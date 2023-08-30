@@ -21,7 +21,12 @@ export function renderScrollContent() {
   scrollContainer.appendChild(content);
 }
 
+export function projectInitial(parent) {
+  projectRenererContainer(parent);
+  renderScrollContent();
+}
 export const projectRender = {
+  initial: projectInitial,
   rendererContainer: projectRenererContainer,
   renderScrollContent,
 };
