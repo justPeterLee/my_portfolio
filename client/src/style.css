@@ -1,3 +1,38 @@
 body {
   background-color: rgb(30, 30, 30);
 }
+
+p,
+a {
+  color: white;
+  text-decoration: none;
+}
+/* ---- global class ---- */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-card {
+  border-radius: 10px;
+}
+
+.general-transition {
+  transition: all ease 0.3s;
+}
+/* ---- nav menu ---- */
+#nav-menu-hover-container {
+  position: absolute;
+
+  min-width: 10rem;
+  min-height: 12rem;
+}
+
+#nav-menu-hover-container:hover {
+  background-color: rgb(40, 40, 40);
+}
+#nav-menu-container {
+  gap: 5px;
+}
