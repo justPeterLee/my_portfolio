@@ -11,3 +11,5 @@ class Display {
     this._Display = Display;
   }
 }
+
+export const display = new Display();
