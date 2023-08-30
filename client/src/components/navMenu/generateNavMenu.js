@@ -1,5 +1,5 @@
 import { pagesObj } from "../../global/Pages";
 
-function generateNavMenu() {
-  console.log(pagesObj);
+export function generateNavMenu() {
+  console.log("menu: ", pagesObj);
 }

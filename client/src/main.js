@@ -1,9 +1,14 @@
 import { menuSelector } from "./components/navMenu/NavMenu";
 import { createProjectPage } from "./components/pages/project/project";
 import { createPage } from "./global/Pages";
-function initalLoad() {
+import { generateNavMenu } from "./components/navMenu/generateNavMenu";
+const initalLoad = new Promise((resolve, reject) => {
   createPage("/", "homeSession", () => {});
   createProjectPage();
-}
 
-initalLoad();
+  resolve();
+});
+
+initalLoad.then(() => {
+  generateNavMenu();
+});
