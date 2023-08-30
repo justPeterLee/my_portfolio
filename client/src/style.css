@@ -23,16 +23,41 @@ a {
   transition: all ease 0.3s;
 }
 /* ---- nav menu ---- */
+
 #nav-menu-hover-container {
   position: absolute;
 
   min-width: 10rem;
   min-height: 12rem;
 }
-
 #nav-menu-hover-container:hover {
   background-color: rgb(40, 40, 40);
 }
+
 #nav-menu-container {
   gap: 5px;
+}
+
+.nav-menu-text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  left: -14px;
+  width: 4px;
+  height: 4px;
+  background-color: white;
+  border-radius: 100%;
+}
+
+#link-selected div {
+  display: inline;
+}
+
+#link-not-selected div {
+  display: none;
 }
