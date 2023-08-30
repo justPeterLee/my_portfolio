@@ -4,12 +4,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite App</title>
+
+  <link rel="stylesheet" href="./style.css">
+
+  <title>My Portfolio</title>
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <div id="menu-hover-container">
+      <div id="menu-container">
+        <a href="/" class="page-links">home</a>
+        <a href="/about" class="page-links">about</a>
+        <a href="/project" class="page-links">project</a>
+        <a href="/contact" class="page-links">contact</a>
+      </div>
+    </div>
+  </div>
   <script type="module" src="/main.js"></script>
+  <script type="module" src="/utils/router/router.js"></script>
 </body>
 
 </html>
