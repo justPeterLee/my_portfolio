@@ -1,5 +1,6 @@
 import { menuSelector } from "./components/navMenu/NavMenu";
 import { rendered } from "./global/Rendered";
+import { projectRender } from "./components/pages/project/renderProject";
 menuSelector();
 
 // rendered.addRender("asdf");
