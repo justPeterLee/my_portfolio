@@ -1,5 +1,4 @@
 // page routing system
-import { pagesObj } from "../../global/Pages";
 import { updater } from "../updater/updater";
 
 const links = document.getElementsByClassName("page-links");
