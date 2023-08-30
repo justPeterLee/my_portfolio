@@ -13,11 +13,10 @@ class Pages {
 }
 
 export class PageInstance {
-  constructor(url, sessionKey, rendererContainer, defaultContent) {
+  constructor(url, sessionKey, initialRender) {
     this._url = url;
-    this._rendererContainer = rendererContainer;
-    this._defaultContent = defaultContent;
     this._sessionKey = sessionKey;
+    this._initialRender = initialRender;
   }
 
   get url() {
@@ -28,12 +27,8 @@ export class PageInstance {
     return this._sessionKey;
   }
 
-  get rendererContainer() {
-    return this._rendererContainer;
-  }
-
-  get defaultContent() {
-    return this.defaultContent;
+  get initialRender() {
+    return this._initialRender;
   }
 }
 
@@ -41,17 +36,12 @@ export const pages = new Pages({});
 
 export const pagesObj = {};
 
-export function createPage(url, sessionKey, rendererContainer, defaultContent) {
+export function createPage(url, sessionKey, initialRender) {
   return new Promise((resolve, reject) => {
     if (pagesObj[url]) {
       reject("page already created");
     } else {
-      const newPage = new PageInstance(
-        url,
-        sessionKey,
-        rendererContainer,
-        defaultContent
-      );
+      const newPage = new PageInstance(url, sessionKey, initialRender);
 
       if (newPage) {
         resolve(newPage);
