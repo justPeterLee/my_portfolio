@@ -1,4 +1,6 @@
 // page routing system
+import { pagesObj } from "../../global/Pages";
+
 const links = document.getElementsByClassName("page-links");
 const linkArr = [...links];
 
@@ -22,6 +24,8 @@ const urlLocationHandler = async () => {
   if (location.length === 0) {
     location = "/";
   }
+
+  console.log(pagesObj);
 };
 
 window.onpopstate = urlLocationHandler;
