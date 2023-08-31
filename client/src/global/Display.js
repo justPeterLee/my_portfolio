@@ -43,10 +43,6 @@ class Display {
     if (!this._isDisplay && !this.Display && !this.session) {
       // pageInstance.initalShow()
       console.log("Now avalible to show:", this.Display);
-      //update display
-      this._isDisplay = true;
-      this._Display = pageInstance;
-      this._session = pageInstance.sessionKey;
     }
   }
 
@@ -64,10 +60,19 @@ class Display {
       // this.hideComponent(pageInstance)
       console.log("something able to hide", this.Display);
       // reset display
-      this._isDisplay = false;
-      this._Display = null;
-      this._session = null;
     }
+  }
+
+  update(pageInstance) {
+    this._isDisplay = true;
+    this._Display = pageInstance;
+    this._session = pageInstance.sessionKey;
+  }
+
+  reset() {
+    this._isDisplay = false;
+    this._Display = null;
+    this._session = null;
   }
 }
 
