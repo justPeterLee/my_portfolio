@@ -1,18 +1,21 @@
 class Rendered {
   constructor() {
     this._Rendered = {};
+    this._called = 0;
   }
 
   get Rendered() {
     return this._Rendered;
   }
 
-  set Rendered(name) {
+  set setRendered(name) {
     this._Rendered = name;
   }
 
   rendering(pageInstance) {
-    console.log(pageInstance);
+    this._Rendered[pageInstance.sessionKey] = pageInstance;
+    this._called += 1;
+    console.log(this._Rendered, this._called);
   }
 }
 

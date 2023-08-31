@@ -13,10 +13,11 @@ class Pages {
 }
 
 export class PageInstance {
-  constructor(url, title, sessionKey, initialRender) {
+  constructor(url, title, sessionKey, parent, initialRender) {
     this._url = url;
     this._title = title || url.replace("/", "");
     this._sessionKey = sessionKey;
+    this._parent = parent || document.querySelector("#center");
     this._initialRender = initialRender;
   }
 
@@ -43,6 +44,7 @@ export const pagesObj = {};
 
 export function createPage(url, title, sessionKey, initialRender) {
   return new Promise((resolve, reject) => {
+    console.log(document.querySelector("#center"));
     if (pagesObj[url]) {
       reject("page already created");
     } else {

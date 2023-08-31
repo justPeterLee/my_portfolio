@@ -25,8 +25,11 @@ export function renderScrollContent() {
 }
 
 export function projectInitial(parent) {
-  projectRenererContainer(parent);
-  renderScrollContent();
+  return new Promise((resolve, reject) => {
+    projectRenererContainer(parent);
+    renderScrollContent();
+    resolve();
+  });
 }
 export const projectRender = {
   initial: projectInitial,
