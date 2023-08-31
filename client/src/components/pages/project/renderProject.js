@@ -1,12 +1,15 @@
 // renderer container
 export function projectRenererContainer(parent) {
-  const rendererContainer = `<div id="project-renderer-container"></div>`;
+  const rendererContainer = document.createElement("div");
+  rendererContainer.id = "project-renderer-container";
   parent.appendChild(rendererContainer);
 }
 
 // default view
 export function renderScrollContent() {
-  const scrollContainer = `<div id="project-container" class="scroll-container"></div>`;
+  const scrollContainer = document.createElement("div");
+  scrollContainer.id = "project-container";
+  scrollContainer.className = "scroll-container";
 
   const content = document.createElement("p");
   content.id = "project-scroll-content";
@@ -15,8 +18,8 @@ export function renderScrollContent() {
   const rendererContainerDOM = document.querySelector(
     "#project-renderer-container"
   );
-  rendererContainerDOM.appendChild(scrollContainerDOM);
-  const scrollContainerDOM = document.querySelector("#project-container");
+
+  rendererContainerDOM.appendChild(scrollContainer);
 
   scrollContainer.appendChild(content);
 }
