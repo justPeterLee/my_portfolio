@@ -11,4 +11,5 @@ const initalLoad = new Promise((resolve, reject) => {
 
 initalLoad.then(() => {
   generateNavMenu();
+  menuSelector();
 });

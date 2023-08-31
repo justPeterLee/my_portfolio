@@ -10,7 +10,7 @@ export function generateNavMenu() {
     console.log(pageKeys[i]);
     const textContainer = document.createElement("span");
     textContainer.id = "link-not-selected";
-    textContainer.class = "nav-menu-text-container";
+    textContainer.className = "nav-menu-text-container";
     textContainer.dataset.pathname = pageKeys[i];
 
     textContainer.innerHTML = `<div class="dot"></div> <a href="${
