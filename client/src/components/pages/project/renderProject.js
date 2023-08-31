@@ -3,6 +3,8 @@ export function projectRenererContainer(parent) {
   const rendererContainer = document.createElement("div");
   rendererContainer.id = "project-renderer-container";
   parent.appendChild(rendererContainer);
+
+  return rendererContainer;
 }
 
 // default view
@@ -22,15 +24,23 @@ export function renderScrollContent() {
   rendererContainerDOM.appendChild(scrollContainer);
 
   scrollContainer.appendChild(content);
+
+  return scrollContainer;
 }
 
 export function projectInitial(parent) {
   return new Promise((resolve, reject) => {
-    projectRenererContainer(parent);
-    renderScrollContent();
-    resolve();
+    const renderContainer = projectRenererContainer(parent);
+    const scrollContainer = renderScrollContent();
+
+    if (renderContainer && scrollContainer) {
+      resolve();
+    } else {
+      reject("could not render page");
+    }
   });
 }
+
 export const projectRender = {
   initial: projectInitial,
   rendererContainer: projectRenererContainer,

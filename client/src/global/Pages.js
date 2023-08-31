@@ -42,13 +42,19 @@ export const pages = new Pages({});
 
 export const pagesObj = {};
 
-export function createPage(url, title, sessionKey, initialRender) {
+export function createPage(url, title, sessionKey, parent, initialRender) {
   return new Promise((resolve, reject) => {
     console.log(document.querySelector("#center"));
     if (pagesObj[url]) {
       reject("page already created");
     } else {
-      const newPage = new PageInstance(url, title, sessionKey, initialRender);
+      const newPage = new PageInstance(
+        url,
+        title,
+        sessionKey,
+        parent,
+        initialRender
+      );
 
       if (newPage) {
         resolve(newPage);

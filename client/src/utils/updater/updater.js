@@ -8,5 +8,12 @@ export const updater = () => {
 
   menuSelector();
 
-  rendered.rendering(pageInstance);
+  console.log(pageInstance.sessionKey);
+
+  if (rendered.Rendered[pageInstance.sessionKey]) {
+    console.log(rendered);
+  } else {
+    console.log(pageInstance);
+    rendered.rendering(pageInstance);
+  }
 };

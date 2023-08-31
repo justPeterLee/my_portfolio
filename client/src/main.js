@@ -1,9 +1,9 @@
 import { menuSelector, selectedHover } from "./components/navMenu/NavMenu";
 import { createProjectPage } from "./components/pages/project/project";
-import { createPage } from "./global/Pages";
+import { createHomePage } from "./components/pages/home/home";
 import { generateNavMenu } from "./components/navMenu/generateNavMenu";
 const initalLoad = new Promise((resolve, reject) => {
-  createPage("/", "Home", "homeSession", () => {});
+  createHomePage();
   createProjectPage();
 
   resolve();
