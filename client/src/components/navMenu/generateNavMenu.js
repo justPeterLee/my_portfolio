@@ -8,5 +8,11 @@ export function generateNavMenu() {
 
   for (let i = 0; i < pageKeys.length; i++) {
     console.log(pageKeys[i]);
+    const textContainer = document.createElement("span");
+    textContainer.id = "link-not-selected";
+    textContainer.class = "nav-menu-text-container";
+    textContainer.innerHTML = `<div class="dot"></div> <a href="${pageKeys[i]}" class="page-links">${pageKeys[i]}</a>`;
+
+    menuContainer.appendChild(textContainer);
   }
 }
