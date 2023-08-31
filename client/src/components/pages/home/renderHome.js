@@ -1,6 +1,6 @@
 function homeRendererContainer(parent) {
   const rendererContainer = document.createElement("div");
-  rendererContainer.id = "project-renderer-container";
+  rendererContainer.id = "home-renderer-container";
   parent.appendChild(rendererContainer);
 
   return rendererContainer;
