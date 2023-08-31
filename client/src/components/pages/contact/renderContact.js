@@ -37,7 +37,7 @@ export function contactInitial(parent) {
   });
 }
 
-export const aboutGenerator = {
+export const contactGenerator = {
   initial: contactInitial,
   rendererContainer: contactRendererContainer,
   contactContentContainer,
