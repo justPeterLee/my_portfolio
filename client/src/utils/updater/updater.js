@@ -13,7 +13,10 @@ export const updater = () => {
   if (rendered.Rendered[pageInstance.sessionKey]) {
     console.log(rendered);
   } else {
-    console.log(pageInstance);
-    rendered.rendering(pageInstance);
+    // const initialRender = pageInstance.initialRender;
+    pageInstance.initialRender().then(() => {
+      rendered.rendering(pageInstance);
+    });
+    // console.log(initialRender);
   }
 };
