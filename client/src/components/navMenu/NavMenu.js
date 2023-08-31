@@ -36,7 +36,7 @@ function showSelected(elements) {
   ishover = true;
   elements.forEach((element) => {
     if (element.dataset.pathname === window.location.pathname) {
-      element.children[1].innerHTML = "selected";
+      element.children[1].innerHTML = "Selected";
     } else {
       element.children[1].innerHTML = element.dataset.title;
     }
