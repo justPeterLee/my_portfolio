@@ -3,7 +3,7 @@ import { createProjectPage } from "./components/pages/project/project";
 import { createPage } from "./global/Pages";
 import { generateNavMenu } from "./components/navMenu/generateNavMenu";
 const initalLoad = new Promise((resolve, reject) => {
-  createPage("/", "homeSession", () => {});
+  createPage("/", "Home", "homeSession", () => {});
   createProjectPage();
 
   resolve();
