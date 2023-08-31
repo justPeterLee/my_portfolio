@@ -9,6 +9,7 @@ export function generateNavMenu() {
     textContainer.id = "link-not-selected";
     textContainer.className = "nav-menu-text-container";
     textContainer.dataset.pathname = pageKeys[i];
+    textContainer.dataset.title = pagesObj[pageKeys[i]].title;
 
     textContainer.innerHTML = `<div class="dot"></div> <a href="${
       pageKeys[i]

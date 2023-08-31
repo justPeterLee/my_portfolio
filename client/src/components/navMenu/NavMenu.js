@@ -11,4 +11,41 @@ export function menuSelector() {
       link.id = "link-not-selected";
     }
   });
+
+  if (ishover) {
+    showSelected(linkArr);
+  }
+}
+
+let ishover = false;
+
+export function selectedHover() {
+  const links = document.getElementsByClassName("nav-menu-text-container");
+  const linkArr = [...links];
+  const hoverContainer = document.querySelector("#nav-menu-hover-container");
+
+  hoverContainer.addEventListener("mouseenter", () => {
+    showSelected(linkArr);
+  });
+  hoverContainer.addEventListener("mouseleave", () => {
+    hideSelected(linkArr);
+  });
+}
+
+function showSelected(elements) {
+  ishover = true;
+  elements.forEach((element) => {
+    if (element.dataset.pathname === window.location.pathname) {
+      element.children[1].innerHTML = "selected";
+    } else {
+      element.children[1].innerHTML = element.dataset.title;
+    }
+  });
+}
+
+function hideSelected(elements) {
+  ishover = false;
+  elements.forEach((element) => {
+    element.children[1].innerHTML = element.dataset.title;
+  });
 }

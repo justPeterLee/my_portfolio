@@ -1,4 +1,4 @@
-import { menuSelector } from "./components/navMenu/NavMenu";
+import { menuSelector, selectedHover } from "./components/navMenu/NavMenu";
 import { createProjectPage } from "./components/pages/project/project";
 import { createPage } from "./global/Pages";
 import { generateNavMenu } from "./components/navMenu/generateNavMenu";
@@ -12,4 +12,5 @@ const initalLoad = new Promise((resolve, reject) => {
 initalLoad.then(() => {
   generateNavMenu();
   menuSelector();
+  selectedHover();
 });
