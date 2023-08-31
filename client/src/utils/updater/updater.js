@@ -14,7 +14,7 @@ export const updater = () => {
     console.log(rendered);
   } else {
     // const initialRender = pageInstance.initialRender;
-    pageInstance.initialRender().then(() => {
+    pageInstance.initialRender(pageInstance.parent).then(() => {
       rendered.rendering(pageInstance);
     });
     // console.log(initialRender);

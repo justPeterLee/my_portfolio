@@ -33,6 +33,10 @@ export class PageInstance {
     return this._sessionKey;
   }
 
+  get parent() {
+    return this._parent;
+  }
+
   get initialRender() {
     return this._initialRender;
   }

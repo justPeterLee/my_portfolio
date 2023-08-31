@@ -1,5 +1,6 @@
 // renderer container
 export function projectRenererContainer(parent) {
+  console.log(parent);
   const rendererContainer = document.createElement("div");
   rendererContainer.id = "project-renderer-container";
   parent.appendChild(rendererContainer);
