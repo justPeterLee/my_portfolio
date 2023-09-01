@@ -1,5 +1,6 @@
-class Components {
-  constructor(generator, show, hide, config) {
+export class Components {
+  constructor(key, generator, show, hide, config) {
+    this._key = key;
     this._generator = generator;
     this._show = show;
     this._hide = hide;
