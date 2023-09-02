@@ -1,11 +1,15 @@
 // renderer container
 export function projectRenererContainer(parent) {
-  console.log(parent);
-  const rendererContainer = document.createElement("div");
-  rendererContainer.id = "project-renderer-container";
-  parent.appendChild(rendererContainer);
+  return new Promise((resolve, reject) => {
+    console.log(parent);
+    const rendererContainer = document.createElement("div");
+    rendererContainer.id = "project-renderer-container";
+    parent.appendChild(rendererContainer);
 
-  return rendererContainer;
+    // if(rendererContainer)
+    console.log(parent);
+    resolve();
+  });
 }
 
 // default view
