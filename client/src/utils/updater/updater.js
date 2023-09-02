@@ -14,9 +14,11 @@ export const updater = () => {
     console.log(rendered);
   } else {
     // const initialRender = pageInstance.initialRender;
-    pageInstance.initialRender(pageInstance.parent).then(() => {
-      rendered.rendering(pageInstance);
-    });
+    // pageInstance.initialRender(pageInstance.parent).then(() => {
+    //   rendered.rendering(pageInstance);
+    // });
     // console.log(initialRender);
+
+    console.log("show");
   }
 };
