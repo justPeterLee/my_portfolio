@@ -13,12 +13,20 @@ class Pages {
 }
 
 export class PageInstance {
-  constructor(url, title, sessionKey, parent, initialRender) {
+  constructor(
+    url,
+    title,
+    sessionKey,
+    parent,
+    initialRender,
+    rendererContainer
+  ) {
     this._url = url;
     this._title = title || url.replace("/", "");
     this._sessionKey = sessionKey;
     this._parent = parent || document.querySelector("#center");
     this._initialRender = initialRender;
+    this._rendererContainer = rendererContainer;
   }
 
   get url() {
@@ -40,13 +48,30 @@ export class PageInstance {
   get initialRender() {
     return this._initialRender;
   }
+
+  get rendererContainer() {
+    return this.rendererContainer;
+  }
+
+  inital() {
+    this.rendererContainer(this.parent).then(() => {
+      console.log("just rendered renderer container");
+    });
+  }
 }
 
 export const pages = new Pages({});
 
 export const pagesObj = {};
 
-export function createPage(url, title, sessionKey, parent, initialRender) {
+export function createPage(
+  url,
+  title,
+  sessionKey,
+  parent,
+  initialRender,
+  rendererContainer
+) {
   return new Promise((resolve, reject) => {
     console.log(document.querySelector("#center"));
     if (pagesObj[url]) {
@@ -57,7 +82,8 @@ export function createPage(url, title, sessionKey, parent, initialRender) {
         title,
         sessionKey,
         parent,
-        initialRender
+        initialRender,
+        rendererContainer
       );
 
       if (newPage) {
