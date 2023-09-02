@@ -19,7 +19,8 @@ export class PageInstance {
     sessionKey,
     parent,
     initialRender,
-    rendererContainer
+    rendererContainer,
+    components
   ) {
     this._url = url;
     this._title = title || url.replace("/", "");
@@ -27,6 +28,7 @@ export class PageInstance {
     this._parent = parent || document.querySelector("#center");
     this._initialRender = initialRender;
     this._rendererContainer = rendererContainer;
+    this._components = components;
   }
 
   get url() {
@@ -51,6 +53,10 @@ export class PageInstance {
 
   get rendererContainer() {
     return this.rendererContainer;
+  }
+
+  get components() {
+    return this._components;
   }
 
   inital() {

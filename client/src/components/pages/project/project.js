@@ -1,5 +1,6 @@
 import { projectRender } from "./renderProject";
 import { createPage } from "../../../global/Pages";
+import { Components } from "../../../global/Components";
 
 export const createProjectPage = () => {
   createPage(
@@ -7,6 +8,19 @@ export const createProjectPage = () => {
     "Project",
     "projectSession",
     undefined,
-    projectRender.initial
+    projectRender.rendererContainer,
+    { scrollContentDisplay }
   );
 };
+
+const scrollContentDisplay = new Components(
+  "scrollContainer",
+  projectRender.renderScrollContent,
+  null,
+  null,
+  { isInitial: true }
+);
+
+// const descriptionContent = new Components(
+//   // projectRender.
+// )

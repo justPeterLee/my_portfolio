@@ -6,6 +6,9 @@ export class Components {
     this._hide = hide;
     this._isInitial = config.isInitial || false;
   }
+  get key() {
+    return this._key;
+  }
 
   get getGenerate() {
     return this._generator;
