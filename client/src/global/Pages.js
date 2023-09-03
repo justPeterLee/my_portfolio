@@ -19,7 +19,7 @@ export class PageInstance {
     this._sessionKey = sessionKey;
     this._parent = parent || document.querySelector("#center");
     this._rendererContainer = rendererContainer;
-    this._components = components;
+    this._components = components || {};
   }
 
   get url() {

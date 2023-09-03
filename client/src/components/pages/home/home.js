@@ -1,6 +1,12 @@
 import { createPage } from "../../../global/Pages";
-import { homeInitial } from "./renderHome";
+import { homeRender } from "./renderHome";
 
 export const createHomePage = () => {
-  createPage("/", "Home", "homeSession", undefined, homeInitial);
+  createPage(
+    "/",
+    "Home",
+    "homeSession",
+    undefined,
+    homeRender.homeRendererContainer
+  );
 };
