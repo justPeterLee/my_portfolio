@@ -1,7 +1,7 @@
 import { aboutRender } from "./renderAbout";
 import { createPage } from "../../../global/Pages";
 import { Components } from "../../../global/Components";
-
+import { animation } from "../../../utils/animation/animation";
 export const createAboutPage = () => {
   createPage(
     "/about",
@@ -16,7 +16,7 @@ export const createAboutPage = () => {
 const aboutContent = new Components(
   "aboutContent",
   aboutRender.aboutContentContainer,
-  null,
+  animation.defaultShow,
   null,
   { isInitial: true }
 );

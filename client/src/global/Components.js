@@ -1,9 +1,10 @@
+import { animation } from "../utils/animation/animation";
 export class Components {
   constructor(key, generator, show, hide, config) {
     this._key = key;
     this._generator = generator;
-    this._show = show;
-    this._hide = hide;
+    this._show = show || animation.defaultShow;
+    this._hide = hide || animation.defaultHide;
     this._isInitial = config.isInitial || false;
   }
   get key() {
@@ -26,14 +27,19 @@ export class Components {
     return this._isInitial;
   }
   generate() {
-    this.getGenerate();
+    return new Promise((resolve, reject) => {
+      const element = this.getGenerate();
+      resolve(element);
+    }).then((element) => {
+      this.show(element);
+    });
   }
 
-  show() {
-    this.getShow();
+  show(element) {
+    this.getShow(element);
   }
 
-  hide() {
-    this.getHide();
+  hide(element) {
+    this.getHide(element);
   }
 }

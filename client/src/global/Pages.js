@@ -43,11 +43,9 @@ export class PageInstance {
     return new Promise((resolve, reject) => {
       const currParent = parent || this.parent;
       this.rendererContainer(currParent).then(() => {
-        console.log("just rendered renderer container");
-      });
-
-      this.initialComponent().forEach((component) => {
-        component.generate();
+        this.initialComponent().forEach((component) => {
+          component.generate();
+        });
       });
 
       resolve();
@@ -76,7 +74,6 @@ export function createPage(
   components
 ) {
   return new Promise((resolve, reject) => {
-    console.log(document.querySelector("#center"));
     if (pagesObj[url]) {
       reject("page already created");
     } else {

@@ -3,11 +3,11 @@ export function aboutRendererContainer(parent) {
     const rendererContainer = document.createElement("div");
     rendererContainer.id = "about-renderer-container";
     parent.appendChild(rendererContainer);
-    resolve();
+    resolve(rendererContainer);
   });
 }
 
-export function aboutContentContainer() {
+function aboutContentContainer() {
   const aboutContentContainer = document.createElement("div");
   aboutContentContainer.id = "about-content-container";
 
@@ -16,7 +16,7 @@ export function aboutContentContainer() {
 
   aboutContentContainer.appendChild(text);
 
-  const rendererContainer = document.querySelector("#about-renderer-container");
+  const rendererContainer = document.getElementById("about-renderer-container");
   rendererContainer.appendChild(aboutContentContainer);
 
   return aboutContentContainer;
