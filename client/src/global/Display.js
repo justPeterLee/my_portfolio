@@ -37,14 +37,15 @@ export class Display {
     this._session = session;
   }
 
-  renderComponent(pageInstance) {
-    pageInstance.initial(pageInstance.parent).then(() => {
-      rendered.rendering(pageInstance);
-    });
-    this.update(pageInstance);
-  }
+  showComponent(pageInstance, render) {
+    const isRender = render || false;
 
-  showComponent(pageInstance) {
+    // same page
+    if (this.session === pageInstance.sessionKey) {
+      console.log("same page");
+      return;
+    }
+
     // if there is already something rendered and isnt the same render
     if (
       this.isDisplay &&
@@ -53,13 +54,21 @@ export class Display {
     ) {
       // this.hideComponent(pageInstance)
       console.log("must hide current session first:", this.Display);
+      this.hideComponent(pageInstance);
       // run hideComponent
     }
 
     if (!this._isDisplay && !this.Display && !this.session) {
       // pageInstance.initalShow()
-      console.log("Now avalible to show:", this.Display);
+      if (isRender) {
+        pageInstance.initial(pageInstance.parent).then(() => {
+          rendered.rendering(pageInstance);
+        });
+      } else {
+        console.log("Now avalible to show:", this.Display);
+      }
     }
+    this.update(pageInstance);
   }
 
   hideComponent(pageInstance) {

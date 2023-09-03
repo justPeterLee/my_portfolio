@@ -9,13 +9,10 @@ export const updater = () => {
 
   menuSelector();
 
-  console.log(pageInstance.sessionKey);
-
   if (rendered.Rendered[pageInstance.sessionKey]) {
-    console.log(rendered);
+    display.showComponent(pageInstance);
   } else {
-    console.log(pageInstance);
-    display.renderComponent(pageInstance);
+    display.showComponent(pageInstance, true);
   }
 
   console.log(display);
