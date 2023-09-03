@@ -1,4 +1,6 @@
 import { animation } from "../utils/animation/animation";
+import { display } from "./Display";
+
 export class Components {
   constructor(key, generator, show, hide, config) {
     this._key = key;
@@ -31,15 +33,15 @@ export class Components {
       const element = this.getGenerate();
       resolve(element);
     }).then((element) => {
-      this.show(element);
+      this.show(element, display.timeline);
     });
   }
 
-  show(element) {
-    this.getShow(element);
+  show(element, tl) {
+    this.getShow(element, tl);
   }
 
-  hide(element) {
-    this.getHide(element);
+  hide(element, tl) {
+    this.getHide(element, tl);
   }
 }

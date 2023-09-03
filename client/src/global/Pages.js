@@ -1,5 +1,5 @@
-import { Display } from "./Display";
-
+import { Display, display } from "./Display";
+import { gsap } from "gsap";
 export class PageInstance {
   constructor(url, title, sessionKey, parent, rendererContainer, components) {
     this._url = url;
@@ -9,6 +9,7 @@ export class PageInstance {
     this._rendererContainer = rendererContainer;
     this._components = components || {};
     this._localDisplay = new Display();
+    this._localTL = gsap.timeline;
   }
 
   get url() {

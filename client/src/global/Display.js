@@ -21,8 +21,8 @@ export class Display {
     return this._session;
   }
 
-  get scope() {
-    return this._scope;
+  get timeline() {
+    return this._timeline;
   }
 
   set setIsDisplay(bool) {
