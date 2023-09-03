@@ -1,10 +1,11 @@
 export function contactRendererContainer(parent) {
-  console.log(parent);
-  const rendererContainer = document.createElement("div");
-  rendererContainer.id = "contact-renderer-container";
-  parent.appendChild(rendererContainer);
+  return new Promise((resolve, reject) => {
+    const rendererContainer = document.createElement("div");
+    rendererContainer.id = "contact-renderer-container";
+    parent.appendChild(rendererContainer);
 
-  return rendererContainer;
+    resolve();
+  });
 }
 
 export function contactContentContainer() {
@@ -24,21 +25,7 @@ export function contactContentContainer() {
   return contactContentContainer;
 }
 
-export function contactInitial(parent) {
-  return new Promise((resolve, reject) => {
-    const renderer = contactRendererContainer(parent);
-    const content = contactContentContainer();
-
-    if (renderer && content) {
-      resolve();
-    } else {
-      reject("could not render page");
-    }
-  });
-}
-
-export const contactGenerator = {
-  initial: contactInitial,
+export const contactRender = {
   rendererContainer: contactRendererContainer,
   contactContentContainer,
 };

@@ -9,7 +9,7 @@ const initalLoad = new Promise((resolve, reject) => {
   createHomePage();
   // createAboutPage();
   createProjectPage();
-  // createContactPage();
+  createContactPage();
 
   resolve();
 });

@@ -1,5 +1,6 @@
-import { contactGenerator } from "./renderContact";
+import { contactRender } from "./renderContact";
 import { createPage } from "../../../global/Pages";
+import { Components } from "../../../global/Components";
 
 export const createContactPage = () => {
   createPage(
@@ -7,6 +8,15 @@ export const createContactPage = () => {
     "Contact",
     "contactSession",
     undefined,
-    contactGenerator.initial
+    contactRender.rendererContainer,
+    { contactContent }
   );
 };
+
+const contactContent = new Components(
+  "contactContent",
+  contactRender.contactContentContainer,
+  null,
+  null,
+  { isInitial: true }
+);
