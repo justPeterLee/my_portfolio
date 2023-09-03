@@ -14,10 +14,10 @@ export const updater = () => {
     console.log(rendered);
   } else {
     // const initialRender = pageInstance.initialRender;
-    // pageInstance.initialRender(pageInstance.parent).then(() => {
-    //   rendered.rendering(pageInstance);
-    // });
-    // console.log(initialRender);
+    console.log(pageInstance);
+    pageInstance.initial(pageInstance.parent).then(() => {
+      rendered.rendering(pageInstance);
+    });
 
     console.log("show");
   }

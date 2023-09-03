@@ -39,16 +39,35 @@ export class PageInstance {
   }
 
   get rendererContainer() {
-    return this.rendererContainer;
+    return this._rendererContainer;
   }
 
   get components() {
     return this._components;
   }
 
-  inital() {
-    this.rendererContainer(this.parent).then(() => {
-      console.log("just rendered renderer container");
+  initial(parent) {
+    return new Promise((resolve, reject) => {
+      const currParent = parent || this.parent;
+      this.rendererContainer(currParent).then(() => {
+        console.log("just rendered renderer container");
+      });
+
+      this.initialComponent().forEach((component) => {
+        component.generate();
+      });
+
+      resolve();
+    });
+  }
+
+  initialComponent() {
+    const keys = Object.keys(this.components);
+
+    return keys.map((component) => {
+      if (this.components[component].isInitial) {
+        return this.components[component];
+      }
     });
   }
 }
@@ -57,7 +76,14 @@ export const pages = new Pages({});
 
 export const pagesObj = {};
 
-export function createPage(url, title, sessionKey, parent, rendererContainer) {
+export function createPage(
+  url,
+  title,
+  sessionKey,
+  parent,
+  rendererContainer,
+  components
+) {
   return new Promise((resolve, reject) => {
     console.log(document.querySelector("#center"));
     if (pagesObj[url]) {
@@ -68,7 +94,8 @@ export function createPage(url, title, sessionKey, parent, rendererContainer) {
         title,
         sessionKey,
         parent,
-        rendererContainer
+        rendererContainer,
+        components
       );
 
       if (newPage) {

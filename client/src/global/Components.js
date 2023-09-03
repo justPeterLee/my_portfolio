@@ -22,6 +22,9 @@ export class Components {
     return this._hide;
   }
 
+  get isInitial() {
+    return this._isInitial;
+  }
   generate() {
     this.getGenerate();
   }

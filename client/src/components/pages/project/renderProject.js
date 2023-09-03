@@ -33,21 +33,7 @@ export function renderScrollContent() {
   return scrollContainer;
 }
 
-export function projectInitial(parent) {
-  return new Promise((resolve, reject) => {
-    const renderContainer = projectRenererContainer(parent);
-    const scrollContainer = renderScrollContent();
-
-    if (renderContainer && scrollContainer) {
-      resolve();
-    } else {
-      reject("could not render page");
-    }
-  });
-}
-
 export const projectRender = {
-  initial: projectInitial,
   rendererContainer: projectRenererContainer,
   renderScrollContent,
 };
