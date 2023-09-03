@@ -1,6 +1,6 @@
 import gsap from "gsap";
 
-class Display {
+export class Display {
   constructor() {
     this._isDisplay = false;
     this._Display = null;

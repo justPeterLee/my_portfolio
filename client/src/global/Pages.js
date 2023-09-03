@@ -1,16 +1,4 @@
-class Pages {
-  constructor(pages) {
-    this._Pages = pages;
-  }
-
-  get Pages() {
-    return this._Pages;
-  }
-
-  set setPages(page) {
-    this._Pages = page;
-  }
-}
+import { Display } from "./Display";
 
 export class PageInstance {
   constructor(url, title, sessionKey, parent, rendererContainer, components) {
@@ -20,6 +8,7 @@ export class PageInstance {
     this._parent = parent || document.querySelector("#center");
     this._rendererContainer = rendererContainer;
     this._components = components || {};
+    this._localDisplay = new Display();
   }
 
   get url() {
@@ -71,8 +60,6 @@ export class PageInstance {
     });
   }
 }
-
-export const pages = new Pages({});
 
 export const pagesObj = {};
 
