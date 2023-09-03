@@ -7,7 +7,7 @@ import { createAboutPage } from "./components/pages/about/about";
 import { createContactPage } from "./components/pages/contact/contact";
 const initalLoad = new Promise((resolve, reject) => {
   createHomePage();
-  // createAboutPage();
+  createAboutPage();
   createProjectPage();
   createContactPage();
 

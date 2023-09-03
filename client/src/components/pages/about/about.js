@@ -1,5 +1,6 @@
-import { aboutGenerator } from "./renderAbout";
+import { aboutRender } from "./renderAbout";
 import { createPage } from "../../../global/Pages";
+import { Components } from "../../../global/Components";
 
 export const createAboutPage = () => {
   createPage(
@@ -7,6 +8,15 @@ export const createAboutPage = () => {
     "About",
     "aboutSession",
     undefined,
-    aboutGenerator.initial
+    aboutRender.rendererContainer,
+    { aboutContent }
   );
 };
+
+const aboutContent = new Components(
+  "aboutContent",
+  aboutRender.aboutContentContainer,
+  null,
+  null,
+  { isInitial: true }
+);

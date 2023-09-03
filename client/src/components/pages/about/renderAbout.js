@@ -1,10 +1,10 @@
 export function aboutRendererContainer(parent) {
-  console.log(parent);
-  const rendererContainer = document.createElement("div");
-  rendererContainer.id = "about-renderer-container";
-  parent.appendChild(rendererContainer);
-
-  return rendererContainer;
+  return new Promise((resolve, reject) => {
+    const rendererContainer = document.createElement("div");
+    rendererContainer.id = "about-renderer-container";
+    parent.appendChild(rendererContainer);
+    resolve();
+  });
 }
 
 export function aboutContentContainer() {
@@ -22,21 +22,7 @@ export function aboutContentContainer() {
   return aboutContentContainer;
 }
 
-export function aboutInital(parent) {
-  return new Promise((resolve, reject) => {
-    const renderer = aboutRendererContainer(parent);
-    const content = aboutContentContainer();
-
-    if (renderer && content) {
-      resolve();
-    } else {
-      reject("could not render page");
-    }
-  });
-}
-
-export const aboutGenerator = {
-  initial: aboutInital,
+export const aboutRender = {
   rendererContainer: aboutRendererContainer,
   aboutContentContainer,
 };
