@@ -35,6 +35,10 @@ export class PageInstance {
     return this._components;
   }
 
+  get localDisplay() {
+    return this._localDisplay;
+  }
+
   initial(parent) {
     return new Promise((resolve, reject) => {
       const currParent = parent || this.parent;
