@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import { rendered } from "./Rendered";
 
 export class Display {
   constructor() {
@@ -24,8 +25,23 @@ export class Display {
     return this._scope;
   }
 
+  set setIsDisplay(bool) {
+    this._isDisplay = bool;
+  }
+
   set setDisplay(Display) {
     this._Display = Display;
+  }
+
+  set setSession(session) {
+    this._session = session;
+  }
+
+  renderComponent(pageInstance) {
+    pageInstance.initial(pageInstance.parent).then(() => {
+      rendered.rendering(pageInstance);
+    });
+    this.update(pageInstance);
   }
 
   showComponent(pageInstance) {
@@ -64,9 +80,9 @@ export class Display {
   }
 
   update(pageInstance) {
-    this._isDisplay = true;
-    this._Display = pageInstance;
-    this._session = pageInstance.sessionKey;
+    this.setIsDisplay = true;
+    this.setDisplay = pageInstance;
+    this.setSession = pageInstance.sessionKey;
   }
 
   reset() {

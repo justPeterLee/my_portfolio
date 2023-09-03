@@ -1,6 +1,7 @@
 import { pagesObj } from "../../global/Pages";
 import { menuSelector } from "../../components/navMenu/NavMenu";
 import { rendered } from "../../global/Rendered";
+import { display } from "../../global/Display";
 
 export const updater = () => {
   const location = window.location.pathname;
@@ -13,12 +14,9 @@ export const updater = () => {
   if (rendered.Rendered[pageInstance.sessionKey]) {
     console.log(rendered);
   } else {
-    // const initialRender = pageInstance.initialRender;
     console.log(pageInstance);
-    pageInstance.initial(pageInstance.parent).then(() => {
-      rendered.rendering(pageInstance);
-    });
-
-    console.log("show");
+    display.renderComponent(pageInstance);
   }
+
+  console.log(display);
 };
