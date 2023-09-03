@@ -19,5 +19,3 @@ initalLoad.then(() => {
   menuSelector();
   selectedHover();
 });
-
-import gsap from "gsap";

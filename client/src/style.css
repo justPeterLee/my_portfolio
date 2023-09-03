@@ -71,3 +71,8 @@ a {
 #link-not-selected div {
   display: none;
 }
+
+/* ----- component ----- */
+#contact-renderer-container {
+  position: absolute;
+}
