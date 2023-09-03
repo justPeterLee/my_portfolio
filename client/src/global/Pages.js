@@ -5,7 +5,7 @@ export class PageInstance {
     this._url = url;
     this._title = title || url.replace("/", "");
     this._sessionKey = sessionKey;
-    this._parent = parent || document.querySelector("#center");
+    this._parent = parent || document.querySelector("body");
     this._rendererContainer = rendererContainer;
     this._components = components || {};
     this._localDisplay = new Display();
