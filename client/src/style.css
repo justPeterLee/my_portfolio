@@ -73,6 +73,14 @@ a {
 }
 
 /* ----- component ----- */
+#about-renderer-container,
+#project-renderer-container,
 #contact-renderer-container {
   position: absolute;
+  width: 20rem;
+  height: 20rem;
+  background-color: rgb(70, 70, 70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
