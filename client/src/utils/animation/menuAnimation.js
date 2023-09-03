@@ -1,13 +1,20 @@
 import gsap from "gsap";
 
-function menuOrigin() {
-  gsap.to("#nav-menu-container", { x: 200, duration: 1 });
+function menuOrigin(initial) {
+  const initialDur = initial ? 0 : 1;
+  gsap.to("#nav-menu-hover-container", { x: 200, duration: initialDur });
 }
 
-function test() {
-  gsap.to("#contact-renderer-container", { x: 200, duration: 1 });
+function menuSide(initial) {
+  const initialDur = initial ? 0 : 1;
+  gsap.to("#nav-menu-hover-container", {
+    x: -400,
+    y: -200,
+    duration: initialDur,
+  });
 }
+
 export const menuAnimation = {
   menuOrigin,
-  test,
+  menuSide,
 };

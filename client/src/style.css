@@ -44,6 +44,8 @@ a {
   min-height: 12rem;
 
   z-index: 100;
+
+  transition: background-color ease 0.3s;
 }
 #nav-menu-hover-container:hover {
   background-color: rgb(40, 40, 40);
