@@ -14,7 +14,7 @@ export const updater = () => {
   // menuAnimation.menuSide(true);
   pageInstance.menu(isInital);
   if (rendered.Rendered[pageInstance.sessionKey]) {
-    display.showComponent(pageInstance);
+    display.showComponent(pageInstance, false);
   } else {
     display.showComponent(pageInstance, true);
   }

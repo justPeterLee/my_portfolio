@@ -84,6 +84,8 @@ export class PageInstance {
   menu(initial) {
     this.menuAnimation(initial);
   }
+
+  hide() {}
 }
 
 export const pagesObj = {};
