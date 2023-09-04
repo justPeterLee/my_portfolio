@@ -1,13 +1,27 @@
 import { Display, display } from "./Display";
 import { gsap } from "gsap";
+import { menuAnimation } from "../utils/animation/menuAnimation";
+
 export class PageInstance {
-  constructor(url, title, sessionKey, parent, rendererContainer, components) {
+  constructor(
+    url,
+    title,
+    sessionKey,
+    parent,
+    rendererContainer,
+    components,
+    menuAnimations
+  ) {
     this._url = url;
     this._title = title || url.replace("/", "");
     this._sessionKey = sessionKey;
+
     this._parent = parent || document.querySelector("body");
     this._rendererContainer = rendererContainer;
     this._components = components || {};
+
+    this._menuAnimation = menuAnimations || menuAnimation.menuOrigin;
+
     this._localDisplay = new Display();
     this._localTL = gsap.timeline;
   }
@@ -36,6 +50,10 @@ export class PageInstance {
     return this._components;
   }
 
+  get menuAnimation() {
+    return this._menuAnimation;
+  }
+
   get localDisplay() {
     return this._localDisplay;
   }
@@ -62,6 +80,10 @@ export class PageInstance {
       }
     });
   }
+
+  menu(initial) {
+    this.menuAnimation(initial);
+  }
 }
 
 export const pagesObj = {};
@@ -72,7 +94,8 @@ export function createPage(
   sessionKey,
   parent,
   rendererContainer,
-  components
+  components,
+  menuAnimations
 ) {
   return new Promise((resolve, reject) => {
     if (pagesObj[url]) {
@@ -84,7 +107,8 @@ export function createPage(
         sessionKey,
         parent,
         rendererContainer,
-        components
+        components,
+        menuAnimations
       );
 
       if (newPage) {

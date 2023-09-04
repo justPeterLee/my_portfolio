@@ -1,6 +1,7 @@
 import { projectRender } from "./renderProject";
 import { createPage } from "../../../global/Pages";
 import { Components } from "../../../global/Components";
+import { menuAnimation } from "../../../utils/animation/menuAnimation";
 
 export const createProjectPage = () => {
   createPage(
@@ -9,7 +10,8 @@ export const createProjectPage = () => {
     "projectSession",
     undefined,
     projectRender.rendererContainer,
-    { scrollContentDisplay }
+    { scrollContentDisplay },
+    menuAnimation.menuSide
   );
 };
 
