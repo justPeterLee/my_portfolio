@@ -1,12 +1,12 @@
 import gsap from "gsap";
-
+import { display } from "../../global/Display";
 // need to accept moving element and timeline
-function defaultShow(element, tl) {
+const tl = display.timeline;
+function defaultShow(element) {
   tl.from(`#${element.id}`, { x: 200, direction: 1 });
 }
 
-function defaultHide(element, tl) {
-  console.log("hiding:", element);
+function defaultHide(element) {
   tl.to(`#${element.id}`, {
     y: 200,
     direction: 1,

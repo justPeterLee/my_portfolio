@@ -8,6 +8,7 @@ export class Components {
     this._show = show || animation.defaultShow;
     this._hide = hide || animation.defaultHide;
     this._isInitial = config.isInitial || false;
+    this._element = null;
   }
   get key() {
     return this._key;
@@ -28,20 +29,38 @@ export class Components {
   get isInitial() {
     return this._isInitial;
   }
+
+  get element() {
+    return this._element;
+  }
+
+  set element(newElement) {
+    this._element = newElement;
+  }
   generate() {
     return new Promise((resolve, reject) => {
       const element = this.getGenerate();
+      this.element = element;
       resolve(element);
     }).then((element) => {
-      this.show(element, display.timeline);
+      this.show();
     });
   }
 
-  show(element, tl) {
-    this.getShow(element, tl);
+  show() {
+    if (this.element) {
+      console.log(this.element);
+      this.getShow(this.element);
+    } else {
+      console.log("no element to show");
+    }
   }
 
-  hide(element, tl) {
-    this.getHide(element, tl);
+  hide() {
+    if (this.element) {
+      this.getHide(this.element);
+    } else {
+      console.log("no element to hide");
+    }
   }
 }

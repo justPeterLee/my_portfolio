@@ -31,7 +31,9 @@ export class LocalDisplay {
 
   showComponent(componentInstance) {}
 
-  hideComponent(componentInstance) {}
+  hideComponent(componentInstance) {
+    // componentInstance.hide();
+  }
 
   manualAdd(componentInstance) {
     this.components[componentInstance.key] = componentInstance;
@@ -39,4 +41,12 @@ export class LocalDisplay {
   }
 
   manualHide(componentInstance) {}
+
+  hide() {
+    console.log(this.components);
+    const keys = Object.keys(this.components);
+    keys.forEach((component) => {
+      this.hideComponent(component);
+    });
+  }
 }
