@@ -29,10 +29,15 @@ export class LocalDisplay {
     return keys;
   }
 
-  showComponent(componentInstance) {}
+  showComponent(componentInstance) {
+    componentInstance.show();
+    this.manualAdd(componentInstance);
+  }
 
   hideComponent(componentInstance) {
     // componentInstance.hide();
+    componentInstance.hide();
+    this.manualHide(componentInstance);
   }
 
   manualAdd(componentInstance) {
@@ -40,13 +45,16 @@ export class LocalDisplay {
     this.updateDisplayState();
   }
 
-  manualHide(componentInstance) {}
+  manualHide(componentInstance) {
+    const key = componentInstance.key;
+    delete this._components[key];
+  }
 
-  hide() {
+  hideAll() {
     console.log(this.components);
     const keys = Object.keys(this.components);
     keys.forEach((component) => {
-      this.hideComponent(component);
+      this.hideComponent(this.components[component]);
     });
   }
 }

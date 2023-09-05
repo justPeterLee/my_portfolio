@@ -23,6 +23,8 @@ export class PageInstance {
     this._menuAnimation = menuAnimations || menuAnimation.menuOrigin;
 
     this._localDisplay = new LocalDisplay();
+
+    this._rendererElement = null;
   }
 
   get url() {
@@ -57,15 +59,25 @@ export class PageInstance {
     return this._localDisplay;
   }
 
+  get rendererElement() {
+    return this._rendererElement;
+  }
+
+  set rendererElement(element) {
+    this._rendererElement = element;
+  }
+
   initial(parent) {
     return new Promise((resolve, reject) => {
       const currParent = parent || this.parent;
-      this.rendererContainer(currParent).then(() => {
+      this.rendererContainer(currParent).then((render) => {
+        this.rendererElement = render;
         this.initialComponent().forEach((component) => {
           component.generate();
-          console.log(component);
-          this.localDisplay.manualAdd(component);
         });
+
+        this.show();
+        this.hide();
       });
 
       resolve();
@@ -86,7 +98,19 @@ export class PageInstance {
     this.menuAnimation(initial);
   }
 
-  hide() {}
+  show() {
+    if (this.rendererElement) {
+      this.initialComponent().forEach((component) => {
+        this.localDisplay.showComponent(component);
+      });
+    }
+  }
+
+  hide() {
+    if (this.rendererElement) {
+      this.localDisplay.hideAll();
+    }
+  }
 }
 
 export const pagesObj = {};

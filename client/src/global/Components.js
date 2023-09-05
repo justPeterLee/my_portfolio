@@ -43,13 +43,16 @@ export class Components {
       this.element = element;
       resolve(element);
     }).then((element) => {
-      this.show();
+      // this.show();
+
+      if (this.isInitial) {
+        element.style.display = "none";
+      }
     });
   }
 
   show() {
     if (this.element) {
-      console.log(this.element);
       this.getShow(this.element);
     } else {
       console.log("no element to show");

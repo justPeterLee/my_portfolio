@@ -61,6 +61,7 @@ export class Display {
     if (!this._isDisplay && !this.Display && !this.session) {
       // pageInstance.initalShow()
       if (isRender) {
+        console.log("rendering");
         pageInstance.initial(pageInstance.parent).then(() => {
           rendered.rendering(pageInstance);
         });
@@ -68,6 +69,7 @@ export class Display {
         console.log("Now avalible to show:", this.Display);
       }
     }
+
     this.update(pageInstance);
   }
 
@@ -83,8 +85,11 @@ export class Display {
       this.session !== pageInstance.sessionKey
     ) {
       // this.hideComponent(pageInstance)
-      console.log("something able to hide", this.Display);
+      console.log("something able to hide", this.Display.localDisplay);
       // reset display
+
+      // this.Display.localDisplay.hideAll();
+      this.reset();
     }
   }
 

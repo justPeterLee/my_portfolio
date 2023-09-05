@@ -4,7 +4,7 @@ export function contactRendererContainer(parent) {
     rendererContainer.id = "contact-renderer-container";
     parent.appendChild(rendererContainer);
 
-    resolve();
+    resolve(rendererContainer);
   });
 }
 

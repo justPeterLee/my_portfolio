@@ -1,14 +1,13 @@
 // renderer container
 export function projectRenererContainer(parent) {
   return new Promise((resolve, reject) => {
-    console.log(parent);
     const rendererContainer = document.createElement("div");
     rendererContainer.id = "project-renderer-container";
     parent.appendChild(rendererContainer);
 
     // if(rendererContainer)
-    console.log(parent);
-    resolve();
+
+    resolve(rendererContainer);
   });
 }
 
