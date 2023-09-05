@@ -1,14 +1,14 @@
 import gsap from "gsap";
-import { display } from "../../global/Display";
 // need to accept moving element and timeline
-const tl = display.timeline;
+const tl = gsap.timeline();
 function defaultShow(element) {
   tl.from(`#${element.id}`, {
     x: 200,
+    opacity: 0,
     direction: 1,
     onStart: () => {
       element.style = {};
-      // element.style.display = "none";
+      element.parentElement.style.display = {};
     },
   });
 }
@@ -18,9 +18,15 @@ function defaultHide(element) {
     y: -200,
     opacity: 0,
     duration: 0.5,
+    onStart: () => {
+      console.log("START");
+    },
     onComplete: () => {
       element.style = {};
-      // element.style.display = "none";
+      // console.log(element.parentElement.nodeName);
+      element.parentElement.style.display = "none";
+      // element.style.opacity = "100%";
+      console.log("end");
     },
   });
 }

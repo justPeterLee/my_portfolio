@@ -32,7 +32,28 @@ export function renderScrollContent() {
   return scrollContainer;
 }
 
+export function renderScrollContents() {
+  const scrollContainer = document.createElement("div");
+  scrollContainer.id = "project-containers";
+  scrollContainer.className = "scroll-containers";
+
+  const content = document.createElement("p");
+  content.id = "project-scroll-contents";
+  content.innerHTML = "asdfasfadfadf";
+
+  const rendererContainerDOM = document.querySelector(
+    "#project-renderer-container"
+  );
+
+  rendererContainerDOM.appendChild(scrollContainer);
+
+  scrollContainer.appendChild(content);
+
+  return scrollContainer;
+}
+
 export const projectRender = {
   rendererContainer: projectRenererContainer,
   renderScrollContent,
+  renderScrollContents,
 };

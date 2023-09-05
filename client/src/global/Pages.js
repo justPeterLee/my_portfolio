@@ -22,7 +22,7 @@ export class PageInstance {
 
     this._menuAnimation = menuAnimations || menuAnimation.menuOrigin;
 
-    this._localDisplay = new LocalDisplay();
+    this._localDisplay = new LocalDisplay(sessionKey);
 
     this._rendererElement = null;
   }
@@ -77,7 +77,7 @@ export class PageInstance {
         });
 
         this.show();
-        this.hide();
+        // this.hide();
       });
 
       resolve();
@@ -102,6 +102,7 @@ export class PageInstance {
     if (this.rendererElement) {
       this.initialComponent().forEach((component) => {
         this.localDisplay.showComponent(component);
+        this.rendererElement.style = {};
       });
     }
   }

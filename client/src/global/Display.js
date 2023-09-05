@@ -37,6 +37,12 @@ export class Display {
     this._session = session;
   }
 
+  renderComponent(pageInstance) {
+    pageInstance.initial(pageInstance.parent).then(() => {
+      rendered.rendering(pageInstance);
+    });
+  }
+
   showComponent(pageInstance, render) {
     const isRender = render || false;
 
@@ -46,51 +52,68 @@ export class Display {
       return;
     }
 
-    // if there is already something rendered and isnt the same render
-    if (
-      this.isDisplay &&
-      this.Display &&
-      this.session !== pageInstance.sessionKey
-    ) {
-      // this.hideComponent(pageInstance)
-      console.log("must hide current session first:", this.Display);
-      this.hideComponent(pageInstance);
-      // run hideComponent
-    }
-
-    if (!this._isDisplay && !this.Display && !this.session) {
-      // pageInstance.initalShow()
+    // if already displaying
+    if (this.isDisplay && this.Display) {
+      // console.log("something is displaying:");
+      // hide current display
+      this.hideComponent(this.Display).then(() => {
+        console.log("DONE hiding");
+        if (isRender) {
+          this.renderComponent(pageInstance);
+        } else {
+          pageInstance.show();
+        }
+      });
+    } else {
+      // console.log("nothing is displaying");
       if (isRender) {
-        console.log("rendering");
-        pageInstance.initial(pageInstance.parent).then(() => {
-          rendered.rendering(pageInstance);
-        });
+        this.renderComponent(pageInstance);
       } else {
-        console.log("Now avalible to show:", this.Display);
+        pageInstance.show();
       }
     }
 
     this.update(pageInstance);
+    // // if there is already something rendered and isnt the same render
+    // if (this.isDisplay && this.Display) {
+    //   // this.hideComponent(pageInstance)
+    //   console.log("must hide current session first:", this.Display);
+    //   this.hideComponent(this.Display).then(() => {
+    //     // pageInstance.show();
+    //     console.log("now show");
+    //     if (isRender) {
+    //       console.log("rendering");
+    //       pageInstance.initial(pageInstance.parent).then(() => {
+    //         rendered.rendering(pageInstance);
+    //       });
+    //     } else {
+    //       console.log("Now avalible to show:", this.Display);
+    //       pageInstance.show();
+    //     }
+    //   });
+    //   // run hideComponent
+    // } else {
+    //   if (isRender) {
+    //     console.log("rendering");
+    //     pageInstance.initial(pageInstance.parent).then(() => {
+    //       rendered.rendering(pageInstance);
+    //     });
+    //   } else {
+    //     console.log("Now avalible to show:", this.Display);
+    //     pageInstance.show();
+    //   }
+    // }
   }
 
   hideComponent(pageInstance) {
-    if (!this._isDisplay && !this.Display && !this.session) {
-      // pageInstance.initalShow()
-      console.log("nothing is able to hide:", this.Display);
-    }
-
-    if (
-      this.isDisplay &&
-      this.Display &&
-      this.session !== pageInstance.sessionKey
-    ) {
-      // this.hideComponent(pageInstance)
-      console.log("something able to hide", this.Display.localDisplay);
-      // reset display
-
-      // this.Display.localDisplay.hideAll();
+    return new Promise((resolve, reject) => {
+      // console.log("something able to hide", pageInstance);
+      pageInstance.hide();
       this.reset();
-    }
+      setTimeout(() => {
+        resolve();
+      }, 500);
+    });
   }
 
   update(pageInstance) {

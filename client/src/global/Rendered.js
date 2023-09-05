@@ -15,7 +15,7 @@ class Rendered {
   rendering(pageInstance) {
     this._Rendered[pageInstance.sessionKey] = pageInstance;
     this._called += 1;
-    console.log(this._Rendered, this._called);
+    // console.log(this._Rendered, this._called);
   }
 }
 
