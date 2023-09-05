@@ -2,6 +2,7 @@ import { aboutRender } from "./renderAbout";
 import { createPage } from "../../../global/Pages";
 import { Components } from "../../../global/Components";
 import { animation } from "../../../utils/animation/animation";
+import { menuAnimation } from "../../../utils/animation/menuAnimation";
 export const createAboutPage = () => {
   createPage(
     "/about",
@@ -9,7 +10,8 @@ export const createAboutPage = () => {
     "aboutSession",
     undefined,
     aboutRender.rendererContainer,
-    { aboutContent }
+    { aboutContent },
+    menuAnimation.menuSide
   );
 };
 
