@@ -1,7 +1,7 @@
 import { Display, display } from "./Display";
 import { gsap } from "gsap";
 import { menuAnimation } from "../utils/animation/menuAnimation";
-
+import { LocalDisplay } from "./LocalDisplay";
 export class PageInstance {
   constructor(
     url,
@@ -22,8 +22,7 @@ export class PageInstance {
 
     this._menuAnimation = menuAnimations || menuAnimation.menuOrigin;
 
-    this._localDisplay = new Display();
-    this._localTL = gsap.timeline;
+    this._localDisplay = new LocalDisplay();
   }
 
   get url() {
@@ -64,6 +63,8 @@ export class PageInstance {
       this.rendererContainer(currParent).then(() => {
         this.initialComponent().forEach((component) => {
           component.generate();
+          console.log(component);
+          this.localDisplay.manualAdd(component);
         });
       });
 
