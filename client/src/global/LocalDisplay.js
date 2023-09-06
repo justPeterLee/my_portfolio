@@ -32,7 +32,15 @@ export class LocalDisplay {
   }
 
   hideComponent(component) {
+    return new Promise((resolve, reject) => {
+      if (component.element) {
+        component.Hide(component.element).then(() => {
+          resolve();
+        });
+      }
+    });
     // hide
+
     // ungenerate
   }
 
