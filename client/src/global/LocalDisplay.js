@@ -32,7 +32,7 @@ export class LocalDisplay {
       this.updateState();
     }
 
-    console.log(this.components, this.isDisplay);
+    // console.log(this.components, this.isDisplay);
   }
 
   hideComponent(component) {
@@ -44,7 +44,7 @@ export class LocalDisplay {
 
           this.updateState();
 
-          console.log(this.components, this.isDisplay);
+          // console.log(this.components, this.isDisplay);
           resolve();
         });
       }
