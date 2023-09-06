@@ -66,6 +66,10 @@ export class PageInstance {
 
     return initialComponents;
   }
+
+  menu(initial) {
+    this.menuAnimation(initial);
+  }
 }
 
 export const pagesObj = {};
@@ -86,6 +90,7 @@ export function createPage(title, url, components, menuAnimations) {
   })
     .then((res) => {
       pagesObj[res.url] = res;
+      console.log(pagesObj);
     })
     .catch((err) => {
       console.log("couldn't create page", err);

@@ -10,13 +10,8 @@ export const updater = () => {
   const pageInstance = pagesObj[location];
   menuSelector();
   // menuAnimation.menuSide(true);
-  // pageInstance.menu(isInital);
   console.log(pageInstance);
-  // if (rendered.Rendered[pageInstance.sessionKey]) {
-  //   display.showComponent(pageInstance);
-  // } else {
-  //   display.showComponent(pageInstance, true);
-  // }
+  pageInstance.menu(isInital);
 
   display.showComponent(pageInstance);
   isInital = false;
