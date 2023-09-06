@@ -80,9 +80,9 @@ a {
 }
 
 /* ----- component ----- */
-#about-renderer-container,
-#project-renderer-container,
-#contact-renderer-container {
+#contact-content-container,
+#project-container,
+#scroll-menu-container {
   position: absolute;
   background-color: rgb(70, 70, 70);
   width: 70rem;
