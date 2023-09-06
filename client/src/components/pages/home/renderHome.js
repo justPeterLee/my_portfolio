@@ -1,13 +1,10 @@
-function homeRendererContainer(parent) {
-  return new Promise((resolve, reject) => {
-    const rendererContainer = document.createElement("div");
-    rendererContainer.id = "home-renderer-container";
-    parent.appendChild(rendererContainer);
+function emptyContent() {
+  const container = document.createElement("div");
+  container.id = "empty-container";
+  container.style.position = "absolute";
 
-    resolve();
-  });
+  return container;
 }
-
 export const homeRender = {
-  homeRendererContainer,
+  emptyContent,
 };
