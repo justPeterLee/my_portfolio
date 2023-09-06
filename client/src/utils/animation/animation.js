@@ -31,21 +31,27 @@ function defaultShow(element, timeline) {
   );
 }
 
-function defaultHide(element) {
-  globalTL.to(`#${element.id}`, {
-    y: -200,
-    opacity: 0,
-    duration: 0.5,
-    // onStart: () => {
-    //   console.log("START");
-    // },
-    // onComplete: () => {
-    //   element.style = {};
-    //   // console.log(element.parentElement.nodeName);
-    //   element.parentElement.style.display = "none";
-    //   // element.style.opacity = "100%";
-    //   console.log("end");
-    // },
+function defaultHide(element, timeline) {
+  return new Promise((resolve, reject) => {
+    let tl;
+    let label = "0";
+
+    if (timeline) {
+      tl = gsap.timeline();
+      label = ">";
+    } else {
+      tl = display.timeline;
+      label = "0";
+    }
+
+    globalTL.to(`#${element.id}`, {
+      y: -200,
+      opacity: 0,
+      duration: 0.5,
+      onComplete: () => {
+        resolve();
+      },
+    });
   });
 }
 
