@@ -47,8 +47,12 @@ export class PageInstance {
     this._rendererElement = element;
   }
 
-  Initial() {
+  initial() {
     console.log(this.getInitial());
+    const initialComponents = this.getInitial();
+    initialComponents.forEach((component) => {
+      this.localDisplay.showComponent(component);
+    });
   }
 
   getInitial() {

@@ -3,7 +3,10 @@ import { display } from "../../global/Display";
 // need to accept moving element and timeline
 
 const globalTL = display.timeline;
-function defaultShow(element) {
+
+function defaultShow(element, timeline) {
+  const tl = timeline | globalTL;
+
   globalTL.from(`#${element.id}`, {
     x: 200,
     opacity: 0,

@@ -12,6 +12,8 @@ export const updater = () => {
   // menuAnimation.menuSide(true);
   // pageInstance.menu(isInital);
   console.log(pageInstance);
+  pageInstance.initial();
+
   if (rendered.Rendered[pageInstance.sessionKey]) {
     display.showComponent(pageInstance, false);
   } else {

@@ -21,53 +21,20 @@ export class LocalDisplay {
     return this._components;
   }
 
-  updateDisplayState() {
-    const keys = Object.keys(this.components);
+  showComponent(component) {
+    // generate
+    const genComponent = component.Generate();
 
-    if (keys.length) {
-      this.isDisplay = true;
-    } else {
-      this.isDisplay = false;
+    // show
+    if (genComponent) {
+      component.Show(genComponent);
     }
-
-    return keys;
   }
 
-  showComponent(componentInstance) {
-    componentInstance.show();
-    this.manualAdd(componentInstance);
-    console.log(
-      "key",
-      this.session,
-      componentInstance.key,
-      this._isDisplay,
-      this.components
-    );
+  hideComponent(component) {
+    // hide
+    // ungenerate
   }
 
-  hideComponent(componentInstance) {
-    // componentInstance.hide();
-    componentInstance.hide();
-    this.manualHide(componentInstance);
-    console.log("key", this.session, componentInstance.key, this._isDisplay);
-  }
-
-  manualAdd(componentInstance) {
-    this.components[componentInstance.key] = componentInstance;
-    this.updateDisplayState();
-  }
-
-  manualHide(componentInstance) {
-    const key = componentInstance.key;
-    delete this._components[key];
-    this.updateDisplayState();
-  }
-
-  hideAll() {
-    const keys = Object.keys(this.components);
-
-    keys.forEach((component) => {
-      this.hideComponent(this.components[component]);
-    });
-  }
+  updateState() {}
 }

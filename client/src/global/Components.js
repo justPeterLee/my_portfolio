@@ -2,27 +2,28 @@ import { animation } from "../utils/animation/animation";
 import { display } from "./Display";
 
 export class Components {
-  constructor(key, generator, show, hide, config) {
+  constructor(key, generate, show, hide, config) {
     this._key = key;
-    this._generator = generator;
+    this._generate = generate;
     this._show = show || animation.defaultShow;
     this._hide = hide || animation.defaultHide;
     this._isInitial = config.isInitial || false;
     this._element = null;
+    this._rendererContainer = document.querySelector("#center");
   }
   get key() {
     return this._key;
   }
 
-  get getGenerate() {
-    return this._generator;
+  get generate() {
+    return this._generate;
   }
 
-  get getShow() {
+  get show() {
     return this._show;
   }
 
-  get getHide() {
+  get hide() {
     return this._hide;
   }
 
@@ -37,33 +38,20 @@ export class Components {
   set element(newElement) {
     this._element = newElement;
   }
-  generate() {
-    return new Promise((resolve, reject) => {
-      const element = this.getGenerate();
-      this.element = element;
-      resolve(element);
-    }).then((element) => {
-      // this.show();
 
-      if (this.isInitial) {
-        element.style.display = "none";
-      }
-    });
+  get rendererContainer() {
+    return this._rendererContainer;
   }
 
-  show() {
-    if (this.element) {
-      this.getShow(this.element);
-    } else {
-      console.log("no element to show");
-    }
+  Show(element, tl) {
+    this.show(element, tl);
   }
 
-  hide() {
-    if (this.element) {
-      this.getHide(this.element);
-    } else {
-      console.log("no element to hide");
-    }
+  Generate() {
+    const genComponent = this.generate();
+    this.rendererContainer.appendChild(genComponent);
+    this.element = genComponent;
+
+    return genComponent;
   }
 }
