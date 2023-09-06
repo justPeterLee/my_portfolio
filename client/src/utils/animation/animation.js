@@ -15,11 +15,10 @@ function defaultShow(element, timeline) {
     tl = display.timeline;
     label = "+=0";
   }
-
   gsap.from(`#${element.id}`, {
-    x: 200,
+    x: 300,
     opacity: 0,
-    direction: 1,
+    duration: 0.35,
     onStart: () => {
       element.style = {};
       // element.parentElement.style.display = {};
