@@ -47,6 +47,10 @@ export class Components {
     this.show(element, tl);
   }
 
+  Hide(element, tl) {
+    this.hide(element, tl);
+  }
+
   Generate() {
     const genComponent = this.generate();
     this.rendererContainer.appendChild(genComponent);
