@@ -3,15 +3,7 @@ import { createPage } from "../../../global/Pages";
 import { Components } from "../../../global/Components";
 import { menuAnimation } from "../../../utils/animation/menuAnimation";
 export const createContactPage = () => {
-  createPage(
-    "/contact",
-    "Contact",
-    "contactSession",
-    undefined,
-    contactRender.rendererContainer,
-    { contactContent },
-    menuAnimation.menuSide
-  );
+  createPage("Contact", "/contact", { contactContent }, menuAnimation.menuSide);
 };
 
 const contactContent = new Components(
