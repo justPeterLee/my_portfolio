@@ -5,17 +5,30 @@ import { display } from "../../global/Display";
 const globalTL = display.timeline;
 
 function defaultShow(element, timeline) {
-  const tl = timeline | globalTL;
+  let tl;
+  let label = "0";
 
-  globalTL.from(`#${element.id}`, {
-    x: 200,
-    opacity: 0,
-    direction: 1,
-    // onStart: () => {
-    //   element.style = {};
-    //   element.parentElement.style.display = {};
-    // },
-  });
+  if (timeline) {
+    tl = gsap.timeline();
+    label = ">";
+  } else {
+    tl = display.timeline;
+    label = "0";
+  }
+
+  tl.from(
+    `#${element.id}`,
+    {
+      x: 200,
+      opacity: 0,
+      direction: 1,
+      // onStart: () => {
+      //   element.style = {};
+      //   element.parentElement.style.display = {};
+      // },
+    },
+    label
+  );
 }
 
 function defaultHide(element) {
