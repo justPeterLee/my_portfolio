@@ -52,36 +52,45 @@ export class Display {
     });
   }
 
-  showComponent(pageInstance, render) {
-    const isRender = render || false;
-
+  showComponent(pageInstance) {
     // is something showing
-    if (this._isDisplay) {
-      // hide current display first
-      console.log("must hide display first");
-
-      this.Display.hide()
-        .then(() => {
-          pageInstance.initial();
-          this.update(pageInstance);
-
-          this.inProcess = false;
-        })
-        .catch(() => {
-          console.log("could not hide page");
-        });
-      // show display
-    } else {
-      // show new display
-      pageInstance.initial();
-      this.update(pageInstance);
-    }
-    // console.log("old: ", this.Display);
-    // console.log("new: ", pageInstance);
+    pageInstance.initial();
     this.update(pageInstance);
   }
 
-  hideComponent(pageInstance) {}
+  hideComponent(pageInstance) {
+    this.Display.hide()
+      .then(() => {
+        this.showComponent(pageInstance);
+        this.inProcess = false;
+      })
+      .catch(() => {
+        console.log("could not hide page");
+      });
+  }
+
+  avalible(pageInstance) {
+    if (this.session === pageInstance.sessionKey) {
+      console.log("same page");
+    } else if (this.isDisplay && this.inProcess) {
+      // there is something showing and it is in the process of hiding
+      console.log("in progress");
+      const processObserver = setInterval(
+        () => this.waitProgress(pageInstance, processObserver),
+        100
+      );
+
+      setTimeout(() => {
+        clearInterval(processObserver);
+      }, 1000);
+    } else if (this.isDisplay) {
+      // hide component
+      this.hideComponent(pageInstance);
+    } else {
+      // show component
+      this.showComponent(pageInstance);
+    }
+  }
 
   update(pageInstance) {
     this.setIsDisplay = true;
@@ -95,23 +104,11 @@ export class Display {
     this._session = null;
   }
 
-  InProcess() {
-    return new Promise((resolve, reject) => {
-      let isInProcess = this.inProcess;
-      while (isInProcess) {
-        isInProcess = this.inProcess;
-      }
-
-      if (!isInProcess) {
-        console.log("no longer in progress");
-        resolve();
-      } else {
-        console.log("still in progress");
-      }
-      setTimeout(() => {
-        reject();
-      }, 5000);
-    });
+  waitProgress(pageInstance, observer) {
+    if (this.isDisplay) {
+      this.hideComponent(pageInstance);
+      clearInterval(observer);
+    }
   }
 }
 

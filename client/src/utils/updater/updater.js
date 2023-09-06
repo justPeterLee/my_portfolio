@@ -10,10 +10,10 @@ export const updater = () => {
   const pageInstance = pagesObj[location];
   menuSelector();
   // menuAnimation.menuSide(true);
-  console.log(pageInstance);
   pageInstance.menu(isInital);
 
-  display.showComponent(pageInstance);
+  // only do this if is able to show
+  display.avalible(pageInstance);
 
   // display.InProcess();
   isInital = false;

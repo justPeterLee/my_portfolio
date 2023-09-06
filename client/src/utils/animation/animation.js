@@ -42,7 +42,7 @@ function defaultHide(element, timeline) {
     gsap.to(`#${element.id}`, {
       y: -200,
       opacity: 0,
-      duration: 0.25,
+      duration: 0.2,
       onComplete: () => {
         element.style = {};
         resolve();
