@@ -7,6 +7,7 @@ export class Display {
     this._Display = null;
     this._session = null;
     this._timeline = gsap.timeline();
+    this._inProcess = false;
   }
 
   get isDisplay() {
@@ -37,6 +38,14 @@ export class Display {
     this._session = session;
   }
 
+  get inProcess() {
+    return this._inProcess;
+  }
+
+  set inProcess(bool) {
+    this._inProcess = bool;
+  }
+
   renderComponent(pageInstance) {
     pageInstance.initial(pageInstance.parent).then(() => {
       rendered.rendering(pageInstance);
@@ -50,10 +59,13 @@ export class Display {
     if (this._isDisplay) {
       // hide current display first
       console.log("must hide display first");
+
       this.Display.hide()
         .then(() => {
-          console.log("page hidden");
           pageInstance.initial();
+          this.update(pageInstance);
+
+          this.inProcess = false;
         })
         .catch(() => {
           console.log("could not hide page");
@@ -62,6 +74,7 @@ export class Display {
     } else {
       // show new display
       pageInstance.initial();
+      this.update(pageInstance);
     }
     // console.log("old: ", this.Display);
     // console.log("new: ", pageInstance);
@@ -80,6 +93,25 @@ export class Display {
     this._isDisplay = false;
     this._Display = null;
     this._session = null;
+  }
+
+  InProcess() {
+    return new Promise((resolve, reject) => {
+      let isInProcess = this.inProcess;
+      while (isInProcess) {
+        isInProcess = this.inProcess;
+      }
+
+      if (!isInProcess) {
+        console.log("no longer in progress");
+        resolve();
+      } else {
+        console.log("still in progress");
+      }
+      setTimeout(() => {
+        reject();
+      }, 5000);
+    });
   }
 }
 
