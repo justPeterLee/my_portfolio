@@ -13,22 +13,18 @@ function defaultShow(element, timeline) {
     label = ">";
   } else {
     tl = display.timeline;
-    label = "0";
+    label = "+=0";
   }
 
-  tl.from(
-    `#${element.id}`,
-    {
-      x: 200,
-      opacity: 0,
-      direction: 1,
-      onStart: () => {
-        element.style = {};
-        // element.parentElement.style.display = {};
-      },
+  gsap.from(`#${element.id}`, {
+    x: 200,
+    opacity: 0,
+    direction: 1,
+    onStart: () => {
+      element.style = {};
+      // element.parentElement.style.display = {};
     },
-    label
-  );
+  });
 }
 
 function defaultHide(element, timeline) {
@@ -44,11 +40,12 @@ function defaultHide(element, timeline) {
       label = "0";
     }
 
-    globalTL.to(`#${element.id}`, {
+    gsap.to(`#${element.id}`, {
       y: -200,
       opacity: 0,
-      duration: 0.5,
+      duration: 0.25,
       onComplete: () => {
+        element.style = {};
         resolve();
       },
     });
