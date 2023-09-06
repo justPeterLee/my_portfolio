@@ -50,6 +50,14 @@ export class Display {
     if (this._isDisplay) {
       // hide current display first
       console.log("must hide display first");
+      this.Display.hide()
+        .then(() => {
+          console.log("page hidden");
+          pageInstance.initial();
+        })
+        .catch(() => {
+          console.log("could not hide page");
+        });
       // show display
     } else {
       // show new display

@@ -22,10 +22,10 @@ function defaultShow(element, timeline) {
       x: 200,
       opacity: 0,
       direction: 1,
-      // onStart: () => {
-      //   element.style = {};
-      //   element.parentElement.style.display = {};
-      // },
+      onStart: () => {
+        element.style = {};
+        // element.parentElement.style.display = {};
+      },
     },
     label
   );

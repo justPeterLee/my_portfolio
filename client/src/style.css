@@ -84,7 +84,7 @@ a {
 #project-container,
 #scroll-menu-container {
   position: absolute;
-  background-color: rgb(70, 70, 70);
+  /* background-color: rgb(70, 70, 70); */
   width: 70rem;
   height: 100vh;
   display: flex;

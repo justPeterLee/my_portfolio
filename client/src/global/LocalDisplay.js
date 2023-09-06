@@ -28,13 +28,23 @@ export class LocalDisplay {
     // show
     if (genComponent) {
       component.Show(genComponent);
+      this.addDisplay(component);
+      this.updateState();
     }
+
+    console.log(this.components, this.isDisplay);
   }
 
   hideComponent(component) {
     return new Promise((resolve, reject) => {
       if (component.element) {
         component.Hide(component.element).then(() => {
+          this.hideDisplay(component);
+          component.element.remove();
+
+          this.updateState();
+
+          console.log(this.components, this.isDisplay);
           resolve();
         });
       }
@@ -44,5 +54,23 @@ export class LocalDisplay {
     // ungenerate
   }
 
-  updateState() {}
+  addDisplay(component) {
+    this.components[component.key] = component;
+  }
+
+  hideDisplay(component) {
+    if (this.components[component.key]) {
+      delete this._components[component.key];
+    }
+  }
+
+  updateState() {
+    const keys = Object.keys(this.components);
+
+    if (keys.length) {
+      this.isDisplay = true;
+    } else {
+      this.isDisplay = false;
+    }
+  }
 }

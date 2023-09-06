@@ -48,7 +48,6 @@ export class PageInstance {
   }
 
   initial() {
-    console.log(this.getInitial());
     const initialComponents = this.getInitial();
     initialComponents.forEach((component) => {
       this.localDisplay.showComponent(component);
@@ -70,6 +69,30 @@ export class PageInstance {
   menu(initial) {
     this.menuAnimation(initial);
   }
+
+  hide() {
+    return new Promise((resolve, reject) => {
+      let isDisplay = this.localDisplay.isDisplay;
+      const keys = Object.keys(this.localDisplay.components);
+
+      keys.forEach((component) => {
+        const currComponent = this.localDisplay.components[component];
+        this.localDisplay.hideComponent(currComponent).then(() => {
+          isDisplay = this.localDisplay.isDisplay;
+
+          if (!isDisplay) {
+            resolve();
+          }
+        });
+      });
+
+      setTimeout(() => {
+        if (isDisplay) {
+          reject();
+        }
+      }, 5000);
+    });
+  }
 }
 
 export const pagesObj = {};
@@ -90,7 +113,6 @@ export function createPage(title, url, components, menuAnimations) {
   })
     .then((res) => {
       pagesObj[res.url] = res;
-      console.log(pagesObj);
     })
     .catch((err) => {
       console.log("couldn't create page", err);

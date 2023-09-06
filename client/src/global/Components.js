@@ -48,7 +48,7 @@ export class Components {
   }
 
   Hide(element, tl) {
-    this.hide(element, tl);
+    return this.hide(element, tl);
   }
 
   Generate() {
