@@ -45,8 +45,18 @@ export class Display {
 
   showComponent(pageInstance, render) {
     const isRender = render || false;
-    console.log("old: ", this.Display);
-    console.log("new: ", pageInstance);
+
+    // is something showing
+    if (this._isDisplay) {
+      // hide current display first
+      console.log("must hide display first");
+      // show display
+    } else {
+      // show new display
+      pageInstance.initial();
+    }
+    // console.log("old: ", this.Display);
+    // console.log("new: ", pageInstance);
     this.update(pageInstance);
   }
 
