@@ -1,18 +1,5 @@
-// renderer container
-export function projectRenererContainer(parent) {
-  return new Promise((resolve, reject) => {
-    const rendererContainer = document.createElement("div");
-    rendererContainer.id = "project-renderer-container";
-    parent.appendChild(rendererContainer);
-
-    // if(rendererContainer)
-
-    resolve(rendererContainer);
-  });
-}
-
 // default view
-export function renderScrollContent() {
+export function scrollContainer() {
   const scrollContainer = document.createElement("div");
   scrollContainer.id = "project-container";
   scrollContainer.className = "scroll-container";
@@ -21,39 +8,25 @@ export function renderScrollContent() {
   content.id = "project-scroll-content";
   content.innerHTML = "project";
 
-  const rendererContainerDOM = document.querySelector(
-    "#project-renderer-container"
-  );
-
-  rendererContainerDOM.appendChild(scrollContainer);
-
   scrollContainer.appendChild(content);
 
   return scrollContainer;
 }
 
-export function renderScrollContents() {
-  const scrollContainer = document.createElement("div");
-  scrollContainer.id = "project-containers";
-  scrollContainer.className = "scroll-containers";
+export function scrollMenu() {
+  const scrollMenuContainer = document.createElement("div");
+  scrollMenuContainer.id = "scroll-menu-container";
 
   const content = document.createElement("p");
-  content.id = "project-scroll-contents";
-  content.innerHTML = "asdfasfadfadf";
+  content.id = "scroll-menu-text";
+  content.innerHTML = "scroll menu";
 
-  const rendererContainerDOM = document.querySelector(
-    "#project-renderer-container"
-  );
+  scrollMenuContainer.appendChild(content);
 
-  rendererContainerDOM.appendChild(scrollContainer);
-
-  scrollContainer.appendChild(content);
-
-  return scrollContainer;
+  return scrollMenuContainer;
 }
 
 export const projectRender = {
-  rendererContainer: projectRenererContainer,
-  renderScrollContent,
-  renderScrollContents,
+  scrollContainer,
+  scrollMenu,
 };

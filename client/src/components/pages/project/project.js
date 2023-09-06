@@ -5,24 +5,25 @@ import { menuAnimation } from "../../../utils/animation/menuAnimation";
 
 export const createProjectPage = () => {
   createPage(
+    "Projects",
     "/projects",
-    "Project",
-    "projectSession",
-    undefined,
-    projectRender.rendererContainer,
-    { scrollContentDisplay },
+    { scrollContainer, scrollMenu },
     menuAnimation.menuSide
   );
 };
 
-const scrollContentDisplay = new Components(
+const scrollContainer = new Components(
   "scrollContainer",
-  projectRender.renderScrollContent,
+  projectRender.scrollContainer,
   null,
   null,
   { isInitial: true }
 );
 
-// const descriptionContent = new Components(
-//   // projectRender.
-// )
+const scrollMenu = new Components(
+  "scrollMenu",
+  projectRender.scrollMenu,
+  null,
+  null,
+  { isInitial: true }
+);
