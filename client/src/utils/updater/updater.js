@@ -14,5 +14,7 @@ export const updater = () => {
   pageInstance.menu(isInital);
 
   display.showComponent(pageInstance);
+
+  // display.InProcess();
   isInital = false;
 };
