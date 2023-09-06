@@ -1,4 +1,5 @@
 import data from "../../../../public/projects.json";
+import "./project.css";
 // default view
 export function scrollContainer() {
   console.log(data);
@@ -7,6 +8,7 @@ export function scrollContainer() {
   scrollContainer.className = "scroll-container";
 
   const mainContainer = document.createElement("div");
+  mainContainer.className = "container";
   mainContainer.id = "main-display-container";
   scrollContainer.appendChild(mainContainer);
 
@@ -58,7 +60,27 @@ export function scrollContainer() {
 
   scrollContainer.appendChild(content);
 
+  scrollContainerEvent(scrollContainer);
   return scrollContainer;
+}
+
+function scrollContainerEvent(scrollContainer) {
+  let isScrolling = false;
+  let timeout;
+
+  function handleScroll() {
+    if (!isScrolling) {
+      isScrolling = true;
+    }
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      // Scrolling has stopped
+      console.log("Scrolling stopped");
+      isScrolling = false;
+    }, 100);
+  }
+
+  scrollContainer.addEventListener("scroll", handleScroll);
 }
 
 export function scrollMenu() {

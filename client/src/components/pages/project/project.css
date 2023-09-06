@@ -1,0 +1,12 @@
+.scroll-container {
+  position: absolute;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.scroll-container:hover {
+  overflow: auto;
+}
+#main-display-container {
+  height: 100rem;
+}
