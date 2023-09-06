@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { menuAnimation } from "../utils/animation/menuAnimation";
 import { LocalDisplay } from "./LocalDisplay";
+import { display } from "./Display";
 export class PageInstance {
   constructor(title, url, components, menuAnimations) {
     this._title = title || url.replace("/", "");
@@ -72,6 +73,7 @@ export class PageInstance {
 
   hide() {
     return new Promise((resolve, reject) => {
+      display.inProcess = true;
       let isDisplay = this.localDisplay.isDisplay;
       const keys = Object.keys(this.localDisplay.components);
 
@@ -81,7 +83,10 @@ export class PageInstance {
           isDisplay = this.localDisplay.isDisplay;
 
           if (!isDisplay) {
-            resolve();
+            display.reset();
+            if (!display.isDisplay) {
+              resolve();
+            }
           }
         });
       });
