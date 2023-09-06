@@ -80,22 +80,3 @@ a {
 }
 
 /* ----- component ----- */
-#contact-content-container,
-#project-container,
-#scroll-menu-container,
-#about-content-container {
-  position: absolute;
-  /* background-color: rgb(70, 70, 70); */
-  top: 50%;
-  left: 50%;
-
-  transform: translate(50%, 50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#scroll-menu-container {
-  top: 40%;
-  transform: translate(50%, 50%);
-}
