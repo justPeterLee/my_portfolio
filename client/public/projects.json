@@ -1,0 +1,69 @@
+{
+  "Klean": {
+    "title": "Klean",
+    "subTitle": "e-commerce shop",
+    "time": "June 2023",
+    "image": "http://localhost:5000/api/v1/cats.jpg",
+    "description": {
+      "image": "",
+      "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
+      "text": "This travel planner application is your ultimate companion for seamless trip planning. Whether you're a solo adventurer or planning a family vacation, this app streamlines the entire process. Input your destination, travel dates, and preferences, and it will generate a personalized itinerary with must-see attractions, local restaurants, and even hotel options.",
+      "tech": ["NextJs", "SQL", "API", "DevOps"]
+    },
+    "link": {
+      "host": "klean.com",
+      "github": "github.com"
+    }
+  },
+
+  "Blossom": {
+    "title": "Blossom",
+    "subTitle": "e-commerce shop",
+    "time": "Sept 2023",
+    "image": "http://localhost:5000/api/v1/fox.jpg",
+    "description": {
+      "image": "",
+      "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
+      "text": "Get on the path to a healthier lifestyle with this all-in-one fitness and health application. It serves as your virtual personal trainer, helping you set fitness goals, track your workouts, and monitor your progress. The app also offers detailed nutritional information and meal planning tools, making it easier to maintain a balanced diet.",
+      "tech": ["NextJs", "SQL", "API", "DevOps"]
+    },
+    "link": {
+      "host": "klean.com",
+      "github": "github.com"
+    }
+  },
+
+  "MaidReady": {
+    "title": "Maid!Ready!",
+    "subTitle": "e-commerce shop",
+    "time": "April 2023",
+    "image": "http://localhost:5000/api/v1/colorCats.jpg",
+    "description": {
+      "image": "",
+      "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
+      "text": "Embark on a journey to master a new language with this language learning application. Whether you're learning for travel, work, or personal enrichment, this app offers comprehensive lessons in multiple languages.",
+      "tech": ["NextJs", "SQL", "API", "DevOps"]
+    },
+    "link": {
+      "host": "klean.com",
+      "github": "github.com"
+    }
+  },
+
+  "Circut": {
+    "title": "Circut",
+    "subTitle": "e-commerce shop",
+    "time": "Aug 2023",
+    "image": "http://localhost:5000/api/v1/deer.jpg",
+    "description": {
+      "image": "",
+      "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
+      "text": "Take control of your finances with this robust personal finance management application. It simplifies budgeting, expense tracking, and investment management. Connect your bank accounts and credit cards to automatically categorize transactions and gain insights into your spending habits.",
+      "tech": ["NextJs", "SQL", "API", "DevOps"]
+    },
+    "link": {
+      "host": "klean.com",
+      "github": "github.com"
+    }
+  }
+}

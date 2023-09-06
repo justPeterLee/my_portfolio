@@ -1,8 +1,14 @@
+import data from "../../../../public/projects.json";
 // default view
 export function scrollContainer() {
+  console.log(data);
   const scrollContainer = document.createElement("div");
   scrollContainer.id = "project-container";
   scrollContainer.className = "scroll-container";
+
+  const mainContainer = document.createElement("div");
+  mainContainer.id = "main-display-container";
+  scrollContainer.appendChild(mainContainer);
 
   const content = document.createElement("p");
   content.id = "project-scroll-content";

@@ -7,7 +7,7 @@ export const createProjectPage = () => {
   createPage(
     "Projects",
     "/projects",
-    { scrollContainer, scrollMenu },
+    { scrollContainer },
     menuAnimation.menuSide
   );
 };
