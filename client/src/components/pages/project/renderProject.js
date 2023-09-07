@@ -95,24 +95,42 @@ export function scrollContainer() {
     scrollContainer.appendChild(projectContainer);
   });
 
-  scrollContainerEvent(scrollContainer);
-
-  touchScrollEvent(scrollContainer);
+  scrollEvent(scrollContainer);
 
   return scrollContainer;
 }
 
-function scrollContainerEvent(scrollContainer) {
-  window.onscroll = (e) => {
-    console.log("scroll");
-  };
-}
-
-function touchScrollEvent(scrollContainer) {
+function scrollEvent(scrollContainer) {
   let mousedown = 0;
   let oldPercentage = 0;
   let currPercentage = 0;
   let newPercentage = 0;
+  const body = document.querySelector("body");
+
+  body.addEventListener("wheel", (event) => {
+    const deltaY = event.deltaY;
+    // Perform actions based on the scroll input
+    if (deltaY > 0) {
+      // Add your code for scrolling down
+      if (newPercentage >= -100) {
+        newPercentage -= 5;
+      }
+    } else if (deltaY < 0) {
+      if (newPercentage <= 1) {
+        newPercentage += 5;
+      }
+    }
+
+    currPercentage = newPercentage;
+
+    scrollContainer.animate(
+      {
+        transform: `translate(-50%,${newPercentage}%)`,
+      },
+      { duration: 500, fill: "forwards" }
+    );
+  });
+
   window.onmousemove = (e) => {
     if (mousedown === 0) return;
 
