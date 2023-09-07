@@ -3,7 +3,7 @@
     "title": "Klean",
     "subTitle": "e-commerce shop",
     "time": "June 2023",
-    "image": "http://localhost:5000/api/v1/cats.jpg",
+    "image": "http://localhost:5173/api/v1/colorCats.jpg",
     "description": {
       "image": "",
       "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
@@ -20,7 +20,7 @@
     "title": "Blossom",
     "subTitle": "e-commerce shop",
     "time": "Sept 2023",
-    "image": "http://localhost:5000/api/v1/fox.jpg",
+    "image": "http://localhost:5173/api/v1/fox.jpg",
     "description": {
       "image": "",
       "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
@@ -37,7 +37,7 @@
     "title": "Maid!Ready!",
     "subTitle": "e-commerce shop",
     "time": "April 2023",
-    "image": "http://localhost:5000/api/v1/colorCats.jpg",
+    "image": "http://localhost:5173/api/v1/colorCats.jpg",
     "description": {
       "image": "",
       "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
@@ -54,7 +54,7 @@
     "title": "Circut",
     "subTitle": "e-commerce shop",
     "time": "Aug 2023",
-    "image": "http://localhost:5000/api/v1/deer.jpg",
+    "image": "http://localhost:5173/api/v1/deer.jpg",
     "description": {
       "image": "",
       "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
