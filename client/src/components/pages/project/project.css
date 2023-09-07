@@ -1,10 +1,10 @@
 #scroll-track {
   position: absolute;
-  overflow: auto;
+  /* overflow: auto; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, 0%);
-  gap: 10rem;
+  gap: 5rem;
 }
 
 /*
@@ -17,7 +17,7 @@ equation for translateY
   gap: 3rem;
 } */
 
-#project-display-container {
+.project-display-container {
   flex-direction: row;
   gap: 3rem;
   /* justify-content: space-between; */
@@ -52,8 +52,35 @@ equation for translateY
 }
 
 #image-container {
-  background-color: rgb(200, 200, 200);
+  /* background-color: rgb(200, 200, 200); */
   width: 25rem;
   height: 17rem;
-  border-radius: 2px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
 }
+
+.image {
+  height: 20rem;
+  /* object-fit: scale-dow; */
+  border-radius: 5px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+
+  transform: translate(-50%, -7.5%);
+}
+
+/* image center equation
+
+- find difference in container and image hight
+- divide by 2
+- divide by image height
+- done in pixels
+
+top = 0 
+center = answer 
+bottom = answer + answer
+
+curr answer = -7.5%
+*/
