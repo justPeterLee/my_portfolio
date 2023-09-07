@@ -61,14 +61,14 @@ equation for translateY
 }
 
 .image {
-  height: 20rem;
+  height: 30rem;
   /* object-fit: scale-dow; */
   border-radius: 5px;
   position: absolute;
   left: 50%;
   top: 0;
 
-  transform: translate(-50%, -7.5%);
+  transform: translate(-50%, -21%);
 }
 
 /* image center equation

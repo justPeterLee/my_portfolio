@@ -115,14 +115,17 @@ function scrollEvent(scrollContainer, imagesArr) {
   let currPercentage = 0;
   let newPercentage = 0;
   let imagePercentage = 0;
-  console.log(imagesArr);
+  let scrollingStoppedTimeout;
+
   const body = document.querySelector("body");
 
   body.addEventListener("wheel", (event) => {
     const deltaY = event.deltaY;
-    // Perform actions based on the scroll input
+    clearTimeout(scrollingStoppedTimeout);
+    scrollingStoppedTimeout = setTimeout(function () {
+      oldPercentage = currPercentage;
+    }, 200);
     if (deltaY > 0) {
-      // Add your code for scrolling down
       if (newPercentage >= -100) {
         newPercentage -= 5;
       }
@@ -141,24 +144,23 @@ function scrollEvent(scrollContainer, imagesArr) {
 
     currPercentage = newPercentage;
 
-    if (imagePercentage >= -15 && imagePercentage <= 0) {
-      imagePercentage = ((newPercentage * 3) / 100) * -15 + -15;
+    if (imagePercentage >= -30 && imagePercentage <= 0) {
+      imagePercentage = ((newPercentage * 5) / 100) * -30 + -30;
     }
 
-    if (imagePercentage <= -15) {
-      imagePercentage = -14.9;
+    if (imagePercentage <= -30) {
+      imagePercentage = -29.9;
     }
     if (imagePercentage >= 0) {
       imagePercentage = -0.1;
     }
 
-    console.log(imagePercentage);
     scrollAnimation(scrollContainer, imagesArr, newPercentage, imagePercentage);
   });
 
   window.onmousemove = (e) => {
     if (mousedown === 0) return;
-
+    console.log(imagePercentage);
     const mouseDelta = (parseFloat(mousedown) - e.clientY) * 0.5;
     const maxDelta = window.innerHeight / 2;
 
@@ -176,12 +178,12 @@ function scrollEvent(scrollContainer, imagesArr) {
 
     currPercentage = newPercentage;
 
-    if (imagePercentage >= -15 && imagePercentage <= 0) {
-      imagePercentage = ((newPercentage * 2) / 100) * -15 + -15;
+    if (imagePercentage >= -30 && imagePercentage <= 0) {
+      imagePercentage = ((newPercentage * 3) / 100) * -32 + -32;
     }
 
-    if (imagePercentage <= -15) {
-      imagePercentage = -14.9;
+    if (imagePercentage <= -30) {
+      imagePercentage = -29.9;
     }
     if (imagePercentage >= 0) {
       imagePercentage = -0.1;
