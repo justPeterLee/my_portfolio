@@ -4,23 +4,24 @@ import "./project.css";
 export function scrollContainer() {
   console.log(data);
   const scrollContainer = document.createElement("div");
-  scrollContainer.id = "project-container";
-  scrollContainer.className = "scroll-container";
+  scrollContainer.id = "scroll-track";
+  scrollContainer.className = "container";
 
-  const mainContainer = document.createElement("div");
-  mainContainer.className = "container";
-  mainContainer.id = "main-display-container";
-  scrollContainer.appendChild(mainContainer);
+  // const mainContainer = document.createElement("div");
+  // mainContainer.className = "container";
+  // mainContainer.id = "main-display-container";
+  // scrollContainer.appendChild(mainContainer);
 
   const keys = Object.keys(data);
 
-  keys.forEach((project) => {
+  keys.forEach((project, index) => {
     console.log(data[project].title);
+    console.log(index);
     // span (main container for project instance)
     const projectContainer = document.createElement("span");
     projectContainer.className = "container";
     projectContainer.id = "project-display-container";
-    mainContainer.appendChild(projectContainer);
+    scrollContainer.appendChild(projectContainer);
 
     // text container
     const scrollTextContainer = document.createElement("div");
@@ -28,22 +29,17 @@ export function scrollContainer() {
     scrollTextContainer.id = "scroll-text-container";
     projectContainer.appendChild(scrollTextContainer);
 
-    // title container
-    const titleContainer = document.createElement("span");
-    titleContainer.className = "container";
-    titleContainer.id = "project-title-subtitle";
-    projectContainer.appendChild(titleContainer);
     //title
     const title = document.createElement("p");
     title.id = "scroll-title";
     title.innerHTML = data[project].title;
-    titleContainer.appendChild(title);
+    scrollTextContainer.appendChild(title);
 
     // subtitle
     const subTitle = document.createElement("p");
     subTitle.id = "scroll-subtitle";
     subTitle.innerHTML = data[project].subTitle;
-    titleContainer.appendChild(subTitle);
+    scrollTextContainer.appendChild(subTitle);
 
     // date
     const date = document.createElement("p");
@@ -51,14 +47,53 @@ export function scrollContainer() {
     date.innerHTML = data[project].time;
     scrollTextContainer.appendChild(date);
 
-    mainContainer.appendChild(projectContainer);
+    // links container
+    const linkContainer = document.createElement("div");
+    linkContainer.id = "link-container";
+    linkContainer.className = "container";
+    scrollTextContainer.appendChild(linkContainer);
+
+    // links
+    const siteLink = document.createElement("a");
+    siteLink.innerHTML = "site";
+    siteLink.id = "site-link";
+    siteLink.className = "link";
+    linkContainer.appendChild(siteLink);
+
+    //dot
+    const linkDot = document.createElement("div");
+    linkDot.id = "link-dot";
+    linkContainer.appendChild(linkDot);
+
+    const codeLink = document.createElement("a");
+    codeLink.innerHTML = "code";
+    codeLink.id = "code-link";
+    codeLink.className = "link";
+    linkContainer.appendChild(codeLink);
+
+    // image dot
+    const imageDot = document.createElement("div");
+    imageDot.id = "image-dot";
+    imageDot.className = "triangle";
+
+    // image container
+    const imageContainer = document.createElement("div");
+    imageContainer.id = "image-container";
+
+    // image
+    if (index % 2 === 0) {
+      imageDot.style.transform = "rotate(90deg)";
+
+      projectContainer.appendChild(imageDot);
+      projectContainer.appendChild(imageContainer);
+    } else {
+      imageDot.style.transform = "rotate(270deg)";
+
+      projectContainer.prepend(imageDot);
+      projectContainer.prepend(imageContainer);
+    }
+    scrollContainer.appendChild(projectContainer);
   });
-
-  const content = document.createElement("p");
-  content.id = "project-scroll-content";
-  content.innerHTML = "project";
-
-  scrollContainer.appendChild(content);
 
   scrollContainerEvent(scrollContainer);
   return scrollContainer;

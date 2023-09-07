@@ -1,10 +1,52 @@
-.scroll-container {
+#scroll-track {
   position: absolute;
-  height: 100vh;
   overflow: auto;
   left: 50%;
   transform: translateX(-50%);
+  gap: 4rem;
 }
 
-/* .scroll-container:hover {
-} */
+#main-display-container {
+  gap: 3rem;
+}
+
+#project-display-container {
+  flex-direction: row;
+  gap: 4rem;
+  /* justify-content: space-between; */
+}
+
+#scroll-text-container {
+  min-width: 8rem;
+}
+
+#link-container {
+  flex-direction: row;
+  gap: 1rem;
+}
+
+#link-dot {
+  border-radius: 100%;
+  width: 2px;
+  height: 2px;
+  background-color: white;
+}
+
+#scroll-title {
+  font-size: 18px;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 4px solid white;
+}
+
+#image-container {
+  background-color: rgb(200, 200, 200);
+  width: 25rem;
+  height: 17rem;
+  border-radius: 2px;
+}
