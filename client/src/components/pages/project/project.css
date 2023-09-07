@@ -1,12 +1,10 @@
 .scroll-container {
   position: absolute;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.scroll-container:hover {
-  overflow: auto;
-}
-#main-display-container {
-  height: 100rem;
-}
+/* .scroll-container:hover {
+} */

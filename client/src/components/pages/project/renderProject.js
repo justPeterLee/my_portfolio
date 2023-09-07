@@ -32,7 +32,7 @@ export function scrollContainer() {
     const titleContainer = document.createElement("span");
     titleContainer.className = "container";
     titleContainer.id = "project-title-subtitle";
-    scrollContainer.appendChild(titleContainer);
+    projectContainer.appendChild(titleContainer);
     //title
     const title = document.createElement("p");
     title.id = "scroll-title";
