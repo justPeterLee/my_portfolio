@@ -1,18 +1,25 @@
 #scroll-track {
   position: absolute;
   overflow: auto;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  gap: 4rem;
+  transform: translate(-50%, 0%);
+  gap: 10rem;
 }
 
-#main-display-container {
+/*
+equation for translateY 
+
+- -2 / (height of node / (# of nodes * hieght of node) + (gap * (# of nodes -1))) 
+*/
+
+/* #main-display-container {
   gap: 3rem;
-}
+} */
 
 #project-display-container {
   flex-direction: row;
-  gap: 4rem;
+  gap: 3rem;
   /* justify-content: space-between; */
 }
 

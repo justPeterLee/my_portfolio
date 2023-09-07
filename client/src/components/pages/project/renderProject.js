@@ -96,26 +96,60 @@ export function scrollContainer() {
   });
 
   scrollContainerEvent(scrollContainer);
+
+  touchScrollEvent(scrollContainer);
+
   return scrollContainer;
 }
 
 function scrollContainerEvent(scrollContainer) {
-  let isScrolling = false;
-  let timeout;
+  window.onscroll = (e) => {
+    console.log("scroll");
+  };
+}
 
-  function handleScroll() {
-    if (!isScrolling) {
-      isScrolling = true;
+function touchScrollEvent(scrollContainer) {
+  let mousedown = 0;
+  let oldPercentage = 0;
+  let currPercentage = 0;
+  let newPercentage = 0;
+  window.onmousemove = (e) => {
+    if (mousedown === 0) return;
+
+    const mouseDelta = (parseFloat(mousedown) - e.clientY) * 0.5;
+    const maxDelta = window.innerHeight / 2;
+
+    const percentage = (mouseDelta / maxDelta) * 100;
+    console.log(newPercentage);
+    if (newPercentage >= -100 && newPercentage <= 1) {
+      newPercentage = oldPercentage + percentage;
     }
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
-      // Scrolling has stopped
-      console.log("Scrolling stopped");
-      isScrolling = false;
-    }, 100);
-  }
+    if (newPercentage < -100) {
+      newPercentage = -99.9;
+    }
+    if (newPercentage > 1) {
+      newPercentage = 0.9;
+    }
+    currPercentage = newPercentage;
+    scrollContainer.animate(
+      {
+        transform: `translate(-50%,${newPercentage}%)`,
+      },
+      { duration: 500, fill: "forwards" }
+    );
 
-  scrollContainer.addEventListener("scroll", handleScroll);
+    // transform = `translate(-50%,${newPercentage}%)`;
+  };
+
+  window.onmousedown = (e) => {
+    console.log(e);
+    mousedown = e.clientY;
+  };
+
+  window.onmouseup = (e) => {
+    mousedown = 0;
+    oldPercentage = currPercentage;
+  };
 }
 
 export function scrollMenu() {
