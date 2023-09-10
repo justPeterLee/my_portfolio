@@ -2,7 +2,7 @@ import { projectRender } from "./renderProject";
 import { createPage } from "../../../global/Pages";
 import { Components } from "../../../global/Components";
 import { menuAnimation } from "../../../utils/animation/menuAnimation";
-
+import { projectAnimation } from "../../../utils/animation/projectAnimation";
 export const createProjectPage = () => {
   createPage(
     "Projects",
@@ -15,7 +15,7 @@ export const createProjectPage = () => {
 const scrollContainer = new Components(
   "scrollContainer",
   projectRender.scrollContainer,
-  null,
+  projectAnimation.showProject,
   null,
   { isInitial: true }
 );

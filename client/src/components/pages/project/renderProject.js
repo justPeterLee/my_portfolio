@@ -21,6 +21,8 @@ export function scrollContainer() {
     const animationContainer = document.createElement("div");
     animationContainer.className = "animation-container";
     animationContainer.id = `animation-container-${index}`;
+    animationContainer.dataset.position = index;
+
     projectContainer.appendChild(animationContainer);
 
     // text container
@@ -126,8 +128,8 @@ function scrollEvent(scrollContainer, imagesArr) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        console.log(window.innerHeight / 2);
-        console.log(entry);
+        // console.log(window.innerHeight / 2);
+        // console.log(entry);
       }
     });
   });
@@ -147,7 +149,7 @@ function scrollEvent(scrollContainer, imagesArr) {
 
     // change percentage
     if (deltaY > 0) {
-      if (newPercentage >= -100) {
+      if (newPercentage >= -80) {
         newPercentage -= 5;
       }
     } else if (deltaY < 0) {
@@ -155,8 +157,8 @@ function scrollEvent(scrollContainer, imagesArr) {
         newPercentage += 5;
       }
     }
-    if (newPercentage < -100) {
-      newPercentage = -99.9;
+    if (newPercentage < -80) {
+      newPercentage = -79.9;
     }
     if (newPercentage > 1) {
       newPercentage = 0.9;
@@ -183,11 +185,11 @@ function scrollEvent(scrollContainer, imagesArr) {
 
     const percentage = (mouseDelta / maxDelta) * -100;
 
-    if (newPercentage >= -100 && newPercentage <= 1) {
+    if (newPercentage >= -80 && newPercentage <= 1) {
       newPercentage = oldPercentage + percentage;
     }
-    if (newPercentage < -100) {
-      newPercentage = -99.9;
+    if (newPercentage < -80) {
+      newPercentage = -79.9;
     }
     if (newPercentage > 1) {
       newPercentage = 0;
@@ -197,7 +199,7 @@ function scrollEvent(scrollContainer, imagesArr) {
 
     newImagePercentage = (newPercentage / 100) * 0.8 * -33.3;
 
-    console.log(newPercentage);
+    // console.log(newPercentage);
 
     scrollAnimation(
       scrollContainer,
