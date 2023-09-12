@@ -16,7 +16,7 @@ const scrollContainer = new Components(
   "scrollContainer",
   projectRender.scrollContainer,
   projectAnimation.showProject,
-  null,
+  projectAnimation.hideProject,
   { isInitial: true }
 );
 

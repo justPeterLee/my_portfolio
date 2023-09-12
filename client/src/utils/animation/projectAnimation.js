@@ -31,30 +31,52 @@ function showProject(element) {
 }
 
 function hideProject(element) {
-  const tl = gsap.timeline();
-  const elementChild = [...element.children];
-  const animationArr = elementChild.map((grandElement) => {
-    return grandElement.children[0];
-  });
+  return new Promise((resolve, reject) => {
+    const tl = gsap.timeline();
+    const children = [...element.children];
+    const center = document.querySelector("#centerDiv");
 
-  animationArr.forEach((position, index) => {
-    // console.log(index);
-    let timedelay;
-    // console.log(timedelay);
-    if (index) timedelay = "-=.6";
-    if (parseInt(position.dataset.position) % 2 === 0) {
-      tl.to(
-        `#${position.id}`,
-        { x: 600, opacity: 0, duration: 0.7 },
-        timedelay
-      );
-    } else {
-      tl.to(
-        `#${position.id}`,
-        { x: -600, opacity: 0, duration: 0.7 },
-        timedelay
-      );
+    if (center) {
+      console.log(center);
+      gsap.to(`#${center.id}`, {
+        duration: 0,
+        onComplete: () => {
+          center.remove();
+        },
+      });
     }
+
+    children.forEach((component, index) => {
+      //   console.log(component);
+      let timedelay;
+      if (index) timedelay = "-=.3";
+      tl.to(
+        `#${component.id}`,
+        {
+          x: 600,
+          opacity: 0,
+          duration: 0.4,
+          onComplete: () => {
+            if (index + 1 === children.length) {
+              element.style = {};
+              resolve();
+            }
+          },
+        },
+        timedelay
+      );
+      console.log(index + 1, children.length);
+    });
+
+    // gsap.to(`#${element.id}`, {
+    //   y: -200,
+    //   opacity: 0,
+    //   duration: 0.2,
+    //   onComplete: () => {
+    //     element.style = {};
+    //     resolve();
+    //   },
+    // });
   });
 }
 
