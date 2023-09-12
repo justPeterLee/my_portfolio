@@ -132,6 +132,7 @@ let mousedown = 0;
 window.onmousemove = (e) => {
   if (mousedown === 0 || window.location.pathname !== "/projects" || !scroll)
     return;
+  if (scroll.moveActive) return;
 
   const mouseDelta = parseFloat(mousedown) - e.clientY;
   const maxDelta = window.innerHeight / 2;
@@ -145,11 +146,13 @@ window.onmousemove = (e) => {
 
 window.onmousedown = (e) => {
   if (window.location.pathname !== "/projects" || !scroll) return;
+  // if (scroll.moveActive) return;
   mousedown = e.clientY;
 };
 
 window.onmouseup = (e) => {
   if (window.location.pathname !== "/projects" || !scroll) return;
+  // if (scroll.moveActive) return;
   mousedown = 0;
   scroll.cachePercent();
 };

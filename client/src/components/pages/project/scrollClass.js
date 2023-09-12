@@ -1,3 +1,4 @@
+import { gsap, Power2 } from "gsap";
 export class projectScroll {
   constructor(scrollContainer, center, images, imageContainers) {
     this._scrollContainer = scrollContainer;
@@ -10,6 +11,14 @@ export class projectScroll {
     this._percent = 0;
     this._imagePercent = 0;
     this._isCenter = null;
+
+    this._imageContainers.forEach((image) => {
+      image.addEventListener("click", (e) => {
+        this.moveTo(e);
+      });
+    });
+
+    this._moveActive = false;
   }
 
   get percent() {
@@ -36,9 +45,18 @@ export class projectScroll {
     this._isCenter = newCenter;
   }
 
+  get moveActive() {
+    return this._moveActive;
+  }
+
+  set moveActive(bool) {
+    this._moveActive = bool;
+  }
+
   cachePercent() {
     this._oldPercent = this._currPercent;
   }
+
   scrollPercent(newPercent) {
     const totalPercent = this._oldPercent + newPercent;
     if (totalPercent >= -100 && totalPercent <= 0) {
@@ -57,19 +75,24 @@ export class projectScroll {
   }
 
   scrollAnimation(newPercentage) {
-    this._scrollContainer.animate(
-      {
+    return new Promise((resolve, reject) => {
+      gsap.to(`#${this._scrollContainer.id}`, {
+        duration: 0.5,
+        fill: "forwards",
+        ease: Power2.easeOut,
         transform: `translate(-50%,${newPercentage}%)`,
-      },
-      { duration: 1000, fill: "forwards" }
-    );
-
-    this.centerDetect();
+        onUpdate: () => {
+          this.centerDetect();
+        },
+        onComplete: () => {
+          resolve();
+        },
+      });
+    });
   }
 
   centerDetect() {
     const centerPos = this._center.getBoundingClientRect();
-    // console.log(this._imageContainers);
     this._imageContainers.forEach((image) => {
       const elementPos = image.getBoundingClientRect();
       const areTouching = !(
@@ -88,5 +111,31 @@ export class projectScroll {
     });
   }
 
-  moveTo() {}
+  moveTo(e) {
+    if (this.moveActive) {
+      console.log("cannot ");
+    } else {
+      this.moveActive = true;
+      console.log(this.percent);
+      const element = e.target.parentNode;
+      const elementPos = element.getBoundingClientRect();
+      const elementCenter = elementPos.top + elementPos.height / 2;
+
+      const centerPos = this._center.getBoundingClientRect();
+      const centerCenter = centerPos.top + centerPos.height / 2;
+
+      const scrollHeight = this._scrollContainer.getBoundingClientRect().height;
+
+      const distance = centerCenter - elementCenter;
+      const distancePercent = (distance / scrollHeight) * 100;
+
+      // console.log(distancePercent);
+
+      this.scrollPercent(distancePercent);
+      this.scrollAnimation(this.percent).then(() => {
+        this.moveActive = false;
+        this.cachePercent();
+      });
+    }
+  }
 }
