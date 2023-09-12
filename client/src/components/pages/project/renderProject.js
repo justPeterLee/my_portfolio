@@ -1,5 +1,6 @@
 import data from "../../../../public/projects.json";
 import "./project.css";
+import { projectScroll } from "./scrollClass";
 // default view
 export function scrollContainer() {
   console.log(data);
@@ -120,10 +121,38 @@ export function scrollContainer() {
     scrollContainer.appendChild(projectContainer);
   });
 
-  scrollEvent(scrollContainer, imagesArr, imagePos, centerDiv);
-  // parallaxImage(scrollContainer);
+  scroll = new projectScroll(scrollContainer, centerDiv, imagesArr, imagePos);
+
   return scrollContainer;
 }
+
+let scroll;
+let mousedown = 0;
+
+window.onmousemove = (e) => {
+  if (mousedown === 0 || window.location.pathname !== "/projects" || !scroll)
+    return;
+
+  const mouseDelta = parseFloat(mousedown) - e.clientY;
+  const maxDelta = window.innerHeight / 2;
+  const percentage = (mouseDelta / maxDelta) * -100;
+
+  // console.log(percentage);
+  scroll.scrollPercent(percentage);
+
+  scroll.scrollAnimation(scroll.percent);
+};
+
+window.onmousedown = (e) => {
+  if (window.location.pathname !== "/projects" || !scroll) return;
+  mousedown = e.clientY;
+};
+
+window.onmouseup = (e) => {
+  if (window.location.pathname !== "/projects" || !scroll) return;
+  mousedown = 0;
+  scroll.cachePercent();
+};
 
 // movement system
 // - drag, scroll, key input
@@ -131,30 +160,6 @@ export function scrollContainer() {
 //    - percentage
 //    - animation
 // hold a percentage
-let percent = 0;
-let scrollContainerGlobal;
-function scrollMovement(percentChange) {
-  if (percent > -100 && percent < 0) {
-    percent += percentChange;
-  }
-
-  if (percent > 0) {
-    percent = -0.9;
-  }
-  if (percent < -100) {
-    percent = -0.99;
-  }
-  return percent;
-}
-
-function animationScroll(percentage) {
-  scrollContainerGlobal.animate(
-    {
-      transform: `translate(-50%,${newPercentage}%)`,
-    },
-    { duration: 1000, fill: "forwards" }
-  );
-}
 
 function center(element, centerEle) {
   const elementPos = element.getBoundingClientRect();
@@ -379,6 +384,7 @@ function moveToCenter(
 
   return calcPercent;
 }
+
 export function scrollMenu() {
   const scrollMenuContainer = document.createElement("div");
   scrollMenuContainer.id = "scroll-menu-container";
