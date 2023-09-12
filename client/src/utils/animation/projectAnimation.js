@@ -37,7 +37,6 @@ function hideProject(element) {
     const center = document.querySelector("#centerDiv");
 
     if (center) {
-      console.log(center);
       gsap.to(`#${center.id}`, {
         duration: 0,
         onComplete: () => {
@@ -65,7 +64,6 @@ function hideProject(element) {
         },
         timedelay
       );
-      console.log(index + 1, children.length);
     });
 
     // gsap.to(`#${element.id}`, {

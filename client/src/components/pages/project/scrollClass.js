@@ -14,11 +14,14 @@ export class projectScroll {
 
     this._imageContainers.forEach((image) => {
       image.addEventListener("click", (e) => {
-        this.moveTo(e);
+        if (!this._mouseMove) {
+          this.moveTo(e);
+        }
       });
     });
 
     this._moveActive = false;
+    this._mouseMove = false;
   }
 
   get percent() {
@@ -53,6 +56,13 @@ export class projectScroll {
     this._moveActive = bool;
   }
 
+  get mouseMove() {
+    return this._mouseMove;
+  }
+
+  set mouseMove(bool) {
+    this._mouseMove = bool;
+  }
   cachePercent() {
     this._oldPercent = this._currPercent;
   }
@@ -112,11 +122,9 @@ export class projectScroll {
   }
 
   moveTo(e) {
-    if (this.moveActive) {
-      console.log("cannot ");
+    if (this.moveActive && this.mouseMove) {
     } else {
       this.moveActive = true;
-      console.log(this.percent);
       const element = e.target.parentNode;
       const elementPos = element.getBoundingClientRect();
       const elementCenter = elementPos.top + elementPos.height / 2;
