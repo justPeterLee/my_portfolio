@@ -134,7 +134,6 @@ window.onmousemove = (e) => {
     return;
   if (scroll.moveActive) return;
   scroll.mouseMove = true;
-  console.log(scroll.mouseMove);
   const mouseDelta = parseFloat(mousedown) - e.clientY;
   const maxDelta = window.innerHeight / 2;
   const percentage = (mouseDelta / maxDelta) * -100;
@@ -160,6 +159,29 @@ window.onmouseup = (e) => {
   mousedown = 0;
   scroll.cachePercent();
 };
+
+let scrollingStoppedTimeout;
+const body = document.querySelector("body");
+
+body.addEventListener("wheel", (event) => {
+  // scroll detection
+  const deltaY = event.deltaY;
+  let newPercentage = scroll.percent;
+  clearTimeout(scrollingStoppedTimeout);
+
+  scrollingStoppedTimeout = setTimeout(function () {
+    newPercentage = 0;
+    scroll.cachePercent();
+  }, 200);
+
+  // change percentage
+
+  if (deltaY > 0) {
+    scroll.scrollUp();
+  } else if (deltaY < 0) {
+    scroll.scrollDown();
+  }
+});
 
 // movement system
 // - drag, scroll, key input

@@ -69,6 +69,7 @@ export class projectScroll {
 
   scrollPercent(newPercent) {
     const totalPercent = this._oldPercent + newPercent;
+
     if (totalPercent >= -100 && totalPercent <= 0) {
       this.percent = totalPercent;
     }
@@ -145,5 +146,30 @@ export class projectScroll {
         this.cachePercent();
       });
     }
+  }
+
+  scrollUp() {
+    // this.scrollPercent(-5);
+    this.percent -= 5;
+
+    if (this.percent < -100) {
+      this.percent = -99.9;
+    }
+
+    this._currPercent = this.percent;
+    this.scrollAnimation(this.percent);
+  }
+
+  scrollDown() {
+    // this.scrollPercent(10);
+    this.percent += 5;
+
+    if (this.percent > 0) {
+      this.percent = -0.9;
+    }
+
+    this._currPercent = this.percent;
+
+    this.scrollAnimation(this.percent);
   }
 }
