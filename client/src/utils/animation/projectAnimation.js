@@ -14,7 +14,6 @@ function showProject(element) {
     // console.log(index);
     let timedelay;
     if (index) timedelay = "-=.4";
-    console.log(timedelay);
     if (parseInt(position.dataset.position) % 2 === 0) {
       tl.from(
         `#${position.id}`,
@@ -59,6 +58,7 @@ function hideProject(element) {
   });
 }
 
+// function
 export const projectAnimation = {
   showProject,
   hideProject,
