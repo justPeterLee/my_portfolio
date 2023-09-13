@@ -97,6 +97,7 @@ export function scrollContainer() {
     image.src = data[project].image;
     image.alt = "image";
 
+    image.style.objectPosition = "center 100%";
     imagesArr.push(image);
     // image
     if (index % 2 === 0) {
