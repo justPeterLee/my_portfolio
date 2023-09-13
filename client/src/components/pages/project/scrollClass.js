@@ -23,7 +23,7 @@ export class projectScroll {
       image.addEventListener("mouseover", (e) => {
         const position = e.target.dataset.position;
         const tri = document.querySelector(`#image-triangle-${position}`);
-        if (!tri) return;
+        if (!tri || this.mouseMove) return;
 
         gsap.to(`#${tri.id}`, {
           duration: 0.2,
@@ -34,7 +34,7 @@ export class projectScroll {
       image.addEventListener("mouseout", (e) => {
         const position = e.target.dataset.position;
         const tri = document.querySelector(`#image-triangle-${position}`);
-        if (!tri) return;
+        if (!tri || this.mouseMove) return;
 
         gsap.to(`#${tri.id}`, { duration: 0.2, right: 0 });
       });

@@ -142,7 +142,6 @@ window.onmousemove = (e) => {
 
   if (percentage <= -2 || percentage >= 2) {
     scroll.mouseMove = true;
-    console.log(percentage);
   }
   scroll.scrollPercent(percentage);
   scroll.scrollAnimation(scroll.percent);
@@ -185,6 +184,10 @@ body.addEventListener("wheel", (event) => {
   }
 });
 
+// --------------------------------
+// scroll menu
+// --------------------------------
+
 export function scrollMenu() {
   const scrollMenuContainer = document.createElement("div");
   scrollMenuContainer.id = "scroll-menu-container";
@@ -196,6 +199,23 @@ export function scrollMenu() {
   scrollMenuContainer.appendChild(content);
 
   return scrollMenuContainer;
+}
+
+// -------------------------------
+// description generator
+// -------------------------------
+
+export function scrollDescription() {
+  const description = document.createElement("div");
+
+  const text = document.createElement("p");
+  text.innerHTML = "description";
+
+  description.appendChild(text);
+
+  body.appendChild(description);
+
+  return description;
 }
 
 export const projectRender = {
