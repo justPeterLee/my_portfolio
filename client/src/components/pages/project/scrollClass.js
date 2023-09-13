@@ -1,10 +1,9 @@
 import { gsap, Power2 } from "gsap";
 export class projectScroll {
-  constructor(scrollContainer, center, images, imageContainers) {
+  constructor(scrollContainer, center, images) {
     this._scrollContainer = scrollContainer;
     this._center = center;
     this._images = images;
-    this._imageContainers = imageContainers;
 
     this._oldPercent = 0;
     this._currPercent = 0;
@@ -12,7 +11,9 @@ export class projectScroll {
     this._imagePercent = 0;
     this._isCenter = null;
 
-    this._imageContainers.forEach((image) => {
+    // this._isInitial = true;
+
+    this._images.forEach((image) => {
       image.addEventListener("click", (e) => {
         if (!this._mouseMove) {
           this.moveTo(e);
@@ -102,9 +103,17 @@ export class projectScroll {
     });
   }
 
+  imageParallax(newPercentage) {
+    this._images.forEach((element) => {
+      gsap.to(`#${element.id}`, {
+        duration: 0.5,
+        objectPosition: `center ${100 + newPercentage}%`,
+      });
+    });
+  }
   centerDetect() {
     const centerPos = this._center.getBoundingClientRect();
-    this._imageContainers.forEach((image) => {
+    this._images.forEach((image) => {
       const elementPos = image.getBoundingClientRect();
       const areTouching = !(
         elementPos.right < centerPos.left ||
@@ -116,7 +125,6 @@ export class projectScroll {
       if (areTouching) {
         if (this.isCenter !== image.dataset.position) {
           this.isCenter = image.dataset.position;
-          this._center.innerHTML = this.isCenter;
         }
       }
     });
@@ -141,6 +149,7 @@ export class projectScroll {
       // console.log(distancePercent);
 
       this.scrollPercent(distancePercent);
+      this.imageParallax(this.percent);
       this.scrollAnimation(this.percent).then(() => {
         this.moveActive = false;
         this.cachePercent();
@@ -157,6 +166,7 @@ export class projectScroll {
     }
 
     this._currPercent = this.percent;
+    this.imageParallax(this.percent);
     this.scrollAnimation(this.percent);
   }
 
@@ -169,7 +179,7 @@ export class projectScroll {
     }
 
     this._currPercent = this.percent;
-
+    this.imageParallax(this.percent);
     this.scrollAnimation(this.percent);
   }
 }

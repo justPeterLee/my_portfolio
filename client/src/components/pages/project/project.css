@@ -4,7 +4,7 @@
   top: 200px;
   left: 50%;
   transform: translate(-50%);
-  gap: 5rem;
+  gap: 2rem;
 }
 
 /*
@@ -61,24 +61,11 @@ equation for translateY
   border-bottom: 4px solid white;
 }
 
-#image-container {
-  background-color: rgb(200, 200, 200);
+.image {
   width: 35rem;
   height: 20rem;
-  border-radius: 4px;
-  position: relative;
-  overflow: hidden;
-}
-
-.image {
-  height: 60rem;
-  /* object-fit: scale-dow; */
-  border-radius: 5px;
-  position: absolute;
-  left: 50%;
-  top: 0;
-
-  transform: translate(-50%, -33.33%);
+  object-fit: cover;
+  object-position: center 100%;
 }
 
 /* image center equation

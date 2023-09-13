@@ -2,19 +2,14 @@ import data from "../../../../public/projects.json";
 import "./project.css";
 import { projectScroll } from "./scrollClass";
 // default view
+const body = document.querySelector("body");
+
 export function scrollContainer() {
   console.log(data);
-  const body = document.querySelector("body");
 
   const centerDiv = document.createElement("div");
   centerDiv.id = "centerDiv";
   body.append(centerDiv);
-
-  const centerText = document.createElement("p");
-  centerText.dataset.center = "none";
-  centerText.innerHTML = centerText.dataset.center;
-
-  centerDiv.appendChild(centerText);
 
   const scrollContainer = document.createElement("div");
   scrollContainer.id = "scroll-track";
@@ -22,7 +17,6 @@ export function scrollContainer() {
 
   const keys = Object.keys(data);
   const imagesArr = [];
-  const imagePos = [];
   keys.forEach((project, index) => {
     // span (main container for project instance)
     const projectContainer = document.createElement("span");
@@ -92,36 +86,30 @@ export function scrollContainer() {
     imageDot.id = "image-dot";
     imageDot.className = "triangle";
 
-    // image container
-    const imageContainer = document.createElement("div");
-    imageContainer.id = "image-container";
-    imageContainer.dataset.position = index;
-
     const image = document.createElement("img");
     image.dataset.position = index;
     image.id = `image-${index}`;
     image.className = "image";
     image.src = data[project].image;
-    imageContainer.appendChild(image);
+    image.alt = "image";
 
     imagesArr.push(image);
-    imagePos.push(imageContainer);
     // image
     if (index % 2 === 0) {
       imageDot.style.transform = "rotate(90deg)";
 
       animationContainer.appendChild(imageDot);
-      animationContainer.appendChild(imageContainer);
+      animationContainer.appendChild(image);
     } else {
       imageDot.style.transform = "rotate(270deg)";
 
       animationContainer.prepend(imageDot);
-      animationContainer.prepend(imageContainer);
+      animationContainer.prepend(image);
     }
     scrollContainer.appendChild(projectContainer);
   });
 
-  scroll = new projectScroll(scrollContainer, centerDiv, imagesArr, imagePos);
+  scroll = new projectScroll(scrollContainer, centerDiv, imagesArr);
 
   return scrollContainer;
 }
@@ -133,15 +121,16 @@ window.onmousemove = (e) => {
   if (mousedown === 0 || window.location.pathname !== "/projects" || !scroll)
     return;
   if (scroll.moveActive) return;
+
   scroll.mouseMove = true;
+
   const mouseDelta = parseFloat(mousedown) - e.clientY;
   const maxDelta = window.innerHeight / 2;
   const percentage = (mouseDelta / maxDelta) * -100;
 
-  // console.log(percentage);
   scroll.scrollPercent(percentage);
-
   scroll.scrollAnimation(scroll.percent);
+  scroll.imageParallax(scroll.percent);
 };
 
 window.onmousedown = (e) => {
@@ -161,16 +150,13 @@ window.onmouseup = (e) => {
 };
 
 let scrollingStoppedTimeout;
-const body = document.querySelector("body");
 
 body.addEventListener("wheel", (event) => {
   // scroll detection
   const deltaY = event.deltaY;
-  let newPercentage = scroll.percent;
   clearTimeout(scrollingStoppedTimeout);
 
   scrollingStoppedTimeout = setTimeout(function () {
-    newPercentage = 0;
     scroll.cachePercent();
   }, 200);
 
@@ -182,237 +168,6 @@ body.addEventListener("wheel", (event) => {
     scroll.scrollDown();
   }
 });
-
-// movement system
-// - drag, scroll, key input
-// - moving scroll track
-//    - percentage
-//    - animation
-// hold a percentage
-
-function center(element, centerEle) {
-  const elementPos = element.getBoundingClientRect();
-  const centerPos = centerEle.getBoundingClientRect();
-
-  const areTouching = !(
-    elementPos.right < centerPos.left ||
-    elementPos.left > centerPos.right ||
-    elementPos.bottom < centerPos.top ||
-    elementPos.top > centerPos.bottom
-  );
-
-  if (areTouching) {
-    if (centerEle.children[0].innerHTML !== element.dataset.position) {
-      centerEle.children[0].innerHTML = element.dataset.position;
-    }
-  }
-}
-
-function scrollEvent(scrollContainer, imagesArr, imagePos, centerDiv) {
-  let scrollHeight = 0;
-  let percentIncrement = 0;
-
-  let mousedown = 0;
-  let oldPercentage = 0;
-  let currPercentage = 0;
-  let newPercentage = 0;
-
-  let newImagePercentage = 0;
-  let trackImage = {};
-
-  let scrollingStoppedTimeout;
-
-  const centerDivPos = centerDiv.getBoundingClientRect();
-  const centerDivCenter = centerDivPos.top + centerDivPos.height / 2;
-
-  const body = document.querySelector("body");
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const position = entry.target.dataset.position;
-      if (entry.isIntersecting) {
-        trackImage[position] = entry.target;
-      } else if (!entry.isIntersecting) {
-        if (trackImage[position]) {
-          delete trackImage[position];
-        }
-      }
-    });
-  });
-
-  const scrollContainerObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        scrollHeight = entry.boundingClientRect.height;
-        percentIncrement = (1 / scrollHeight) * 100;
-        scrollContainerObserver.unobserve(entry.target);
-      }
-    });
-  });
-
-  scrollContainerObserver.observe(scrollContainer);
-  imagePos.forEach((element) => {
-    observer.observe(element);
-    console.log(element);
-    element.addEventListener("click", (event) => {
-      const parent = event.target.parentNode;
-      const parentPos = parent.getBoundingClientRect();
-      const parentCenter = parentPos.top + parentPos.height / 2;
-
-      newPercentage = moveToCenter(
-        parentCenter,
-        centerDivCenter,
-        scrollHeight,
-        scrollContainer,
-        newPercentage,
-        imagesArr
-      );
-
-      currPercentage = newPercentage;
-    });
-  });
-
-  body.addEventListener("wheel", (event) => {
-    // scroll detection
-    const deltaY = event.deltaY;
-    clearTimeout(scrollingStoppedTimeout);
-    scrollingStoppedTimeout = setTimeout(function () {
-      oldPercentage = currPercentage;
-    }, 200);
-
-    // change percentage
-    if (deltaY > 0) {
-      if (newPercentage >= -80) {
-        newPercentage -= 5;
-      }
-    } else if (deltaY < 0) {
-      if (newPercentage <= 1) {
-        newPercentage += 5;
-      }
-    }
-    if (newPercentage < -80) {
-      newPercentage = -79.9;
-    }
-    if (newPercentage > 1) {
-      newPercentage = 0.9;
-    }
-
-    // track percent
-    currPercentage = newPercentage;
-
-    newImagePercentage = (newPercentage / 100) * 0.5 * 66.6;
-
-    const keys = Object.keys(trackImage);
-
-    keys.forEach((key) => {
-      center(trackImage[key], centerDiv);
-    });
-    // animation
-    scrollAnimation(
-      scrollContainer,
-      imagesArr,
-      newPercentage,
-      newImagePercentage
-    );
-  });
-
-  window.onmousemove = (e) => {
-    if (mousedown === 0) return;
-    const mouseDelta = parseFloat(mousedown) - e.clientY;
-    const maxDelta = window.innerHeight / 2;
-
-    const percentage = (mouseDelta / maxDelta) * -100;
-    console.log(mouseDelta);
-    if (newPercentage >= -86 && newPercentage <= 1) {
-      newPercentage = oldPercentage + percentage;
-    }
-    if (newPercentage < -86) {
-      newPercentage = -85.9;
-    }
-    if (newPercentage > 1) {
-      newPercentage = 0;
-    }
-
-    currPercentage = newPercentage;
-
-    newImagePercentage = (newPercentage / 100) * 0.8 * -33.3;
-
-    const keys = Object.keys(trackImage);
-
-    keys.forEach((key) => {
-      center(trackImage[key], centerDiv);
-    });
-
-    scrollAnimation(
-      scrollContainer,
-      imagesArr,
-      newPercentage,
-      newImagePercentage
-    );
-  };
-
-  window.onmousedown = (e) => {
-    mousedown = e.clientY;
-  };
-
-  window.onmouseup = (e) => {
-    mousedown = 0;
-    oldPercentage = currPercentage;
-  };
-}
-
-function scrollAnimation(
-  scrollContainer,
-  imagesArr,
-  newPercentage,
-  imagePercentage
-) {
-  scrollContainer.animate(
-    {
-      transform: `translate(-50%,${newPercentage}%)`,
-    },
-    { duration: 1000, fill: "forwards" }
-  );
-  imagesArr.forEach((image) => {
-    image.animate(
-      {
-        transform: `translate(-50%,${imagePercentage}%)`,
-      },
-      { duration: 1000, fill: "forwards" }
-    );
-  });
-}
-
-function moveToCenter(
-  elementCenter,
-  center,
-  scrollHeight,
-  scrollContainer,
-  percent,
-  imagesArr
-) {
-  const distance = center - elementCenter;
-  const distancePercent = (distance / scrollHeight) * 100;
-  const calcPercent = distancePercent + percent;
-  const newImagePercentage = (calcPercent / 100) * 0.8 * -33.3;
-
-  scrollContainer.animate(
-    {
-      transform: `translate(-50%,${calcPercent}%)`,
-    },
-    { duration: 300, fill: "forwards" }
-  );
-  imagesArr.forEach((image) => {
-    image.animate(
-      {
-        transform: `translate(-50%,${newImagePercentage}%)`,
-      },
-      { duration: 1000, fill: "forwards" }
-    );
-  });
-
-  return calcPercent;
-}
 
 export function scrollMenu() {
   const scrollMenuContainer = document.createElement("div");
