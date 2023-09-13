@@ -136,12 +136,14 @@ window.onmousemove = (e) => {
     return;
   if (scroll.moveActive) return;
 
-  scroll.mouseMove = true;
-
   const mouseDelta = parseFloat(mousedown) - e.clientY;
   const maxDelta = window.innerHeight / 2;
   const percentage = (mouseDelta / maxDelta) * -100;
 
+  if (percentage <= -2 || percentage >= 2) {
+    scroll.mouseMove = true;
+    console.log(percentage);
+  }
   scroll.scrollPercent(percentage);
   scroll.scrollAnimation(scroll.percent);
   scroll.imageParallax(scroll.percent);

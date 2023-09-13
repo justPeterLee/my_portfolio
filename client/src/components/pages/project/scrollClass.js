@@ -173,6 +173,7 @@ export class projectScroll {
         this.moveActive = false;
         this.cachePercent();
       });
+      console.log("moved");
     }
   }
 
