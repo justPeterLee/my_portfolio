@@ -1,7 +1,7 @@
 {
   "Klean": {
     "title": "Klean",
-    "subTitle": "e-commerce shop",
+    "subTitle": "E-Shop",
     "time": "June 2023",
     "image": "http://localhost:5173/api/v1/long1.webp",
     "description": {
@@ -18,7 +18,7 @@
 
   "Blossom": {
     "title": "Blossom",
-    "subTitle": "e-commerce shop",
+    "subTitle": "Plant Tracker",
     "time": "Sept 2023",
     "image": "http://localhost:5173/api/v1/long2.webp",
     "description": {
@@ -35,7 +35,7 @@
 
   "MaidReady": {
     "title": "Maid!Ready!",
-    "subTitle": "e-commerce shop",
+    "subTitle": "Service",
     "time": "April 2023",
     "image": "http://localhost:5173/api/v1/long3.webp",
     "description": {
@@ -52,7 +52,7 @@
 
   "Circut": {
     "title": "Circut",
-    "subTitle": "e-commerce shop",
+    "subTitle": "Application",
     "time": "Aug 2023",
     "image": "http://localhost:5173/api/v1/long4.webp",
     "description": {

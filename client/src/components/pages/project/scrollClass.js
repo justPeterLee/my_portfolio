@@ -19,6 +19,25 @@ export class projectScroll {
           this.moveTo(e);
         }
       });
+
+      image.addEventListener("mouseover", (e) => {
+        const position = e.target.dataset.position;
+        const tri = document.querySelector(`#image-triangle-${position}`);
+        if (!tri) return;
+
+        gsap.to(`#${tri.id}`, {
+          duration: 0.2,
+          right: tri.dataset.side ? 20 : -20,
+        });
+      });
+
+      image.addEventListener("mouseout", (e) => {
+        const position = e.target.dataset.position;
+        const tri = document.querySelector(`#image-triangle-${position}`);
+        if (!tri) return;
+
+        gsap.to(`#${tri.id}`, { duration: 0.2, right: 0 });
+      });
     });
 
     this._moveActive = false;

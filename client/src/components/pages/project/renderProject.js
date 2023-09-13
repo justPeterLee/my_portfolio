@@ -27,7 +27,7 @@ export function scrollContainer() {
 
     // abosolute container
     const animationContainer = document.createElement("div");
-    animationContainer.className = "animation-container";
+    animationContainer.className = "container animation-container";
     animationContainer.id = `animation-container-${index}`;
     animationContainer.dataset.position = index;
 
@@ -82,9 +82,13 @@ export function scrollContainer() {
     linkContainer.appendChild(codeLink);
 
     // image dot
+    const imageDotContainer = document.createElement("div");
+    imageDotContainer.className = "dot-container";
+
     const imageDot = document.createElement("div");
-    imageDot.id = "image-dot";
+    imageDot.id = `image-triangle-${index}`;
     imageDot.className = "triangle";
+    imageDotContainer.appendChild(imageDot);
 
     const image = document.createElement("img");
     image.dataset.position = index;
@@ -97,13 +101,22 @@ export function scrollContainer() {
     // image
     if (index % 2 === 0) {
       imageDot.style.transform = "rotate(90deg)";
+      imageDot.classList.add("tri-right");
 
-      animationContainer.appendChild(imageDot);
+      image.style.marginLeft = "2rem";
+      scrollTextContainer.style.marginRight = "1rem";
+
+      animationContainer.appendChild(imageDotContainer);
       animationContainer.appendChild(image);
     } else {
       imageDot.style.transform = "rotate(270deg)";
+      imageDot.classList.add("tri-right");
 
-      animationContainer.prepend(imageDot);
+      imageDot.dataset.side = "right";
+      image.style.marginRight = "2rem";
+      scrollTextContainer.style.marginLeft = "1rem";
+
+      animationContainer.prepend(imageDotContainer);
       animationContainer.prepend(image);
     }
     scrollContainer.appendChild(projectContainer);

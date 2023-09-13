@@ -1,40 +1,21 @@
 #scroll-track {
   position: absolute;
-  /* overflow: auto; */
   top: 200px;
   left: 50%;
   transform: translate(-50%);
   gap: 2rem;
 }
 
-/*
-equation for translateY 
-
-- -2 / (height of node / (# of nodes * hieght of node) + (gap * (# of nodes -1))) 
-*/
-
-/* #main-display-container {
-  gap: 3rem;
-} */
-
 .project-display-container {
   gap: 10rem;
   position: relative;
   height: 20rem;
-  /* margin-bottom: 5rem; */
-  /* justify-content: space-between; */
 }
 
 .animation-container {
   position: absolute;
-  display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-}
-#scroll-text-container {
-  min-width: 8rem;
+  gap: 2rem;
 }
 
 #link-container {
@@ -53,12 +34,16 @@ equation for translateY
   font-size: 18px;
 }
 
+.dot-container {
+  position: relative;
+}
 .triangle {
   width: 0;
   height: 0;
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
   border-bottom: 4px solid white;
+  position: absolute;
 }
 
 .image {
@@ -68,34 +53,10 @@ equation for translateY
   object-position: center 100%;
 }
 
-/* image center equation
-
-- find difference in container and image hight
-- divide by 2
-- divide by image height
-- done in pixels
-
-top = 0 
-center = answer 
-bottom = answer + answer
-
-curr answer = -7.5%
-*/
-
 #centerDiv {
   top: 200px;
   transform: translateY(50%);
   position: absolute;
-  background-color: aliceblue;
-
   width: 4rem;
   height: 4rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#centerDiv p {
-  color: black;
 }
