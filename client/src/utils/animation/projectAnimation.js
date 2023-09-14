@@ -65,19 +65,27 @@ function hideProject(element) {
         timedelay
       );
     });
-
-    // gsap.to(`#${element.id}`, {
-    //   y: -200,
-    //   opacity: 0,
-    //   duration: 0.2,
-    //   onComplete: () => {
-    //     element.style = {};
-    //     resolve();
-    //   },
-    // });
   });
 }
 
+export function showDescription(selected, imageArr) {
+  // get all
+  // get choosen
+  return new Promise((resolve, reject) => {
+    console.log(selected, imageArr);
+    const selectedId = selected.parent.dataset.position;
+
+    imageArr.forEach((element) => {
+      if (element.parentNode.dataset.position !== selectedId) {
+        console.log(element.parentNode);
+        gsap.to(`#${element.parentNode.id}`, { opacity: 0, duration: 0.3 });
+      }
+    });
+
+    gsap.to(`#${selected.image.id}`, { height: "auto", duration: 1 });
+    console.log(selected);
+  });
+}
 // function
 export const projectAnimation = {
   showProject,

@@ -1,4 +1,5 @@
 import { gsap, Power2 } from "gsap";
+import { showDescription } from "../../../utils/animation/projectAnimation";
 export class projectScroll {
   constructor(scrollContainer, center, images) {
     this._scrollContainer = scrollContainer;
@@ -11,11 +12,12 @@ export class projectScroll {
     this._imagePercent = 0;
     this._isCenter = null;
 
+    this._isFocus = false;
     // this._isInitial = true;
 
     this._images.forEach((image) => {
       image.addEventListener("click", (e) => {
-        if (!this._mouseMove) {
+        if (!this._mouseMove || !this.isFocus) {
           this.moveTo(e);
         }
       });
@@ -23,7 +25,7 @@ export class projectScroll {
       image.addEventListener("mouseover", (e) => {
         const position = e.target.dataset.position;
         const tri = document.querySelector(`#image-triangle-${position}`);
-        if (!tri || this.mouseMove) return;
+        if (!tri || this.mouseMove || this.isFocus) return;
 
         gsap.to(`#${tri.id}`, {
           duration: 0.2,
@@ -86,6 +88,14 @@ export class projectScroll {
 
   set mouseMove(bool) {
     this._mouseMove = bool;
+  }
+
+  get isFocus() {
+    return this._isFocus;
+  }
+
+  set isFocus(bool) {
+    this._isFocus = bool;
   }
 
   initialCenter() {
@@ -164,7 +174,7 @@ export class projectScroll {
   }
 
   moveTo(e) {
-    if (this.moveActive && this.mouseMove) {
+    if (this.moveActive && this.mouseMove && this.isFocus) {
     } else {
       this.moveActive = true;
       const element = e.target.parentNode;
@@ -187,7 +197,15 @@ export class projectScroll {
         this.moveActive = false;
         this.cachePercent();
       });
+
       console.log("moved");
+
+      showDescription(
+        { parent: e.target.parentNode, image: e.target },
+        this._images
+      );
+
+      this.isFocus = true;
     }
   }
 
