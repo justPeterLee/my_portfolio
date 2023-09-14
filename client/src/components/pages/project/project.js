@@ -7,7 +7,7 @@ export const createProjectPage = () => {
   createPage(
     "Projects",
     "/projects",
-    { scrollContainer },
+    { scrollContainer, scrollDescription },
     menuAnimation.menuSide
   );
 };
@@ -26,4 +26,12 @@ const scrollMenu = new Components(
   null,
   null,
   { isInitial: true }
+);
+
+const scrollDescription = new Components(
+  "scrollDescription",
+  projectRender.scrollDescription,
+  null,
+  null,
+  { isInitial: false }
 );

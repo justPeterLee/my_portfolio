@@ -51,7 +51,7 @@ export class PageInstance {
   initial() {
     const initialComponents = this.getInitial();
     initialComponents.forEach((component) => {
-      this.localDisplay.showComponent(component);
+      if (component) this.localDisplay.showComponent(component);
     });
   }
 

@@ -14,6 +14,7 @@ export function scrollContainer() {
   const scrollContainer = document.createElement("div");
   scrollContainer.id = "scroll-track";
   scrollContainer.className = "container";
+  // scrollContainer.style.top = `${window.innerHeight / 2 - 10 * 16}px `;
 
   const keys = Object.keys(data);
   const imagesArr = [];
@@ -97,7 +98,7 @@ export function scrollContainer() {
     image.src = data[project].image;
     image.alt = "image";
 
-    image.style.objectPosition = "center 100%";
+    // image.style.objectPosition = "center -10%";
     imagesArr.push(image);
     // image
     if (index % 2 === 0) {
@@ -145,7 +146,16 @@ window.onmousemove = (e) => {
   }
   scroll.scrollPercent(percentage);
   scroll.scrollAnimation(scroll.percent);
-  scroll.imageParallax(scroll.percent);
+  // scroll.imageParallax(scroll.percent);
+  // console.log(scroll.images);
+  const images = scroll.images;
+
+  images.forEach((element) => {
+    // let imagePercent = scroll.imagePercentage(element);
+    scroll.imageParallax(scroll.percent + 100, element);
+  });
+
+  // scroll.imagePercentage();
 };
 
 window.onmousedown = (e) => {
@@ -221,4 +231,5 @@ export function scrollDescription() {
 export const projectRender = {
   scrollContainer,
   scrollMenu,
+  scrollDescription,
 };

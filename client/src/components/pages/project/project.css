@@ -1,6 +1,6 @@
 #scroll-track {
   position: absolute;
-  top: 200px;
+  top: 50%;
   left: 50%;
   transform: translate(-50%);
   gap: 2rem;
@@ -47,16 +47,18 @@
 }
 
 .image {
-  width: 35rem;
+  width: 45rem;
   height: 20rem;
   object-fit: cover;
   object-position: center 100%;
 }
 
 #centerDiv {
-  top: 200px;
-  transform: translateY(50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   position: absolute;
-  width: 4rem;
-  height: 4rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  background-color: aliceblue;
 }

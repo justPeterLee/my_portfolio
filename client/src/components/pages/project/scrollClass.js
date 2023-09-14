@@ -34,7 +34,7 @@ export class projectScroll {
       image.addEventListener("mouseout", (e) => {
         const position = e.target.dataset.position;
         const tri = document.querySelector(`#image-triangle-${position}`);
-        if (!tri || this.mouseMove) return;
+        if (!tri) return;
 
         gsap.to(`#${tri.id}`, { duration: 0.2, right: 0 });
       });
@@ -42,6 +42,10 @@ export class projectScroll {
 
     this._moveActive = false;
     this._mouseMove = false;
+  }
+
+  get images() {
+    return this._images;
   }
 
   get percent() {
@@ -83,6 +87,11 @@ export class projectScroll {
   set mouseMove(bool) {
     this._mouseMove = bool;
   }
+
+  initialCenter() {
+    const height = this._scrollContainer.getBoundingClientRect().height;
+    console.log(height);
+  }
   cachePercent() {
     this._oldPercent = this._currPercent;
   }
@@ -105,14 +114,18 @@ export class projectScroll {
     this._currPercent = this.percent;
   }
 
-  scrollAnimation(newPercentage) {
+  scrollAnimation(newPercentage, manual) {
     return new Promise((resolve, reject) => {
+      const isManual = manual || false;
       gsap.to(`#${this._scrollContainer.id}`, {
         duration: 0.5,
         fill: "forwards",
         ease: Power2.easeOut,
         transform: `translate(-50%,${newPercentage}%)`,
         onUpdate: () => {
+          if (isManual) {
+            this.imageAnimation();
+          }
           this.centerDetect();
         },
         onComplete: () => {
@@ -122,12 +135,13 @@ export class projectScroll {
     });
   }
 
-  imageParallax(newPercentage) {
-    this._images.forEach((element) => {
-      gsap.to(`#${element.id}`, {
-        duration: 0.5,
-        objectPosition: `center ${100 + newPercentage}%`,
-      });
+  imageParallax(newPercentage, element) {
+    // const from = a || "none";
+    // console.log(newPercentage, from);
+    // this._images.forEach((element) => {
+    gsap.to(`#${element.id}`, {
+      duration: 0.5,
+      objectPosition: `center ${newPercentage}%`,
     });
   }
   centerDetect() {
@@ -157,19 +171,19 @@ export class projectScroll {
       const elementPos = element.getBoundingClientRect();
       const elementCenter = elementPos.top + elementPos.height / 2;
 
+      //   console.log(elementPos.height);
       const centerPos = this._center.getBoundingClientRect();
       const centerCenter = centerPos.top + centerPos.height / 2;
 
       const scrollHeight = this._scrollContainer.getBoundingClientRect().height;
-
       const distance = centerCenter - elementCenter;
       const distancePercent = (distance / scrollHeight) * 100;
 
       // console.log(distancePercent);
 
       this.scrollPercent(distancePercent);
-      this.imageParallax(this.percent);
-      this.scrollAnimation(this.percent).then(() => {
+
+      this.scrollAnimation(this.percent, true).then(() => {
         this.moveActive = false;
         this.cachePercent();
       });
@@ -186,7 +200,7 @@ export class projectScroll {
     }
 
     this._currPercent = this.percent;
-    this.imageParallax(this.percent);
+    this.defaultImageAnimation();
     this.scrollAnimation(this.percent);
   }
 
@@ -199,7 +213,54 @@ export class projectScroll {
     }
 
     this._currPercent = this.percent;
-    this.imageParallax(this.percent);
+    this.defaultImageAnimation();
     this.scrollAnimation(this.percent);
+  }
+
+  imagePercentage(image) {
+    const imagePos = image.getBoundingClientRect();
+    const imageCenter = imagePos.top + imagePos.height / 2;
+    // console.log(imageCenter);
+
+    const centerPos = this._center.getBoundingClientRect();
+    const centerCenter = centerPos.top + centerPos.height / 2;
+
+    const distance = centerCenter - imageCenter;
+
+    const scrollHeight = this._scrollContainer.getBoundingClientRect().height;
+    const distancePercent = (distance / scrollHeight) * 100;
+
+    const ratioPercent = distancePercent + 50;
+
+    // console.log(ratioPercent);
+
+    let imagePercent;
+
+    if (ratioPercent <= 100 && ratioPercent >= 0) {
+      imagePercent = ratioPercent;
+    }
+
+    if (imagePercent < 0 || ratioPercent < 0) {
+      imagePercent = 0.1;
+    }
+    if (imagePercent > 100 || ratioPercent > 100) {
+      imagePercent = 99.9;
+    }
+
+    return imagePercent;
+    // this.imageParallax(imagePercent, "checker");
+  }
+
+  imageAnimation() {
+    this.images.forEach((element) => {
+      let imagePercent = this.imagePercentage(element);
+      this.imageParallax(imagePercent, element);
+    });
+  }
+
+  defaultImageAnimation() {
+    this.images.forEach((element) => {
+      this.imageParallax(this.percent + 100, element);
+    });
   }
 }
