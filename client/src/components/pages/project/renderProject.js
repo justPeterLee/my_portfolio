@@ -1,3 +1,4 @@
+// import cross from "../../../../public/cross.svg";
 import data from "../../../../public/projects.json";
 import "./project.css";
 import { projectScroll } from "./scrollClass";
