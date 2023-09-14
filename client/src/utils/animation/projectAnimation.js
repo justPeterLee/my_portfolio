@@ -72,7 +72,6 @@ export function showDescription(selected, imageArr) {
   // get all
   // get choosen
   return new Promise((resolve, reject) => {
-    console.log(selected, imageArr);
     const selectedId = selected.parent.dataset.position;
 
     imageArr.forEach((element) => {
@@ -82,8 +81,35 @@ export function showDescription(selected, imageArr) {
       }
     });
 
-    gsap.to(`#${selected.image.id}`, { height: "auto", duration: 1 });
+    gsap.to(`#${selected.image.id}`, {
+      height: "auto",
+      duration: 1,
+      onComplete: () => {
+        resolve();
+      },
+    });
     console.log(selected);
+  });
+}
+
+export function hideDescription(selected, imageArr) {
+  return new Promise((resolve, reject) => {
+    const selectedId = selected.parent.dataset.position;
+
+    imageArr.forEach((element) => {
+      if (element.parentNode.dataset.position !== selectedId) {
+        console.log(element.parentNode);
+        gsap.to(`#${element.parentNode.id}`, { opacity: 1, duration: 1 });
+      }
+    });
+
+    gsap.to(`#${selected.image.id}`, {
+      height: "20rem",
+      duration: 0.5,
+      onComplete: () => {
+        resolve();
+      },
+    });
   });
 }
 // function

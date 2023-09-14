@@ -146,16 +146,24 @@ window.onmousemove = (e) => {
     scroll.mouseMove = true;
   }
   scroll.scrollPercent(percentage);
-  scroll.scrollAnimation(scroll.percent);
-  // scroll.imageParallax(scroll.percent);
-  // console.log(scroll.images);
+
   const images = scroll.images;
 
-  images.forEach((element) => {
-    // let imagePercent = scroll.imagePercentage(element);
-    scroll.imageParallax(scroll.percent + 100, element);
-  });
+  if (!scroll.isFocus) {
+    scroll.scrollAnimation(scroll.percent);
+    images.forEach((element) => {
+      // let imagePercent = scroll.imagePercentage(element);
+      scroll.imageParallax(scroll.percent + 100, element);
+    });
+    scroll.scrollPercent(percentage);
+  } else {
+    if (percentage <= -7 || percentage >= 7) {
+      console.log("break");
+      scroll.unFocus();
+    }
+  }
 
+  // console.log(percentage);
   // scroll.imagePercentage();
 };
 

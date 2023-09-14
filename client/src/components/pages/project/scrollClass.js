@@ -1,5 +1,8 @@
 import { gsap, Power2 } from "gsap";
-import { showDescription } from "../../../utils/animation/projectAnimation";
+import {
+  showDescription,
+  hideDescription,
+} from "../../../utils/animation/projectAnimation";
 export class projectScroll {
   constructor(scrollContainer, center, images) {
     this._scrollContainer = scrollContainer;
@@ -13,11 +16,12 @@ export class projectScroll {
     this._isCenter = null;
 
     this._isFocus = false;
+    this._whoFocus = null;
     // this._isInitial = true;
 
     this._images.forEach((image) => {
       image.addEventListener("click", (e) => {
-        if (!this._mouseMove || !this.isFocus) {
+        if (!this._mouseMove && !this.isFocus) {
           this.moveTo(e);
         }
       });
@@ -96,6 +100,14 @@ export class projectScroll {
 
   set isFocus(bool) {
     this._isFocus = bool;
+  }
+
+  get whoFocus() {
+    return this._whoFocus;
+  }
+
+  set whoFocus(element) {
+    this._whoFocus = element;
   }
 
   initialCenter() {
@@ -200,12 +212,12 @@ export class projectScroll {
 
       console.log("moved");
 
-      showDescription(
-        { parent: e.target.parentNode, image: e.target },
-        this._images
-      );
-
+      this.whoFocus = { parent: e.target.parentNode, image: e.target };
       this.isFocus = true;
+      console.log(scrollHeight);
+      showDescription(this.whoFocus, this._images).then(() => {
+        console.log(this._scrollContainer.getBoundingClientRect().height);
+      });
     }
   }
 
@@ -280,5 +292,11 @@ export class projectScroll {
     this.images.forEach((element) => {
       this.imageParallax(this.percent + 100, element);
     });
+  }
+
+  unFocus() {
+    hideDescription(this.whoFocus, this._images);
+    this.whoFocus = {};
+    this.isFocus = false;
   }
 }
