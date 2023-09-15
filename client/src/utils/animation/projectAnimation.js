@@ -93,6 +93,7 @@ export function focusImage(selected, imageArr) {
 
 export function unfocusImage(selected, imageArr) {
   return new Promise((resolve, reject) => {
+    console.log("unfocused animation");
     const selectedId = selected.parent.dataset.position;
 
     imageArr.forEach((element) => {

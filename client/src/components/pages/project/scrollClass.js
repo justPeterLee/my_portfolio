@@ -149,7 +149,7 @@ export class projectScroll {
         transform: `translate(-50%,${newPercentage}%)`,
         onUpdate: () => {
           if (isManual) {
-            this.imageAnimation();
+            this.imageAnimation(manual);
           }
           this.centerDetect();
         },
@@ -208,10 +208,10 @@ export class projectScroll {
 
       this.scrollPercent(distancePercent);
 
-      this.scrollAnimation(this.percent, true).then(() => {
+      this.scrollAnimation(this.percent, e.target).then(() => {
         this.moveActive = false;
         this.cachePercent();
-        showDescription(this.whoFocus);
+        // showDescription(this.whoFocus);
       });
 
       console.log("moved");
@@ -225,6 +225,7 @@ export class projectScroll {
 
   scrollUp() {
     // this.scrollPercent(-5);
+    if (this.isFocus) return;
     this.percent -= 5;
 
     if (this.percent < -100) {
@@ -238,6 +239,7 @@ export class projectScroll {
 
   scrollDown() {
     // this.scrollPercent(10);
+    if (this.isFocus) return;
     this.percent += 5;
 
     if (this.percent > 0) {
@@ -283,11 +285,9 @@ export class projectScroll {
     // this.imageParallax(imagePercent, "checker");
   }
 
-  imageAnimation() {
-    this.images.forEach((element) => {
-      let imagePercent = this.imagePercentage(element);
-      this.imageParallax(imagePercent, element);
-    });
+  imageAnimation(element) {
+    let imagePercent = this.imagePercentage(element);
+    this.imageParallax(imagePercent, element);
   }
 
   defaultImageAnimation() {
@@ -297,8 +297,9 @@ export class projectScroll {
   }
 
   unFocus() {
+    console.log("unfocus");
     unfocusImage(this.whoFocus, this._images);
-    hideDescription(this.whoFocus);
+    // hideDescription(this.whoFocus);
     this.whoFocus = {};
     this.isFocus = false;
   }

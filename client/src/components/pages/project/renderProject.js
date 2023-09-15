@@ -160,6 +160,7 @@ window.onmousemove = (e) => {
   if (mousedown === 0 || window.location.pathname !== "/projects" || !scroll)
     return;
   if (scroll.moveActive) return;
+  console.log("running");
 
   const mouseDelta = parseFloat(mousedown) - e.clientY;
   const maxDelta = window.innerHeight / 2;
@@ -272,11 +273,11 @@ export function scrollDescription(parent, index) {
 
   // text block
   position = textBlockGenerator("Description", textContainer, position);
-  position = textBlockGenerator(
-    "This is what we are really talking about right now",
-    textContainer,
-    position
-  );
+  // position = textBlockGenerator(
+  //   "This is what we are really talking about right now",
+  //   textContainer,
+  //   position
+  // );
   position = textBlockGenerator("Description", textContainer, position);
   position = textBlockGenerator("Description", textContainer, position);
   position = textBlockGenerator("Description", textContainer, position);
