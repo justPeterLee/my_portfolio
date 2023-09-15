@@ -1,5 +1,8 @@
 import { gsap, Power2 } from "gsap";
+import { scrollDescription } from "./renderProject";
 import {
+  focusImage,
+  unfocusImage,
   showDescription,
   hideDescription,
 } from "../../../utils/animation/projectAnimation";
@@ -208,16 +211,15 @@ export class projectScroll {
       this.scrollAnimation(this.percent, true).then(() => {
         this.moveActive = false;
         this.cachePercent();
+        showDescription(this.whoFocus);
       });
 
       console.log("moved");
 
       this.whoFocus = { parent: e.target.parentNode, image: e.target };
       this.isFocus = true;
-      console.log(scrollHeight);
-      showDescription(this.whoFocus, this._images).then(() => {
-        console.log(this._scrollContainer.getBoundingClientRect().height);
-      });
+
+      focusImage(this.whoFocus, this._images);
     }
   }
 
@@ -295,8 +297,13 @@ export class projectScroll {
   }
 
   unFocus() {
-    hideDescription(this.whoFocus, this._images);
+    unfocusImage(this.whoFocus, this._images);
+    hideDescription(this.whoFocus);
     this.whoFocus = {};
     this.isFocus = false;
+  }
+
+  generateDescription(parent) {
+    scrollDescription(parent);
   }
 }

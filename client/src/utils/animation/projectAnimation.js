@@ -13,17 +13,17 @@ function showProject(element) {
   animationArr.forEach((position, index) => {
     // console.log(index);
     let timedelay;
-    if (index) timedelay = "-=.4";
+    if (index) timedelay = "-=.2";
     if (parseInt(position.dataset.position) % 2 === 0) {
       tl.from(
         `#${position.id}`,
-        { x: -600, opacity: 0, duration: 0.5 },
+        { x: -600, opacity: 0, duration: 0.3 },
         timedelay
       );
     } else {
       tl.from(
         `#${position.id}`,
-        { x: 600, opacity: 0, duration: 0.5 },
+        { x: 600, opacity: 0, duration: 0.3 },
         timedelay
       );
     }
@@ -68,7 +68,7 @@ function hideProject(element) {
   });
 }
 
-export function showDescription(selected, imageArr) {
+export function focusImage(selected, imageArr) {
   // get all
   // get choosen
   return new Promise((resolve, reject) => {
@@ -76,14 +76,13 @@ export function showDescription(selected, imageArr) {
 
     imageArr.forEach((element) => {
       if (element.parentNode.dataset.position !== selectedId) {
-        console.log(element.parentNode);
         gsap.to(`#${element.parentNode.id}`, { opacity: 0, duration: 0.3 });
       }
     });
 
     gsap.to(`#${selected.image.id}`, {
       height: "auto",
-      duration: 1,
+      duration: 0.7,
       onComplete: () => {
         resolve();
       },
@@ -92,23 +91,71 @@ export function showDescription(selected, imageArr) {
   });
 }
 
-export function hideDescription(selected, imageArr) {
+export function unfocusImage(selected, imageArr) {
   return new Promise((resolve, reject) => {
     const selectedId = selected.parent.dataset.position;
 
     imageArr.forEach((element) => {
       if (element.parentNode.dataset.position !== selectedId) {
-        console.log(element.parentNode);
         gsap.to(`#${element.parentNode.id}`, { opacity: 1, duration: 1 });
       }
     });
 
     gsap.to(`#${selected.image.id}`, {
       height: "20rem",
-      duration: 0.5,
+      duration: 0.3,
       onComplete: () => {
         resolve();
       },
+    });
+  });
+}
+
+export function showDescription(selected) {
+  const tl = gsap.timeline();
+  const selectedId = selected.parent.dataset.position;
+  const textContainer = selected.parent.querySelector(
+    `#scroll-text-container-${selectedId}`
+  );
+  const description = textContainer.querySelector(
+    `#description-container-${selectedId}`
+  );
+  //   document.getElementsByClassName
+  const text = [...description.getElementsByClassName("text")];
+
+  text.forEach((element, index) => {
+    let timedelay;
+    if (index) timedelay = "-=.04";
+    tl.from(
+      `#${element.id}`,
+      {
+        y: 20,
+        duration: 0.12,
+        onStart: () => {
+          //   element.style.transform = "translate(20px, 20px)";
+          element.style.opacity = "100%";
+        },
+      },
+      timedelay
+    );
+  });
+}
+
+export function hideDescription(selected) {
+  const selectedId = selected.parent.dataset.position;
+  const textContainer = selected.parent.querySelector(
+    `#scroll-text-container-${selectedId}`
+  );
+  const description = textContainer.querySelector(
+    `#description-container-${selectedId}`
+  );
+  //   document.getElementsByClassName
+  const text = [...description.getElementsByClassName("text")];
+
+  text.forEach((element, index) => {
+    gsap.to(`#${element.id}`, {
+      opacity: 0,
+      duration: 0.3,
     });
   });
 }

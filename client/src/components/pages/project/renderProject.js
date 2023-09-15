@@ -8,6 +8,10 @@ const body = document.querySelector("body");
 export function scrollContainer() {
   console.log(data);
 
+  // -----------------------------------------------
+  // outter divs
+  // -----------------------------------------------
+
   const centerDiv = document.createElement("div");
   centerDiv.id = "centerDiv";
   body.append(centerDiv);
@@ -15,10 +19,13 @@ export function scrollContainer() {
   const scrollContainer = document.createElement("div");
   scrollContainer.id = "scroll-track";
   scrollContainer.className = "container";
-  // scrollContainer.style.top = `${window.innerHeight / 2 - 10 * 16}px `;
 
+  // -----------------------------------------------
+  // project nodes
+  // -----------------------------------------------
   const keys = Object.keys(data);
   const imagesArr = [];
+
   keys.forEach((project, index) => {
     // span (main container for project instance)
     const projectContainer = document.createElement("span");
@@ -38,7 +45,8 @@ export function scrollContainer() {
     // text container
     const scrollTextContainer = document.createElement("div");
     scrollTextContainer.className = "container";
-    scrollTextContainer.id = "scroll-text-container";
+    scrollTextContainer.id = `scroll-text-container-${index}`;
+    scrollTextContainer.dataset.position = index;
     animationContainer.appendChild(scrollTextContainer);
 
     //title
@@ -83,6 +91,16 @@ export function scrollContainer() {
     codeLink.className = "link";
     linkContainer.appendChild(codeLink);
 
+    // ------------------------------------------------
+    // description generator
+    // ------------------------------------------------
+
+    scrollDescription(scrollTextContainer, index);
+
+    // ------------------------------------------------
+    // image
+    // ------------------------------------------------
+
     // image dot
     const imageDotContainer = document.createElement("div");
     imageDotContainer.className = "dot-container";
@@ -101,6 +119,11 @@ export function scrollContainer() {
 
     image.style.objectPosition = "center 100%";
     imagesArr.push(image);
+
+    // ------------------------------------------------
+    // image direction
+    // ------------------------------------------------
+
     // image
     if (index % 2 === 0) {
       imageDot.style.transform = "rotate(90deg)";
@@ -224,19 +247,69 @@ export function scrollMenu() {
 // description generator
 // -------------------------------
 
-export function scrollDescription() {
-  const description = document.createElement("div");
+export function scrollDescription(parent, index) {
+  let position = null;
+  // container
+  const descriptionContainer = document.createElement("div");
+  descriptionContainer.id = `description-container-${index}`;
+  descriptionContainer.className = "description-container";
+  // descriptionContainer.style.visibility = "hidden";
+  // descriptionContainer.style.position = "absolute";
+  // title
+  const titleContianer = document.createElement("h3");
+  titleContianer.className = "slide-up-text";
+  descriptionContainer.appendChild(titleContianer);
 
-  const text = document.createElement("p");
-  text.innerHTML = "description";
+  // text block
+  position = textBlockGenerator("Title", titleContianer, position);
+  position = textBlockGenerator("Title", titleContianer, position);
+  position = textBlockGenerator("Title", titleContianer, position);
 
-  description.appendChild(text);
+  // text
+  const textContainer = document.createElement("p");
+  textContainer.className = "slide-up-text";
+  descriptionContainer.appendChild(textContainer);
 
-  body.appendChild(description);
+  // text block
+  position = textBlockGenerator("Description", textContainer, position);
+  position = textBlockGenerator(
+    "This is what we are really talking about right now",
+    textContainer,
+    position
+  );
+  position = textBlockGenerator("Description", textContainer, position);
+  position = textBlockGenerator("Description", textContainer, position);
+  position = textBlockGenerator("Description", textContainer, position);
 
-  return description;
+  parent.appendChild(descriptionContainer);
+
+  return descriptionContainer;
 }
 
+function textBlockGenerator(text, parent, position) {
+  let proxyPosition = position;
+  if (position === null) {
+    proxyPosition = 0;
+  } else {
+    proxyPosition += 1;
+  }
+  // hidden block
+  const hiddenContainer = document.createElement("span");
+  hiddenContainer.className = "hidden-text";
+  parent.appendChild(hiddenContainer);
+
+  const textBlock = document.createElement("span");
+  textBlock.id = `text-${proxyPosition}`;
+  textBlock.className = "text";
+  textBlock.innerHTML = text;
+
+  // textBlock.style.position = "absolute";
+  // textBlock.style.transform = "translateY(-20px)";
+  textBlock.style.opacity = 0;
+  hiddenContainer.appendChild(textBlock);
+
+  return proxyPosition;
+}
 export const projectRender = {
   scrollContainer,
   scrollMenu,

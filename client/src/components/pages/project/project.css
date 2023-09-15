@@ -62,3 +62,27 @@
   height: 1.7rem;
   background-color: aliceblue;
 }
+
+/* -------------------------
+text
+-------------------------- */
+
+h3 {
+  color: white;
+}
+
+.slide-up-text {
+  position: relative;
+}
+
+.description-container {
+  transition: all ease 0.3s;
+}
+.hidden-text {
+  overflow: hidden;
+  display: flex;
+}
+/* .hidden-text:hover {
+  transform: rotate(90deg);
+  background-color: aliceblue;
+} */
