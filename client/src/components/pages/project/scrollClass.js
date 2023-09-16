@@ -225,7 +225,7 @@ export class projectScroll {
 
   scrollUp() {
     // this.scrollPercent(-5);
-    if (this.isFocus) return;
+    if (this.isFocus) this.unFocus();
     this.percent -= 5;
 
     if (this.percent < -100) {
@@ -239,7 +239,7 @@ export class projectScroll {
 
   scrollDown() {
     // this.scrollPercent(10);
-    if (this.isFocus) return;
+    if (this.isFocus) this.unFocus();
     this.percent += 5;
 
     if (this.percent > 0) {

@@ -82,7 +82,7 @@ export function focusImage(selected, imageArr) {
 
     gsap.to(`#${selected.image.id}`, {
       height: "auto",
-      duration: 0.7,
+      duration: 0.5,
       onComplete: () => {
         resolve();
       },
@@ -104,7 +104,7 @@ export function unfocusImage(selected, imageArr) {
 
     gsap.to(`#${selected.image.id}`, {
       height: "20rem",
-      duration: 0.3,
+      duration: 0.55,
       onComplete: () => {
         resolve();
       },
