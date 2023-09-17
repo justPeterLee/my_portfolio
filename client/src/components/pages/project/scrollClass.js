@@ -297,7 +297,6 @@ export class projectScroll {
   }
 
   unFocus() {
-    console.log("unfocus");
     unfocusImage(this.whoFocus, this._images);
     // hideDescription(this.whoFocus);
     this.whoFocus = {};

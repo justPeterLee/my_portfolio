@@ -44,58 +44,65 @@ export function scrollContainer() {
 
     // text container
     const scrollTextContainer = document.createElement("div");
-    scrollTextContainer.className = "container";
+    scrollTextContainer.className = "container text-container";
     scrollTextContainer.id = `scroll-text-container-${index}`;
     scrollTextContainer.dataset.position = index;
     animationContainer.appendChild(scrollTextContainer);
+
+    //animation text container
+    const animationTextContainer = document.createElement("div");
+    animationTextContainer.className = "container animation-text-container";
+    animationTextContainer.id = `animation-text-container-${index}`;
+    animationTextContainer.dataset.position = index;
+    scrollTextContainer.appendChild(animationTextContainer);
 
     //title
     const title = document.createElement("p");
     title.id = "scroll-title";
     title.innerHTML = data[project].title;
-    scrollTextContainer.appendChild(title);
+    animationTextContainer.appendChild(title);
 
     // subtitle
     const subTitle = document.createElement("p");
     subTitle.id = "scroll-subtitle";
     subTitle.innerHTML = data[project].subTitle;
-    scrollTextContainer.appendChild(subTitle);
+    animationTextContainer.appendChild(subTitle);
 
     // date
     const date = document.createElement("p");
     date.id = "scroll-date";
     date.innerHTML = data[project].time;
-    scrollTextContainer.appendChild(date);
+    animationTextContainer.appendChild(date);
 
     // links container
     const linkContainer = document.createElement("div");
     linkContainer.id = "link-container";
     linkContainer.className = "container";
-    scrollTextContainer.appendChild(linkContainer);
+    animationTextContainer.appendChild(linkContainer);
 
     // links
     const siteLink = document.createElement("a");
     siteLink.innerHTML = "site";
     siteLink.id = "site-link";
     siteLink.className = "link";
-    linkContainer.appendChild(siteLink);
+    animationTextContainer.appendChild(siteLink);
 
     //dot
     const linkDot = document.createElement("div");
     linkDot.id = "link-dot";
-    linkContainer.appendChild(linkDot);
+    animationTextContainer.appendChild(linkDot);
 
     const codeLink = document.createElement("a");
     codeLink.innerHTML = "code";
     codeLink.id = "code-link";
     codeLink.className = "link";
-    linkContainer.appendChild(codeLink);
+    animationTextContainer.appendChild(codeLink);
 
     // ------------------------------------------------
     // description generator
     // ------------------------------------------------
 
-    scrollDescription(scrollTextContainer, index);
+    scrollDescription(animationTextContainer, index);
 
     // ------------------------------------------------
     // image
@@ -160,7 +167,6 @@ window.onmousemove = (e) => {
   if (mousedown === 0 || window.location.pathname !== "/projects" || !scroll)
     return;
   if (scroll.moveActive) return;
-  console.log("running");
 
   const mouseDelta = parseFloat(mousedown) - e.clientY;
   const maxDelta = window.innerHeight / 2;
@@ -182,7 +188,6 @@ window.onmousemove = (e) => {
     scroll.scrollPercent(percentage);
   } else {
     if (percentage <= -7 || percentage >= 7) {
-      console.log("break");
       scroll.unFocus();
     }
   }
@@ -306,7 +311,7 @@ function textBlockGenerator(text, parent, position) {
 
   // textBlock.style.position = "absolute";
   // textBlock.style.transform = "translateY(-20px)";
-  textBlock.style.opacity = 0;
+  // textBlock.style.opacity = 0;
   hiddenContainer.appendChild(textBlock);
 
   return proxyPosition;
