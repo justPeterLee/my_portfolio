@@ -139,6 +139,7 @@ export function scrollContainer() {
       image.style.marginLeft = "2rem";
       scrollTextContainer.style.marginRight = "1rem";
 
+      animationTextContainer.style.right = 0;
       animationContainer.appendChild(imageDotContainer);
       animationContainer.appendChild(image);
     } else {
@@ -149,6 +150,7 @@ export function scrollContainer() {
       image.style.marginRight = "2rem";
       scrollTextContainer.style.marginLeft = "1rem";
 
+      animationTextContainer.style.left = 0;
       animationContainer.prepend(imageDotContainer);
       animationContainer.prepend(image);
     }

@@ -112,26 +112,35 @@ export function unfocusImage(selected, imageArr) {
 
 export function showDescription(selected) {
   const tl = gsap.timeline();
+
   const selectedId = selected.parent.dataset.position;
-  const textContainer = selected.parent.querySelector(
-    `#scroll-text-container-${selectedId}`
-  );
-  const description = textContainer.querySelector(
+
+  const descriptionContainer = selected.parent.querySelector(
     `#description-container-${selectedId}`
   );
-  //   document.getElementsByClassName
+  const description = selected.parent.querySelector(
+    `#description-container-${selectedId}`
+  );
+
+  // move title
+  tl.to(`#${descriptionContainer.id}`, {
+    width: "16rem",
+    height: "10rem",
+    duration: 0.2,
+  });
+
+  // show description
   const text = [...description.getElementsByClassName("text")];
 
   text.forEach((element, index) => {
     let timedelay;
-    if (index) timedelay = "-=.04";
+    if (index) timedelay = "-=.45";
     tl.from(
       `#${element.id}`,
       {
         y: 20,
-        duration: 0.12,
+        duration: 0.5,
         onStart: () => {
-          //   element.style.transform = "translate(20px, 20px)";
           element.style.opacity = "100%";
         },
       },
@@ -142,13 +151,22 @@ export function showDescription(selected) {
 
 export function hideDescription(selected) {
   const selectedId = selected.parent.dataset.position;
-  const textContainer = selected.parent.querySelector(
-    `#scroll-text-container-${selectedId}`
-  );
-  const description = textContainer.querySelector(
+
+  const descriptionContainer = selected.parent.querySelector(
     `#description-container-${selectedId}`
   );
-  //   document.getElementsByClassName
+  const description = selected.parent.querySelector(
+    `#description-container-${selectedId}`
+  );
+
+  // move title
+  gsap.to(`#${descriptionContainer.id}`, {
+    width: "10rem",
+    height: "0rem",
+    duration: 0.2,
+  });
+
+  // hide description
   const text = [...description.getElementsByClassName("text")];
 
   text.forEach((element, index) => {

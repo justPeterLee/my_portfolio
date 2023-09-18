@@ -220,6 +220,7 @@ export class projectScroll {
       this.isFocus = true;
 
       focusImage(this.whoFocus, this._images);
+      showDescription(this.whoFocus);
     }
   }
 
@@ -298,7 +299,7 @@ export class projectScroll {
 
   unFocus() {
     unfocusImage(this.whoFocus, this._images);
-    // hideDescription(this.whoFocus);
+    hideDescription(this.whoFocus);
     this.whoFocus = {};
     this.isFocus = false;
   }

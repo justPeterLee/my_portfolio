@@ -90,8 +90,10 @@ h3 {
 }
 
 .description-container {
-  width: 16rem;
-  height: auto;
+  width: 12rem;
+  height: 0rem;
+  overflow: hidden;
+  /* transform: scaleY(1); */
   /* background-color: darkmagenta; */
   /* position: absolute; */
 }
@@ -101,8 +103,9 @@ h3 {
   /* width: 15rem; */
   /* height: 13rem; */
   /* right: 0; */
-  background-color: darkgoldenrod;
+  /* background-color: darkgoldenrod; */
 
-  transition: width ease 0.5s;
+  /* transition: width ease 0.5s;
   transition: height ease 0.5s;
+  transition: scale ease 0.5s; */
 }
