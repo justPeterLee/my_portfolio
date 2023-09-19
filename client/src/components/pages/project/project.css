@@ -36,6 +36,7 @@
 
 .dot-container {
   position: relative;
+  z-index: 100;
 }
 .triangle {
   width: 0;
@@ -85,26 +86,32 @@ h3 {
 
 .text-container {
   width: 10rem;
-  background-color: darkcyan;
+  /* background-color: darkcyan; */
   position: relative;
 }
 
 .description-container {
-  width: 12rem;
-  height: 0rem;
-  overflow: hidden;
-  /* transform: scaleY(1); */
+  width: 16rem;
+  /* height: 0rem; */
+  /* overflow: hidden; */
+  /* transform: scale(1.33, 1); */
   /* background-color: darkmagenta; */
-  /* position: absolute; */
+  right: 0;
+  position: absolute;
+  /* display: flex; */
+  transform: translateY(20%);
 }
 
 .animation-text-container {
-  position: absolute;
-  /* width: 15rem; */
-  /* height: 13rem; */
-  /* right: 0; */
+  /* transform: translate(-30%, -50%); */
+  /* transform: translateX(50); */
+  /* position: absolute; */
+  width: 100%;
+  /* right: 10; */
+  /* height: 0; */
   /* background-color: darkgoldenrod; */
 
+  /* transform: scaleY(1); */
   /* transition: width ease 0.5s;
   transition: height ease 0.5s;
   transition: scale ease 0.5s; */

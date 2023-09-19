@@ -144,9 +144,10 @@ export class projectScroll {
       const isManual = manual || false;
       gsap.to(`#${this._scrollContainer.id}`, {
         duration: 0.5,
-        fill: "forwards",
-        ease: Power2.easeOut,
-        transform: `translate(-50%,${newPercentage}%)`,
+        // fill: "forwards",
+        // ease: Power2.easeOut,
+        // transform: `translate(-50%,${newPercentage}%)`,
+        translateY: `${newPercentage}%`,
         onUpdate: () => {
           if (isManual) {
             this.imageAnimation(manual);

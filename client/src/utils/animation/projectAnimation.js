@@ -115,18 +115,34 @@ export function showDescription(selected) {
 
   const selectedId = selected.parent.dataset.position;
 
+  const animationContainer = selected.parent.querySelector(
+    `#animation-text-container-${selectedId}`
+  );
   const descriptionContainer = selected.parent.querySelector(
     `#description-container-${selectedId}`
   );
   const description = selected.parent.querySelector(
     `#description-container-${selectedId}`
   );
+  console.log(animationContainer.getBoundingClientRect());
+  console.log(descriptionContainer.getBoundingClientRect());
 
+  const titleDem = animationContainer.getBoundingClientRect();
+  const descriptionDem = descriptionContainer.getBoundingClientRect();
+
+  const vertical =
+    (descriptionDem.width / 2 / titleDem.width -
+      titleDem.width / 2 / titleDem.width) *
+    100;
   // move title
-  tl.to(`#${descriptionContainer.id}`, {
-    width: "16rem",
-    height: "10rem",
-    duration: 0.2,
+
+  const direction = parseInt(selectedId) % 2 === 0 ? -1 * vertical : vertical;
+
+  tl.to(`#${animationContainer.id}`, {
+    translateY: "-100%",
+    translateX: `${direction}`,
+    // height: "auto",
+    duration: 0.5,
   });
 
   // show description
@@ -152,6 +168,9 @@ export function showDescription(selected) {
 export function hideDescription(selected) {
   const selectedId = selected.parent.dataset.position;
 
+  const animationContainer = selected.parent.querySelector(
+    `#animation-text-container-${selectedId}`
+  );
   const descriptionContainer = selected.parent.querySelector(
     `#description-container-${selectedId}`
   );
@@ -160,10 +179,10 @@ export function hideDescription(selected) {
   );
 
   // move title
-  gsap.to(`#${descriptionContainer.id}`, {
-    width: "10rem",
-    height: "0rem",
-    duration: 0.2,
+  gsap.to(`#${animationContainer.id}`, {
+    translateX: `0%`,
+    translateY: `0%`,
+    duration: 0.4,
   });
 
   // hide description

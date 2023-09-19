@@ -102,7 +102,7 @@ export function scrollContainer() {
     // description generator
     // ------------------------------------------------
 
-    scrollDescription(animationTextContainer, index);
+    scrollDescription(scrollTextContainer, index);
 
     // ------------------------------------------------
     // image
@@ -139,7 +139,6 @@ export function scrollContainer() {
       image.style.marginLeft = "2rem";
       scrollTextContainer.style.marginRight = "1rem";
 
-      animationTextContainer.style.right = 0;
       animationContainer.appendChild(imageDotContainer);
       animationContainer.appendChild(image);
     } else {
@@ -150,7 +149,6 @@ export function scrollContainer() {
       image.style.marginRight = "2rem";
       scrollTextContainer.style.marginLeft = "1rem";
 
-      animationTextContainer.style.left = 0;
       animationContainer.prepend(imageDotContainer);
       animationContainer.prepend(image);
     }
@@ -261,6 +259,11 @@ export function scrollDescription(parent, index) {
   const descriptionContainer = document.createElement("div");
   descriptionContainer.id = `description-container-${index}`;
   descriptionContainer.className = "description-container";
+  if (parseInt(index) % 2 === 0) {
+    descriptionContainer.style.right = 0;
+  } else {
+    descriptionContainer.style.left = 0;
+  }
   // descriptionContainer.style.visibility = "hidden";
   // descriptionContainer.style.position = "absolute";
   // title
@@ -312,8 +315,8 @@ function textBlockGenerator(text, parent, position) {
   textBlock.innerHTML = text;
 
   // textBlock.style.position = "absolute";
-  // textBlock.style.transform = "translateY(-20px)";
-  // textBlock.style.opacity = 0;
+  // textBlock.style.top = -10;
+  textBlock.style.opacity = 0;
   hiddenContainer.appendChild(textBlock);
 
   return proxyPosition;
