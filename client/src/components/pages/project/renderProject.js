@@ -14,6 +14,7 @@ export function scrollContainer() {
 
   const centerDiv = document.createElement("div");
   centerDiv.id = "centerDiv";
+  centerDiv.className = "container";
   body.append(centerDiv);
 
   const scrollContainer = document.createElement("div");
@@ -85,18 +86,18 @@ export function scrollContainer() {
     siteLink.innerHTML = "site";
     siteLink.id = "site-link";
     siteLink.className = "link";
-    animationTextContainer.appendChild(siteLink);
+    linkContainer.appendChild(siteLink);
 
     //dot
     const linkDot = document.createElement("div");
     linkDot.id = "link-dot";
-    animationTextContainer.appendChild(linkDot);
+    linkContainer.appendChild(linkDot);
 
     const codeLink = document.createElement("a");
     codeLink.innerHTML = "code";
     codeLink.id = "code-link";
     codeLink.className = "link";
-    animationTextContainer.appendChild(codeLink);
+    linkContainer.appendChild(codeLink);
 
     // ------------------------------------------------
     // description generator

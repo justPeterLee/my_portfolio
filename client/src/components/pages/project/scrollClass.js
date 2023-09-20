@@ -143,11 +143,12 @@ export class projectScroll {
     return new Promise((resolve, reject) => {
       const isManual = manual || false;
       gsap.to(`#${this._scrollContainer.id}`, {
-        duration: 0.5,
+        // duration: 0.5,
         // fill: "forwards",
         // ease: Power2.easeOut,
         // transform: `translate(-50%,${newPercentage}%)`,
         translateY: `${newPercentage}%`,
+        // y: `${newPercentage}%`,
         onUpdate: () => {
           if (isManual) {
             this.imageAnimation(manual);
@@ -155,6 +156,7 @@ export class projectScroll {
           this.centerDetect();
         },
         onComplete: () => {
+          // console.log("scroll image COMPLETE");
           resolve();
         },
       });
@@ -168,6 +170,9 @@ export class projectScroll {
     gsap.to(`#${element.id}`, {
       duration: 0.5,
       objectPosition: `center ${newPercentage}%`,
+      // onComplete: () => {
+      //   console.log("image parallax COMPLETE");
+      // },
     });
   }
   centerDetect() {
@@ -184,6 +189,7 @@ export class projectScroll {
       if (areTouching) {
         if (this.isCenter !== image.dataset.position) {
           this.isCenter = image.dataset.position;
+          this._center.innerHTML = this.isCenter;
         }
       }
     });
@@ -192,6 +198,7 @@ export class projectScroll {
   moveTo(e) {
     if (this.moveActive && this.mouseMove && this.isFocus) {
     } else {
+      // console.time("animation");
       this.moveActive = true;
       const element = e.target.parentNode;
       const elementPos = element.getBoundingClientRect();
@@ -212,7 +219,6 @@ export class projectScroll {
       this.scrollAnimation(this.percent, e.target).then(() => {
         this.moveActive = false;
         this.cachePercent();
-        // showDescription(this.whoFocus);
       });
 
       console.log("moved");
@@ -307,5 +313,17 @@ export class projectScroll {
 
   generateDescription(parent) {
     scrollDescription(parent);
+  }
+
+  // testing
+  gsapArray(className) {
+    let newPercent = this.percent;
+    gsap.to(`.${className}`, {
+      duration: 0.5,
+      objectPosition: `center ${newPercent + 100}%`,
+      // onComplete: () => {
+      //   console.log("image parallax COMPLETE");
+      // },
+    });
   }
 }

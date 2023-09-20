@@ -59,8 +59,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 1.2rem;
+  height: 1.2rem;
   background-color: aliceblue;
 }
 
@@ -86,33 +86,16 @@ h3 {
 
 .text-container {
   width: 10rem;
-  /* background-color: darkcyan; */
   position: relative;
 }
 
 .description-container {
   width: 16rem;
-  /* height: 0rem; */
-  /* overflow: hidden; */
-  /* transform: scale(1.33, 1); */
-  /* background-color: darkmagenta; */
   right: 0;
   position: absolute;
-  /* display: flex; */
   transform: translateY(20%);
 }
 
 .animation-text-container {
-  /* transform: translate(-30%, -50%); */
-  /* transform: translateX(50); */
-  /* position: absolute; */
   width: 100%;
-  /* right: 10; */
-  /* height: 0; */
-  /* background-color: darkgoldenrod; */
-
-  /* transform: scaleY(1); */
-  /* transition: width ease 0.5s;
-  transition: height ease 0.5s;
-  transition: scale ease 0.5s; */
 }
