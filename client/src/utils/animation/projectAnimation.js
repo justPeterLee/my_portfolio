@@ -68,6 +68,68 @@ function hideProject(element) {
   });
 }
 
+const pageTL = gsap.timeline();
+export function focusProject(selected, imageArr) {
+  const selectedId = selected.parent.dataset.position;
+
+  const animationContainer = selected.parent.querySelector(
+    `#animation-text-container-${selectedId}`
+  );
+  const descriptionContainer = selected.parent.querySelector(
+    `#description-container-${selectedId}`
+  );
+  const description = selected.parent.querySelector(
+    `#description-container-${selectedId}`
+  );
+
+  imageArr.forEach((element) => {
+    if (element.parentNode.dataset.position !== selectedId) {
+      pageTL.to(`#${element.parentNode.id}`, { opacity: 0, duration: 0.3 });
+    }
+  });
+
+  pageTL.to(`#${selected.image.id}`, {
+    height: "55rem",
+    duration: 0.5,
+  });
+
+  // move title
+  const titleDem = animationContainer.getBoundingClientRect();
+  const descriptionDem = descriptionContainer.getBoundingClientRect();
+
+  const vertical =
+    (descriptionDem.width / 2 / titleDem.width -
+      titleDem.width / 2 / titleDem.width) *
+    100;
+
+  const direction = parseInt(selectedId) % 2 === 0 ? -1 * vertical : vertical;
+
+  pageTL.to(`#${animationContainer.id}`, {
+    translateY: "-100%",
+    translateX: `${direction}`,
+    duration: 0.5,
+  });
+
+  // show description
+  const text = [...description.getElementsByClassName("text")];
+
+  text.forEach((element, index) => {
+    let timedelay;
+    if (index) timedelay = "-=.45";
+    pageTL.from(
+      `#${element.id}`,
+      {
+        y: 20,
+        duration: 0.5,
+        onStart: () => {
+          element.style.opacity = "100%";
+        },
+      },
+      timedelay
+    );
+  });
+}
+
 export function focusImage(selected, imageArr) {
   // get all
   // get choosen
@@ -87,6 +149,46 @@ export function focusImage(selected, imageArr) {
         // console.log("image resize COMPLETE");
         resolve();
       },
+    });
+  });
+}
+
+export function blurProject(selected, imageArr) {
+  const selectedId = selected.parent.dataset.position;
+
+  const animationContainer = selected.parent.querySelector(
+    `#animation-text-container-${selectedId}`
+  );
+
+  const description = selected.parent.querySelector(
+    `#description-container-${selectedId}`
+  );
+
+  imageArr.forEach((element) => {
+    if (element.parentNode.dataset.position !== selectedId) {
+      pageTL.to(`#${element.parentNode.id}`, { opacity: 1, duration: 1 });
+    }
+  });
+
+  pageTL.to(`#${selected.image.id}`, {
+    height: "20rem",
+    duration: 0.55,
+  });
+
+  // move title
+  pageTL.to(`#${animationContainer.id}`, {
+    translateX: `0%`,
+    translateY: `0%`,
+    duration: 0.4,
+  });
+
+  // hide description
+  const text = [...description.getElementsByClassName("text")];
+
+  text.forEach((element) => {
+    pageTL.to(`#${element.id}`, {
+      opacity: 0,
+      duration: 0.3,
     });
   });
 }

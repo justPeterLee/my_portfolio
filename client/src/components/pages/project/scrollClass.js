@@ -5,6 +5,8 @@ import {
   unfocusImage,
   showDescription,
   hideDescription,
+  focusProject,
+  blurProject,
 } from "../../../utils/animation/projectAnimation";
 export class projectScroll {
   constructor(scrollContainer, center, images) {
@@ -226,8 +228,8 @@ export class projectScroll {
       this.whoFocus = { parent: e.target.parentNode, image: e.target };
       this.isFocus = true;
 
-      focusImage(this.whoFocus, this._images);
-      showDescription(this.whoFocus);
+      focusProject(this.whoFocus, this._images);
+      // showDescription(this.whoFocus);
     }
   }
 
@@ -305,8 +307,8 @@ export class projectScroll {
   }
 
   unFocus() {
-    unfocusImage(this.whoFocus, this._images);
-    hideDescription(this.whoFocus);
+    blurProject(this.whoFocus, this._images);
+    // hideDescription(this.whoFocus);
     this.whoFocus = {};
     this.isFocus = false;
   }
