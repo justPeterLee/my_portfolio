@@ -68,8 +68,9 @@ function hideProject(element) {
   });
 }
 
-const pageTL = gsap.timeline();
-export function focusProject(selected, imageArr) {
+const showTL = gsap.timeline();
+const hideTL = gsap.timeline();
+export function focusProject(selected) {
   const selectedId = selected.parent.dataset.position;
 
   const animationContainer = selected.parent.querySelector(
@@ -82,13 +83,15 @@ export function focusProject(selected, imageArr) {
     `#description-container-${selectedId}`
   );
 
-  imageArr.forEach((element) => {
-    if (element.parentNode.dataset.position !== selectedId) {
-      pageTL.to(`#${element.parentNode.id}`, { opacity: 0, duration: 0.3 });
-    }
-  });
+  const images = gsap.utils
+    .toArray(".animation-container")
+    .filter((element) => {
+      if (element.dataset.position !== selectedId) return element;
+    });
 
-  pageTL.to(`#${selected.image.id}`, {
+  showTL.to(images, { opacity: 0, duration: 0.3 });
+
+  showTL.to(`#${selected.image.id}`, {
     height: "55rem",
     duration: 0.5,
   });
@@ -104,29 +107,24 @@ export function focusProject(selected, imageArr) {
 
   const direction = parseInt(selectedId) % 2 === 0 ? -1 * vertical : vertical;
 
-  pageTL.to(`#${animationContainer.id}`, {
+  showTL.to(`#${animationContainer.id}`, {
     translateY: "-100%",
     translateX: `${direction}`,
     duration: 0.5,
   });
 
   // show description
-  const text = [...description.getElementsByClassName("text")];
+  const text = gsap.utils.toArray(description.getElementsByClassName("text"));
 
-  text.forEach((element, index) => {
-    let timedelay;
-    if (index) timedelay = "-=.45";
-    pageTL.from(
-      `#${element.id}`,
-      {
-        y: 20,
-        duration: 0.5,
-        onStart: () => {
-          element.style.opacity = "100%";
-        },
-      },
-      timedelay
-    );
+  showTL.from(text, {
+    y: 20,
+    duration: 0.5,
+    stagger: 0.05,
+    onStart: () => {
+      text.forEach((element) => {
+        element.style.opacity = "100%";
+      });
+    },
   });
 }
 
@@ -153,7 +151,7 @@ export function focusImage(selected, imageArr) {
   });
 }
 
-export function blurProject(selected, imageArr) {
+export function blurProject(selected) {
   const selectedId = selected.parent.dataset.position;
 
   const animationContainer = selected.parent.querySelector(
@@ -164,32 +162,35 @@ export function blurProject(selected, imageArr) {
     `#description-container-${selectedId}`
   );
 
-  imageArr.forEach((element) => {
-    if (element.parentNode.dataset.position !== selectedId) {
-      pageTL.to(`#${element.parentNode.id}`, { opacity: 1, duration: 1 });
-    }
-  });
+  // image reveal
+  const images = gsap.utils
+    .toArray(".animation-container")
+    .filter((element) => {
+      if (element.dataset.position !== selectedId) return element;
+    });
 
-  pageTL.to(`#${selected.image.id}`, {
+  hideTL.to(images, { opacity: 1, duration: 1, stagger: 0.2 });
+
+  // resize focused image
+  hideTL.to(`#${selected.image.id}`, {
     height: "20rem",
     duration: 0.55,
   });
 
   // move title
-  pageTL.to(`#${animationContainer.id}`, {
+  hideTL.to(`#${animationContainer.id}`, {
     translateX: `0%`,
     translateY: `0%`,
     duration: 0.4,
   });
 
   // hide description
-  const text = [...description.getElementsByClassName("text")];
+  const target = gsap.utils.toArray(description.getElementsByClassName("text"));
 
-  text.forEach((element) => {
-    pageTL.to(`#${element.id}`, {
-      opacity: 0,
-      duration: 0.3,
-    });
+  hideTL.to(target, {
+    opacity: 0,
+    duration: 0.3,
+    stagger: 0.05,
   });
 }
 

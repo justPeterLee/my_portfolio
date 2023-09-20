@@ -170,7 +170,7 @@ export class projectScroll {
     // console.log(newPercentage, from);
     // this._images.forEach((element) => {
     gsap.to(`#${element.id}`, {
-      duration: 0.5,
+      // duration: 0.5,
       objectPosition: `center ${newPercentage}%`,
       // onComplete: () => {
       //   console.log("image parallax COMPLETE");
@@ -228,8 +228,7 @@ export class projectScroll {
       this.whoFocus = { parent: e.target.parentNode, image: e.target };
       this.isFocus = true;
 
-      focusProject(this.whoFocus, this._images);
-      // showDescription(this.whoFocus);
+      focusProject(this.whoFocus);
     }
   }
 
@@ -307,7 +306,7 @@ export class projectScroll {
   }
 
   unFocus() {
-    blurProject(this.whoFocus, this._images);
+    blurProject(this.whoFocus);
     // hideDescription(this.whoFocus);
     this.whoFocus = {};
     this.isFocus = false;
