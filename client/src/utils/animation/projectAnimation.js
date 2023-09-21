@@ -68,8 +68,9 @@ function hideProject(element) {
   });
 }
 
-const showTL = gsap.timeline();
-const hideTL = gsap.timeline();
+export const showTL = gsap.timeline();
+export const hideTL = gsap.timeline();
+
 export function focusProject(selected) {
   // animation elements
   const selectedId = selected.parent.dataset.position;
@@ -133,19 +134,24 @@ export function focusProject(selected) {
   // show description
   const text = gsap.utils.toArray(description.getElementsByClassName("text"));
 
-  showTL.from(text, {
-    y: 20,
-    duration: 0.5,
-    stagger: 0.05,
-    onStart: () => {
-      text.forEach((element) => {
-        element.style.opacity = "100%";
-      });
+  showTL.from(
+    text,
+    {
+      y: 20,
+      duration: 0.4,
+      stagger: 0.05,
+      onStart: () => {
+        text.forEach((element) => {
+          element.style.opacity = "100%";
+        });
+      },
     },
-  });
+    "-=.15"
+  );
 }
 
 export function blurProject(selected) {
+  // if (showTL.progress() < 0.4) return;
   // animated elements
   const selectedId = selected.parent.dataset.position;
 
@@ -167,14 +173,14 @@ export function blurProject(selected) {
       if (element.dataset.position !== selectedId) return element;
     });
 
-  hideTL.to(images, { opacity: 1, duration: 1, stagger: 0.2 });
+  hideTL.to(images, { opacity: 1, duration: 0.5 });
 
   // resize focused image
   hideTL.to(
     `#${selected.image.id}`,
     {
       height: "20rem",
-      duration: 0.55,
+      duration: 0.5,
     },
     "instant"
   );
@@ -197,7 +203,7 @@ export function blurProject(selected) {
     target,
     {
       opacity: 0,
-      duration: 0.2,
+      duration: 0.3,
     },
     "instant"
   );

@@ -3,6 +3,8 @@ import { scrollDescription } from "./renderProject";
 import {
   focusProject,
   blurProject,
+  showTL,
+  hideTL,
 } from "../../../utils/animation/projectAnimation";
 export class projectScroll {
   constructor(scrollContainer, center, images) {
@@ -141,11 +143,8 @@ export class projectScroll {
     return new Promise((resolve, reject) => {
       const isManual = manual || false;
       gsap.to(`#${this._scrollContainer.id}`, {
-        // duration: 0.5,
-        // fill: "forwards",
-        // ease: Power2.easeOut,
-        // transform: `translate(-50%,${newPercentage}%)`,
-        translateY: `${newPercentage}%`,
+        transform: `translate(-50%,${newPercentage}%)`,
+        // translateY: `${newPercentage}%`,
         // y: `${newPercentage}%`,
         onUpdate: () => {
           if (isManual) {
@@ -154,7 +153,6 @@ export class projectScroll {
           this.centerDetect();
         },
         onComplete: () => {
-          // console.log("scroll image COMPLETE");
           resolve();
         },
       });
@@ -162,15 +160,8 @@ export class projectScroll {
   }
 
   imageParallax(newPercentage, element) {
-    // const from = a || "none";
-    // console.log(newPercentage, from);
-    // this._images.forEach((element) => {
     gsap.to(`#${element.id}`, {
-      // duration: 0.5,
       objectPosition: `center ${newPercentage}%`,
-      // onComplete: () => {
-      //   console.log("image parallax COMPLETE");
-      // },
     });
   }
   centerDetect() {
@@ -194,42 +185,43 @@ export class projectScroll {
   }
 
   moveTo(e) {
-    if (this.moveActive && this.mouseMove && this.isFocus) {
-    } else {
-      // console.time("animation");
-      this.moveActive = true;
-      const element = e.target.parentNode;
-      const elementPos = element.getBoundingClientRect();
-      const elementCenter = elementPos.top + elementPos.height / 2;
+    // console.log();
+    if (this.moveActive && this.mouseMove && this.isFocus) return;
 
-      //   console.log(elementPos.height);
-      const centerPos = this._center.getBoundingClientRect();
-      const centerCenter = centerPos.top + centerPos.height / 2;
+    // console.time("animation");
+    this.moveActive = true;
+    const element = e.target.parentNode;
+    const elementPos = element.getBoundingClientRect();
+    const elementCenter = elementPos.top + elementPos.height / 2;
 
-      const scrollHeight = this._scrollContainer.getBoundingClientRect().height;
-      const distance = centerCenter - elementCenter;
-      const distancePercent = (distance / scrollHeight) * 100;
+    //   console.log(elementPos.height);
+    const centerPos = this._center.getBoundingClientRect();
+    const centerCenter = centerPos.top + centerPos.height / 2;
 
-      // console.log(distancePercent);
+    const scrollHeight = this._scrollContainer.getBoundingClientRect().height;
+    const distance = centerCenter - elementCenter;
+    const distancePercent = (distance / scrollHeight) * 100;
 
-      this.scrollPercent(distancePercent);
+    // console.log(distancePercent);
 
-      this.scrollAnimation(this.percent, e.target).then(() => {
-        this.moveActive = false;
-        this.cachePercent();
-      });
+    this.scrollPercent(distancePercent);
 
-      console.log("moved");
+    this.scrollAnimation(this.percent, e.target).then(() => {
+      this.moveActive = false;
+      this.cachePercent();
+    });
 
-      this.whoFocus = { parent: e.target.parentNode, image: e.target };
-      this.isFocus = true;
+    console.log("moved");
 
-      focusProject(this.whoFocus);
-    }
+    this.whoFocus = { parent: e.target.parentNode, image: e.target };
+    this.isFocus = true;
+
+    focusProject(this.whoFocus);
   }
 
   scrollUp() {
     // this.scrollPercent(-5);
+    // if (showTL.isActive()) return;
     if (this.isFocus) this.unFocus();
     this.percent -= 5;
 

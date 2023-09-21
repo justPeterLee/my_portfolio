@@ -2,6 +2,7 @@
 import data from "../../../../public/projects.json";
 import "./project.css";
 import { projectScroll } from "./scrollClass";
+import { showTL, hideTL } from "../../../utils/animation/projectAnimation";
 // default view
 const body = document.querySelector("body");
 
@@ -168,15 +169,17 @@ window.onmousemove = (e) => {
   if (mousedown === 0 || window.location.pathname !== "/projects" || !scroll)
     return;
   if (scroll.moveActive) return;
+  // if (showTL.isActive()) return;
 
   const mouseDelta = parseFloat(mousedown) - e.clientY;
   const maxDelta = window.innerHeight / 2;
   const percentage = (mouseDelta / maxDelta) * -100;
 
+  scroll.scrollPercent(percentage);
+
   if (percentage <= -2 || percentage >= 2) {
     scroll.mouseMove = true;
   }
-  scroll.scrollPercent(percentage);
 
   const images = scroll.images;
 
@@ -186,7 +189,6 @@ window.onmousemove = (e) => {
       // let imagePercent = scroll.imagePercentage(element);
       scroll.imageParallax(scroll.percent + 100, element);
     });
-    scroll.scrollPercent(percentage);
   } else {
     if (percentage <= -7 || percentage >= 7) {
       scroll.unFocus();
@@ -273,9 +275,9 @@ export function scrollDescription(parent, index) {
   descriptionContainer.appendChild(titleContianer);
 
   // text block
-  position = textBlockGenerator("Title", titleContianer, position);
-  position = textBlockGenerator("Title", titleContianer, position);
-  position = textBlockGenerator("Title", titleContianer, position);
+  position = textBlockGenerator("What", titleContianer, position);
+  position = textBlockGenerator("Why", titleContianer, position);
+  position = textBlockGenerator("How", titleContianer, position);
 
   // text
   const textContainer = document.createElement("p");
@@ -283,15 +285,31 @@ export function scrollDescription(parent, index) {
   descriptionContainer.appendChild(textContainer);
 
   // text block
-  position = textBlockGenerator("Description", textContainer, position);
-  // position = textBlockGenerator(
-  //   "This is what we are really talking about right now",
-  //   textContainer,
-  //   position
-  // );
-  position = textBlockGenerator("Description", textContainer, position);
-  position = textBlockGenerator("Description", textContainer, position);
-  position = textBlockGenerator("Description", textContainer, position);
+  position = textBlockGenerator(
+    "So this is the start Huh... welp",
+    textContainer,
+    position
+  );
+  position = textBlockGenerator(
+    "This is what we are really talking about",
+    textContainer,
+    position
+  );
+  position = textBlockGenerator(
+    "This is just random text that is showing ",
+    textContainer,
+    position
+  );
+  position = textBlockGenerator(
+    "this is even more reasn to show why we ",
+    textContainer,
+    position
+  );
+  position = textBlockGenerator(
+    "here is another reason that we might",
+    textContainer,
+    position
+  );
 
   parent.appendChild(descriptionContainer);
 
