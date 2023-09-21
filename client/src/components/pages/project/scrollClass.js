@@ -1,10 +1,6 @@
-import { gsap, Power2 } from "gsap";
+import { gsap } from "gsap";
 import { scrollDescription } from "./renderProject";
 import {
-  focusImage,
-  unfocusImage,
-  showDescription,
-  hideDescription,
   focusProject,
   blurProject,
 } from "../../../utils/animation/projectAnimation";
