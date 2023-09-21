@@ -71,18 +71,25 @@ function hideProject(element) {
 const showTL = gsap.timeline();
 const hideTL = gsap.timeline();
 export function focusProject(selected) {
+  // animation elements
   const selectedId = selected.parent.dataset.position;
 
   const animationContainer = selected.parent.querySelector(
     `#animation-text-container-${selectedId}`
   );
+
   const descriptionContainer = selected.parent.querySelector(
     `#description-container-${selectedId}`
   );
+
   const description = selected.parent.querySelector(
     `#description-container-${selectedId}`
   );
 
+  // labels
+  showTL.addLabel("instant", "+=0");
+
+  // outer images
   const images = gsap.utils
     .toArray(".animation-container")
     .filter((element) => {
@@ -91,10 +98,15 @@ export function focusProject(selected) {
 
   showTL.to(images, { opacity: 0, duration: 0.3 });
 
-  showTL.to(`#${selected.image.id}`, {
-    height: "55rem",
-    duration: 0.5,
-  });
+  // main image
+  showTL.to(
+    `#${selected.image.id}`,
+    {
+      height: "55rem",
+      duration: 0.5,
+    },
+    "instant"
+  );
 
   // move title
   const titleDem = animationContainer.getBoundingClientRect();
@@ -107,11 +119,16 @@ export function focusProject(selected) {
 
   const direction = parseInt(selectedId) % 2 === 0 ? -1 * vertical : vertical;
 
-  showTL.to(`#${animationContainer.id}`, {
-    translateY: "-100%",
-    translateX: `${direction}`,
-    duration: 0.5,
-  });
+  showTL.to(
+    `#${animationContainer.id}`,
+    {
+      translateY: "-100%",
+      translateX: `${direction}`,
+      duration: 0.5,
+    },
+    // "-=.2"
+    "instant"
+  );
 
   // show description
   const text = gsap.utils.toArray(description.getElementsByClassName("text"));
@@ -129,6 +146,7 @@ export function focusProject(selected) {
 }
 
 export function blurProject(selected) {
+  // animated elements
   const selectedId = selected.parent.dataset.position;
 
   const animationContainer = selected.parent.querySelector(
@@ -138,6 +156,9 @@ export function blurProject(selected) {
   const description = selected.parent.querySelector(
     `#description-container-${selectedId}`
   );
+
+  // labels
+  hideTL.addLabel("instant", "+=0");
 
   // image reveal
   const images = gsap.utils
@@ -149,26 +170,37 @@ export function blurProject(selected) {
   hideTL.to(images, { opacity: 1, duration: 1, stagger: 0.2 });
 
   // resize focused image
-  hideTL.to(`#${selected.image.id}`, {
-    height: "20rem",
-    duration: 0.55,
-  });
+  hideTL.to(
+    `#${selected.image.id}`,
+    {
+      height: "20rem",
+      duration: 0.55,
+    },
+    "instant"
+  );
 
   // move title
-  hideTL.to(`#${animationContainer.id}`, {
-    translateX: `0%`,
-    translateY: `0%`,
-    duration: 0.4,
-  });
+  hideTL.to(
+    `#${animationContainer.id}`,
+    {
+      translateX: `0%`,
+      translateY: `0%`,
+      duration: 0.4,
+    },
+    "instant"
+  );
 
   // hide description
   const target = gsap.utils.toArray(description.getElementsByClassName("text"));
 
-  hideTL.to(target, {
-    opacity: 0,
-    duration: 0.3,
-    stagger: 0.05,
-  });
+  hideTL.to(
+    target,
+    {
+      opacity: 0,
+      duration: 0.2,
+    },
+    "instant"
+  );
 }
 
 // function
