@@ -138,8 +138,8 @@ export class projectScroll {
         y: `${newPercentage}%`,
         onUpdate: () => {
           if (isManual) {
-            let imagePercent = this.imagePercentage(manual);
-            this.imageParallax(imagePercent, manual);
+            // let imagePercent = this.imagePercentage(manual);
+            // this.imageParallax(imagePercent, manual);
           }
           this.centerDetect();
         },
@@ -150,12 +150,17 @@ export class projectScroll {
     });
   }
 
-  imageParallax(newPercentage, element) {
-    gsap.to(`#${element.id}`, {
+  imageParallax(newPercentage) {
+    gsap.to(this.images, {
       objectPosition: `center ${newPercentage}%`,
     });
   }
 
+  imageParallaxCenter(element) {
+    gsap.to(`#${element.id}`, {
+      objectPosition: `center ${50}%`,
+    });
+  }
   centerDetect() {
     const centerPos = this._center.getBoundingClientRect();
     this._images.forEach((image) => {
@@ -198,6 +203,9 @@ export class projectScroll {
       this.cachePercent();
     });
 
+    // let imagePercent = this.imagePercentage(e.target, distancePercent);
+    this.imageParallaxCenter(e.target);
+
     this.whoFocus = { parent: e.target.parentNode, image: e.target };
     this.isFocus = true;
 
@@ -220,7 +228,7 @@ export class projectScroll {
       }
 
       this._currPercent = this.percent;
-      this.defaultImageAnimation();
+      this.imageParallax(this.percent + 100);
       this.scrollAnimation(this.percent);
     } else {
       this._scrollCount -= 1;
@@ -240,7 +248,7 @@ export class projectScroll {
       }
 
       this._currPercent = this.percent;
-      this.defaultImageAnimation();
+      this.imageParallax(this.percent + 100);
       this.scrollAnimation(this.percent);
     } else {
       this._scrollCount -= 1;
@@ -248,42 +256,6 @@ export class projectScroll {
         this.unFocus();
       }
     }
-  }
-
-  imagePercentage(image) {
-    const imagePos = image.getBoundingClientRect();
-    const imageCenter = imagePos.top + imagePos.height / 2;
-
-    const centerPos = this._center.getBoundingClientRect();
-    const centerCenter = centerPos.top + centerPos.height / 2;
-
-    const distance = centerCenter - imageCenter;
-
-    const scrollHeight = this._scrollContainer.getBoundingClientRect().height;
-    const distancePercent = (distance / scrollHeight) * 100;
-
-    const ratioPercent = distancePercent + 50;
-
-    let imagePercent;
-
-    if (ratioPercent <= 100 && ratioPercent >= 0) {
-      imagePercent = ratioPercent;
-    }
-
-    if (imagePercent < 0 || ratioPercent < 0) {
-      imagePercent = 0.1;
-    }
-    if (imagePercent > 100 || ratioPercent > 100) {
-      imagePercent = 99.9;
-    }
-
-    return imagePercent;
-  }
-
-  defaultImageAnimation() {
-    this.images.forEach((element) => {
-      this.imageParallax(this.percent + 100, element);
-    });
   }
 
   triAnimation(position, state) {
@@ -302,4 +274,35 @@ export class projectScroll {
       gsap.to(`#${tri.id}`, { duration: 0.2, x: 0 });
     } else return;
   }
+
+  // imagePercentage(image, offset) {
+  //   console.log(offset);
+  //   const imagePos = image.getBoundingClientRect();
+  //   const imageCenter = imagePos.top + imagePos.height / 2;
+
+  //   const centerPos = this._center.getBoundingClientRect();
+  //   const centerCenter = centerPos.top + centerPos.height / 2;
+
+  //   const distance = centerCenter - imageCenter;
+
+  //   const scrollHeight = this._scrollContainer.getBoundingClientRect().height;
+  //   const distancePercent = (distance / scrollHeight) * 100;
+
+  //   const ratioPercent = distancePercent + 50 + offset;
+
+  //   let imagePercent;
+
+  //   if (ratioPercent <= 100 && ratioPercent >= 0) {
+  //     imagePercent = ratioPercent;
+  //   }
+
+  //   if (imagePercent < 0 || ratioPercent < 0) {
+  //     imagePercent = 0.1;
+  //   }
+  //   if (imagePercent > 100 || ratioPercent > 100) {
+  //     imagePercent = 99.9;
+  //   }
+
+  //   return imagePercent;
+  // }
 }

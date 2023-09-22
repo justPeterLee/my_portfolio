@@ -166,10 +166,13 @@ let scroll;
 let mousedown = 0;
 
 window.onmousemove = (e) => {
-  if (mousedown === 0 || window.location.pathname !== "/projects" || !scroll)
+  if (
+    mousedown === 0 ||
+    window.location.pathname !== "/projects" ||
+    !scroll ||
+    scroll.moveActive
+  )
     return;
-  if (scroll.moveActive) return;
-  // if (showTL.isActive()) return;
 
   const mouseDelta = parseFloat(mousedown) - e.clientY;
   const maxDelta = window.innerHeight / 2;
@@ -181,22 +184,14 @@ window.onmousemove = (e) => {
     scroll.mouseMove = true;
   }
 
-  const images = scroll.images;
-
   if (!scroll.isFocus) {
     scroll.scrollAnimation(scroll.percent);
-    images.forEach((element) => {
-      // let imagePercent = scroll.imagePercentage(element);
-      scroll.imageParallax(scroll.percent + 100, element);
-    });
+    scroll.imageParallax(scroll.percent + 100);
   } else {
     if (percentage <= -7 || percentage >= 7) {
       scroll.unFocus();
     }
   }
-
-  // console.log(percentage);
-  // scroll.imagePercentage();
 };
 
 window.onmousedown = (e) => {
