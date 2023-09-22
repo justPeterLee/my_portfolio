@@ -169,8 +169,6 @@ export class projectScroll {
       if (areTouching) {
         if (this.isCenter !== image.dataset.position) {
           this.isCenter = image.dataset.position;
-          console.log(this.isCenter);
-          // this._center.innerHTML = this.isCenter;
         }
       }
     });
@@ -179,6 +177,7 @@ export class projectScroll {
   focus(e) {
     if (this.moveActive && this.mouseMove && this.isFocus) return;
     this.triAnimation(e.target.dataset.position, "hide");
+    this.hideCross();
     this.moveActive = true;
     const element = e.target.parentNode;
     const elementPos = element.getBoundingClientRect();
@@ -209,6 +208,7 @@ export class projectScroll {
 
   unFocus() {
     blurProject(this.whoFocus);
+    this.showCross();
     this.whoFocus = {};
     this.isFocus = false;
     this._scrollCount = 0;
@@ -270,6 +270,13 @@ export class projectScroll {
     } else return;
   }
 
+  showCross() {
+    gsap.to(`#centerDiv`, { rotate: "-=180", opacity: 1, duration: 0.2 });
+  }
+
+  hideCross() {
+    gsap.to(`#centerDiv`, { rotate: "+=180", opacity: 0, duration: 0.2 });
+  }
   // imagePercentage(image, offset) {
   //   console.log(offset);
   //   const imagePos = image.getBoundingClientRect();

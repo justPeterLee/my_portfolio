@@ -115,7 +115,7 @@ export function focusProject(selected) {
 
   const vertical =
     (descriptionDem.width / 2 / titleDem.width -
-      titleDem.width / 2 / titleDem.width) *
+      titleDem.width / titleDem.width) *
     100;
 
   const direction = parseInt(selectedId) % 2 === 0 ? -1 * vertical : vertical;
@@ -123,7 +123,7 @@ export function focusProject(selected) {
   showTL.to(
     `#${animationContainer.id}`,
     {
-      translateY: "-100%",
+      translateY: "-150%",
       translateX: `${direction}`,
       duration: 0.5,
     },
