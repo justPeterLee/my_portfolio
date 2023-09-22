@@ -42,23 +42,6 @@ export class projectScroll {
     this._scrollCount = 0;
   }
 
-  triAnimation(position, state) {
-    const tri = document.querySelector(`#image-triangle-${position}`);
-
-    if (state === "show") {
-      if (!tri || this.mouseMove || this.isFocus) return;
-
-      gsap.to(`#${tri.id}`, {
-        duration: 0.2,
-        right: tri.dataset.side ? 20 : -20,
-      });
-    } else if (state === "hide") {
-      if (!tri) return;
-
-      gsap.to(`#${tri.id}`, { duration: 0.2, right: 0 });
-    } else return;
-  }
-
   get images() {
     return this._images;
   }
@@ -301,5 +284,22 @@ export class projectScroll {
     this.images.forEach((element) => {
       this.imageParallax(this.percent + 100, element);
     });
+  }
+
+  triAnimation(position, state) {
+    const tri = document.querySelector(`#image-triangle-${position}`);
+
+    if (state === "show") {
+      if (!tri || this.mouseMove || this.isFocus) return;
+
+      gsap.to(`#${tri.id}`, {
+        duration: 0.2,
+        x: tri.dataset.side ? -20 : 20,
+      });
+    } else if (state === "hide") {
+      if (!tri) return;
+
+      gsap.to(`#${tri.id}`, { duration: 0.2, x: 0 });
+    } else return;
   }
 }
