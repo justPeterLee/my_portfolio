@@ -61,7 +61,7 @@
   position: absolute;
   width: 1.2rem;
   height: 1.2rem;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
 }
 
 /* -------------------------
@@ -94,8 +94,4 @@ h3 {
   right: 0;
   position: absolute;
   transform: translateY(20%);
-}
-
-.animation-text-container {
-  width: 100%;
 }

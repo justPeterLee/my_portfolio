@@ -129,18 +129,11 @@ export class projectScroll {
     this._currPercent = this.percent;
   }
 
-  scrollAnimation(newPercentage, manual) {
+  scrollAnimation(newPercentage) {
     return new Promise((resolve, reject) => {
-      const isManual = manual || false;
       gsap.to(`#${this._scrollContainer.id}`, {
-        // transform: `translate(-50%,${newPercentage}%)`,
-        // translateY: `${newPercentage}%`,
         y: `${newPercentage}%`,
         onUpdate: () => {
-          if (isManual) {
-            // let imagePercent = this.imagePercentage(manual);
-            // this.imageParallax(imagePercent, manual);
-          }
           this.centerDetect();
         },
         onComplete: () => {
@@ -151,7 +144,7 @@ export class projectScroll {
   }
 
   imageParallax(newPercentage) {
-    gsap.to(this.images, {
+    gsap.to(".image", {
       objectPosition: `center ${newPercentage}%`,
     });
   }
@@ -161,6 +154,7 @@ export class projectScroll {
       objectPosition: `center ${50}%`,
     });
   }
+
   centerDetect() {
     const centerPos = this._center.getBoundingClientRect();
     this._images.forEach((image) => {
@@ -175,7 +169,8 @@ export class projectScroll {
       if (areTouching) {
         if (this.isCenter !== image.dataset.position) {
           this.isCenter = image.dataset.position;
-          this._center.innerHTML = this.isCenter;
+          console.log(this.isCenter);
+          // this._center.innerHTML = this.isCenter;
         }
       }
     });
@@ -198,7 +193,7 @@ export class projectScroll {
 
     this.scrollPercent(distancePercent);
 
-    this.scrollAnimation(this.percent, e.target).then(() => {
+    this.scrollAnimation(this.percent).then(() => {
       this.moveActive = false;
       this.cachePercent();
     });

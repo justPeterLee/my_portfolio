@@ -1,8 +1,8 @@
-// import cross from "../../../../public/cross.svg";
+import cross from "../../../../public/cross.svg";
 import data from "../../../../public/projects.json";
 import "./project.css";
 import { projectScroll } from "./scrollClass";
-import { showTL, hideTL } from "../../../utils/animation/projectAnimation";
+
 // default view
 const body = document.querySelector("body");
 
@@ -18,6 +18,11 @@ export function scrollContainer() {
   centerDiv.className = "container";
   body.append(centerDiv);
 
+  const svg = document.createElement("img");
+  svg.src = cross;
+  svg.class = "svg-cross";
+
+  centerDiv.appendChild(svg);
   const scrollContainer = document.createElement("div");
   scrollContainer.id = "scroll-track";
   scrollContainer.className = "container";
@@ -196,13 +201,13 @@ window.onmousemove = (e) => {
 
 window.onmousedown = (e) => {
   if (window.location.pathname !== "/projects" || !scroll) return;
-  // if (scroll.moveActive) return;
+
   mousedown = e.clientY;
 };
 
 window.onmouseup = (e) => {
   if (window.location.pathname !== "/projects" || !scroll) return;
-  // if (scroll.moveActive) return;
+
   setTimeout(() => {
     scroll.mouseMove = false;
   }, 100);
@@ -252,7 +257,6 @@ export function scrollMenu() {
 // -------------------------------
 
 export function scrollDescription(data, parent, index) {
-  const textArr = data.what.split(" ");
   const textKey = Object.keys(data);
   let descriptionData = {};
 
@@ -266,15 +270,11 @@ export function scrollDescription(data, parent, index) {
         const group = textArr.slice(i, i + 4);
         textArrGroup.push(group.join(" "));
       }
-      // console.log(textArrGroup);
       descriptionData[title] = textArrGroup;
     }
   });
 
-  // let textArrGroup = [];
-
   let position = null;
-  // console.log(textKey);
   // container
   const descriptionContainer = document.createElement("div");
   descriptionContainer.id = `description-container-${index}`;
@@ -287,7 +287,7 @@ export function scrollDescription(data, parent, index) {
 
   // title
   const titleContianer = document.createElement("h3");
-  titleContianer.className = "slide-up-text";
+  titleContianer.className = "slide-up-text slide-up-title";
   descriptionContainer.appendChild(titleContianer);
 
   // text
@@ -297,7 +297,6 @@ export function scrollDescription(data, parent, index) {
 
   // generate text
   const descriptionDataKey = Object.keys(descriptionData);
-  console.log(descriptionData);
   descriptionDataKey.forEach((title) => {
     position = textBlockGenerator(title, titleContianer, position);
     for (let i = 0; i < descriptionData[title].length; i++) {
@@ -308,38 +307,6 @@ export function scrollDescription(data, parent, index) {
       );
     }
   });
-
-  // // text block
-  // position = textBlockGenerator("What", titleContianer, position);
-  // position = textBlockGenerator("Why", titleContianer, position);
-  // position = textBlockGenerator("How", titleContianer, position);
-
-  // // text block
-  // position = textBlockGenerator(
-  //   "So this is the start Huh... welp",
-  //   textContainer,
-  //   position
-  // );
-  // position = textBlockGenerator(
-  //   "This is what we are really talking about",
-  //   textContainer,
-  //   position
-  // );
-  // position = textBlockGenerator(
-  //   "This is just random text that is showing",
-  //   textContainer,
-  //   position
-  // );
-  // position = textBlockGenerator(
-  //   "this is even more reasn to show why we",
-  //   textContainer,
-  //   position
-  // );
-  // position = textBlockGenerator(
-  //   "iiiiiiiiii iiiiiiiiii iiiiiiiiii 1234567890 1234567890 ",
-  //   textContainer,
-  //   position
-  // );
 
   parent.appendChild(descriptionContainer);
 
@@ -362,9 +329,6 @@ function textBlockGenerator(text, parent, position) {
   textBlock.id = `text-${proxyPosition}`;
   textBlock.className = "text";
   textBlock.innerHTML = text;
-
-  // textBlock.style.position = "absolute";
-  // textBlock.style.top = -10;
   textBlock.style.opacity = 0;
   hiddenContainer.appendChild(textBlock);
 
