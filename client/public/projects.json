@@ -5,9 +5,7 @@
     "time": "June 2023",
     "image": "http://localhost:5173/api/v1/long1.webp",
     "description": {
-      "image": "",
-      "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
-      "text": "This travel planner application is your ultimate companion for seamless trip planning. Whether you're a solo adventurer or planning a family vacation, this app streamlines the entire process. Input your destination, travel dates, and preferences, and it will generate a personalized itinerary with must-see attractions, local restaurants, and even hotel options.",
+      "what": "This travel planner application is your ultimate companion for seamless trip planning. Whether you're a solo adventurer or planning a family vacation, this app streamlines the entire process.",
       "tech": ["NextJs", "SQL", "API", "DevOps"]
     },
     "link": {
@@ -22,9 +20,7 @@
     "time": "Sept 2023",
     "image": "http://localhost:5173/api/v1/long2.webp",
     "description": {
-      "image": "",
-      "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
-      "text": "Get on the path to a healthier lifestyle with this all-in-one fitness and health application. It serves as your virtual personal trainer, helping you set fitness goals, track your workouts, and monitor your progress. The app also offers detailed nutritional information and meal planning tools, making it easier to maintain a balanced diet.",
+      "what": "An all-in-one fitness and health application. It serves as your virtual personal trainer, helping you set fitness goals, track your workouts, and monitor your progress.",
       "tech": ["NextJs", "SQL", "API", "DevOps"]
     },
     "link": {
@@ -39,9 +35,7 @@
     "time": "April 2023",
     "image": "http://localhost:5173/api/v1/long3.webp",
     "description": {
-      "image": "",
-      "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
-      "text": "Embark on a journey to master a new language with this language learning application. Whether you're learning for travel, work, or personal enrichment, this app offers comprehensive lessons in multiple languages.",
+      "what": "A Language learning application. Whether you're learning for travel, work, or personal enrichment, this app offers comprehensive lessons in multiple languages.",
       "tech": ["NextJs", "SQL", "API", "DevOps"]
     },
     "link": {
@@ -56,9 +50,7 @@
     "time": "Aug 2023",
     "image": "http://localhost:5173/api/v1/long4.webp",
     "description": {
-      "image": "",
-      "demo": "<iframe src=`https://giphy.com/embed/xThuWu82QD3pj4wvEQ` width=`480` height=`480 frameBorder=`0` class=`giphy-embed` allowFullScreen></iframe><p><a href=`https://giphy.com/gifs/xThuWu82QD3pj4wvEQ`>via GIPHY</a></p>",
-      "text": "Take control of your finances with this robust personal finance management application. It simplifies budgeting, expense tracking, and investment management. Connect your bank accounts and credit cards to automatically categorize transactions and gain insights into your spending habits.",
+      "what": "A Language learning application. Whether you're learning for travel, work, or personal enrichment, this app offers comprehensive lessons in multiple languages.",
       "tech": ["NextJs", "SQL", "API", "DevOps"]
     },
     "link": {

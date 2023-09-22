@@ -104,7 +104,7 @@ export function scrollContainer() {
     // description generator
     // ------------------------------------------------
 
-    scrollDescription(scrollTextContainer, index);
+    scrollDescription(data[project].description, scrollTextContainer, index);
 
     // ------------------------------------------------
     // image
@@ -256,8 +256,30 @@ export function scrollMenu() {
 // description generator
 // -------------------------------
 
-export function scrollDescription(parent, index) {
+export function scrollDescription(data, parent, index) {
+  const textArr = data.what.split(" ");
+  const textKey = Object.keys(data);
+  let descriptionData = {};
+
+  textKey.forEach((title) => {
+    const dataInfo = data[title];
+
+    if (typeof dataInfo === "string") {
+      const textArr = dataInfo.split(" ");
+      const textArrGroup = [];
+      for (let i = 0; i < textArr.length; i += 4) {
+        const group = textArr.slice(i, i + 4);
+        textArrGroup.push(group.join(" "));
+      }
+      // console.log(textArrGroup);
+      descriptionData[title] = textArrGroup;
+    }
+  });
+
+  // let textArrGroup = [];
+
   let position = null;
+  // console.log(textKey);
   // container
   const descriptionContainer = document.createElement("div");
   descriptionContainer.id = `description-container-${index}`;
@@ -267,49 +289,62 @@ export function scrollDescription(parent, index) {
   } else {
     descriptionContainer.style.left = 0;
   }
-  // descriptionContainer.style.visibility = "hidden";
-  // descriptionContainer.style.position = "absolute";
+
   // title
   const titleContianer = document.createElement("h3");
   titleContianer.className = "slide-up-text";
   descriptionContainer.appendChild(titleContianer);
-
-  // text block
-  position = textBlockGenerator("What", titleContianer, position);
-  position = textBlockGenerator("Why", titleContianer, position);
-  position = textBlockGenerator("How", titleContianer, position);
 
   // text
   const textContainer = document.createElement("p");
   textContainer.className = "slide-up-text";
   descriptionContainer.appendChild(textContainer);
 
-  // text block
-  position = textBlockGenerator(
-    "So this is the start Huh... welp",
-    textContainer,
-    position
-  );
-  position = textBlockGenerator(
-    "This is what we are really talking about",
-    textContainer,
-    position
-  );
-  position = textBlockGenerator(
-    "This is just random text that is showing ",
-    textContainer,
-    position
-  );
-  position = textBlockGenerator(
-    "this is even more reasn to show why we ",
-    textContainer,
-    position
-  );
-  position = textBlockGenerator(
-    "here is another reason that we might",
-    textContainer,
-    position
-  );
+  // generate text
+  const descriptionDataKey = Object.keys(descriptionData);
+  console.log(descriptionData);
+  descriptionDataKey.forEach((title) => {
+    position = textBlockGenerator(title, titleContianer, position);
+    for (let i = 0; i < descriptionData[title].length; i++) {
+      position = textBlockGenerator(
+        descriptionData[title][i],
+        textContainer,
+        position
+      );
+    }
+  });
+
+  // // text block
+  // position = textBlockGenerator("What", titleContianer, position);
+  // position = textBlockGenerator("Why", titleContianer, position);
+  // position = textBlockGenerator("How", titleContianer, position);
+
+  // // text block
+  // position = textBlockGenerator(
+  //   "So this is the start Huh... welp",
+  //   textContainer,
+  //   position
+  // );
+  // position = textBlockGenerator(
+  //   "This is what we are really talking about",
+  //   textContainer,
+  //   position
+  // );
+  // position = textBlockGenerator(
+  //   "This is just random text that is showing",
+  //   textContainer,
+  //   position
+  // );
+  // position = textBlockGenerator(
+  //   "this is even more reasn to show why we",
+  //   textContainer,
+  //   position
+  // );
+  // position = textBlockGenerator(
+  //   "iiiiiiiiii iiiiiiiiii iiiiiiiiii 1234567890 1234567890 ",
+  //   textContainer,
+  //   position
+  // );
 
   parent.appendChild(descriptionContainer);
 

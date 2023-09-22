@@ -137,7 +137,7 @@ export function focusProject(selected) {
   showTL.from(
     text,
     {
-      y: 20,
+      y: 40,
       duration: 0.4,
       stagger: 0.05,
       onStart: () => {
