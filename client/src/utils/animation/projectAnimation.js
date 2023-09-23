@@ -1,39 +1,16 @@
 import { gsap } from "gsap";
 
-function showProject(element) {
-  // even - right
-  // odd - left
-
-  const tl = gsap.timeline();
-  const elementChild = [...element.children];
-  const animationArr = elementChild.map((grandElement) => {
-    return grandElement.children[0];
-  });
-
-  animationArr.forEach((position, index) => {
-    // console.log(index);
-    let timedelay;
-    if (index) timedelay = "-=.2";
-    if (parseInt(position.dataset.position) % 2 === 0) {
-      tl.from(
-        `#${position.id}`,
-        { x: -600, opacity: 0, duration: 0.3 },
-        timedelay
-      );
-    } else {
-      tl.from(
-        `#${position.id}`,
-        { x: 600, opacity: 0, duration: 0.3 },
-        timedelay
-      );
-    }
+function showProject() {
+  gsap.from(".animation-container", {
+    x: -600,
+    opacity: 0,
+    duration: 0.4,
+    stagger: 0.1,
   });
 }
 
-function hideProject(element) {
+function hideProject() {
   return new Promise((resolve, reject) => {
-    const tl = gsap.timeline();
-    const children = [...element.children];
     const center = document.querySelector("#centerDiv");
 
     if (center) {
@@ -45,25 +22,14 @@ function hideProject(element) {
       });
     }
 
-    children.forEach((component, index) => {
-      //   console.log(component);
-      let timedelay;
-      if (index) timedelay = "-=.3";
-      tl.to(
-        `#${component.id}`,
-        {
-          x: 600,
-          opacity: 0,
-          duration: 0.4,
-          onComplete: () => {
-            if (index + 1 === children.length) {
-              element.style = {};
-              resolve();
-            }
-          },
-        },
-        timedelay
-      );
+    gsap.to(".animation-container", {
+      x: 600,
+      opacity: 0,
+      duration: 0.3,
+      stagger: 0.05,
+      onComplete: () => {
+        resolve();
+      },
     });
   });
 }
