@@ -3,7 +3,7 @@
     "title": "Klean",
     "subTitle": "E-Shop",
     "time": "June 2023",
-    "image": "http://localhost:5173/api/v1/long1.webp",
+    "image": "http://localhost:5173/media/long1.webp",
     "description": {
       "what": "This travel planner application is your ultimate companion for seamless trip planning. Whether you're a solo adventurer or planning a family vacation, this app streamlines the entire process.",
       "tech": ["NextJs", "SQL", "API", "DevOps"]
@@ -18,7 +18,7 @@
     "title": "Blossom",
     "subTitle": "Plant Tracker",
     "time": "Sept 2023",
-    "image": "http://localhost:5173/api/v1/long2.webp",
+    "image": "http://localhost:5173/media/long2.webp",
     "description": {
       "what": "An all-in-one fitness and health application. It serves as your virtual personal trainer, helping you set fitness goals, track your workouts, and monitor your progress.",
       "tech": ["NextJs", "SQL", "API", "DevOps"]
@@ -33,7 +33,7 @@
     "title": "Maid!Ready!",
     "subTitle": "Service",
     "time": "April 2023",
-    "image": "http://localhost:5173/api/v1/long3.webp",
+    "image": "http://localhost:5173/media/long3.webp",
     "description": {
       "what": "A Language learning application. Whether you're learning for travel, work, or personal enrichment, this app offers comprehensive lessons in multiple languages.",
       "tech": ["NextJs", "SQL", "API", "DevOps"]
@@ -48,7 +48,7 @@
     "title": "Circut",
     "subTitle": "Application",
     "time": "Aug 2023",
-    "image": "http://localhost:5173/api/v1/long4.webp",
+    "image": "http://localhost:5173/media/long4.webp",
     "description": {
       "what": "A Language learning application. Whether you're learning for travel, work, or personal enrichment, this app offers comprehensive lessons in multiple languages.",
       "tech": ["NextJs", "SQL", "API", "DevOps"]
