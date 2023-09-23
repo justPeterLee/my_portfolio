@@ -15,9 +15,26 @@ export function contactContentContainer() {
   button.class = "button";
   contactContainer.appendChild(button);
 
+  button.addEventListener("click", () => {
+    console.log("clicked");
+    test();
+  });
   return contactContainer;
 }
 
+async function test() {
+  const res = await fetch(`/api/v1/contact/send`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      message: "this is the message",
+      email: "email@email.com",
+    }),
+  });
+  console.log(await res.text());
+}
 export const contactRender = {
   contactContentContainer,
 };
