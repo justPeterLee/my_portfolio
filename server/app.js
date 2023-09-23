@@ -2,11 +2,14 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const NodeCache = require("node-cache");
-
+const bodyParser = require("body-parser");
 const cache = new NodeCache();
 const app = express();
-
 const PORT = process.env.PORT || 5001;
+
+// Body parser middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/v1/", express.static("./public"));
 
