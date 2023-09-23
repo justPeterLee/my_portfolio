@@ -14,18 +14,9 @@ app.get("/api/v1/", (req, res) => {
   res.send("hello");
 });
 
-// app.get("/api/v1/project", (req, res) => {
-//   const dataKey = "prjectKey";
-//   const cacheData = cache.get(dataKey);
-
-//   if(cacheData){
-//     console.log('data served from cache');
-//     res.json(cacheData)
-//   }else{
-//     const dataFilePath = path.join(__dirname, "public", "")
-//   }
-//   res.send("hello");
-// });
+// routes
+const contactRouter = require("./routes/contact.router");
+app.use("/api/v1/contact/", contactRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
