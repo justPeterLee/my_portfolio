@@ -1,6 +1,6 @@
 import cross from "../../../../public/cross.svg";
 import data from "../../../../public/projects.json";
-import "./project.css";
+import "../../../../public/css/project.css";
 import { projectScroll } from "./scrollClass";
 
 // default view
