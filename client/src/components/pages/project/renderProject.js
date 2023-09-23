@@ -197,6 +197,7 @@ window.onmousemove = (e) => {
       scroll.unFocus();
     }
   }
+  console.log("moving");
 };
 
 window.onmousedown = (e) => {
@@ -218,6 +219,8 @@ window.onmouseup = (e) => {
 let scrollingStoppedTimeout;
 
 body.addEventListener("wheel", (event) => {
+  if (window.location.pathname !== "/projects" || !scroll) return;
+
   // scroll detection
   const deltaY = event.deltaY;
   clearTimeout(scrollingStoppedTimeout);
