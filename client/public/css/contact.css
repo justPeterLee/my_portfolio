@@ -2,3 +2,20 @@
   height: 100vh;
   gap: 1rem;
 }
+
+#letter-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.letter-words:nth-child(1) {
+  margin-bottom: 1rem;
+}
+.letter-words:nth-child(2) {
+  margin-left: 2rem;
+}
+
+/* .letter-words:nth-child() {
+  margin-top: 1rem;
+} */
