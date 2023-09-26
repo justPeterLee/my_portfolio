@@ -24,6 +24,23 @@
   margin-left: 2rem;
 }
 
-/* .letter-words:nth-child() {
-  margin-top: 1rem;
-} */
+#letter-hidden-input {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  /* flex-direction: row; */
+}
+
+#contact-input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  border-bottom: solid 1px grey;
+
+  /* transition: ; */
+}
+
+#contact-input:focus {
+  border-bottom: solid 1px white;
+}
