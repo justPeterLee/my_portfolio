@@ -3,7 +3,7 @@ import { Power1 } from "gsap";
 export function showContent() {
   gsap.to(
     ".letter-words",
-    { y: 0, duration: 0.4, stagger: 0.1, ease: Power1.easeOut }
+    { y: 0, duration: 0.4, stagger: 0.075, ease: Power1.easeOut }
     // "-=.1"
   );
 }
