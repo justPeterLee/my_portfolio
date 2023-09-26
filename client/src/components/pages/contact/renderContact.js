@@ -20,14 +20,14 @@ export function contactContentContainer() {
   //   test();
   // });
 
-  letterContainer(contactContainer);
-
+  const letter = letterContainer(contactContainer);
+  inputContainer(letter);
   return contactContainer;
 }
 
 function letterContainer(parent) {
   const letter =
-    "Howdy Peter,\n I think your website is super duper cool.\n I would love to get in contact with you.\n Please reply to the email at you earliest convince.\n thank you kindly, ";
+    "Howdy Peter,\n I think your website is super duper cool.\n I would love to get in contact with you. Please \nreply to the email at you earliest convince.";
 
   let letterArray = letter.split("\n");
 
@@ -46,8 +46,27 @@ function letterContainer(parent) {
     stringContainer.innerHTML = string;
     hiddenContainer.appendChild(stringContainer);
   });
+
+  return textContainer;
 }
 
+function inputContainer(parent) {
+  const hiddenContainer = document.createElement("span");
+  hiddenContainer.className = "letter-hidden-text";
+  parent.appendChild(hiddenContainer);
+
+  const stringContainer = document.createElement("span");
+  stringContainer.id = `letter-words-ending`;
+  stringContainer.className = "letter-words";
+  stringContainer.innerHTML = "yours truly, ";
+  hiddenContainer.appendChild(stringContainer);
+
+  const inputContainer = document.createElement("input");
+  inputContainer.id = "contact-input";
+  hiddenContainer.appendChild(inputContainer);
+
+  parent.appendChild(inputContainer);
+}
 async function test() {
   const res = await fetch(`/api/v1/contact/send`, {
     method: "POST",
