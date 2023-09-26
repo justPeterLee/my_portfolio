@@ -14,7 +14,7 @@ export function hideContent() {
       ".letter-words",
       {
         y: 25,
-        duration: 0.2,
+        duration: 0.3,
         stagger: 0.035,
         onComplete: () => {
           resolve();
