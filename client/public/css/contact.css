@@ -9,10 +9,18 @@
   gap: 0.5rem;
 }
 
-.letter-words:nth-child(1) {
+.hidden-text {
+  overflow: hidden;
+  display: flex;
+}
+
+.letter-words {
+  transform: translateY(25px);
+}
+.hidden-text:nth-child(1) {
   margin-bottom: 1rem;
 }
-.letter-words:nth-child(2) {
+#letter-words-1 {
   margin-left: 2rem;
 }
 

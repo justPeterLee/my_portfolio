@@ -37,11 +37,15 @@ function letterContainer(parent) {
   parent.appendChild(textContainer);
 
   letterArray.forEach((string, index) => {
+    const hiddenContainer = document.createElement("span");
+    hiddenContainer.className = "hidden-text";
+    textContainer.appendChild(hiddenContainer);
+
     const stringContainer = document.createElement("span");
     stringContainer.id = `letter-words-${index}`;
     stringContainer.className = "letter-words";
     stringContainer.innerHTML = string;
-    textContainer.appendChild(stringContainer);
+    hiddenContainer.appendChild(stringContainer);
   });
 }
 
