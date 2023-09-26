@@ -9,7 +9,7 @@
   gap: 0.5rem;
 }
 
-.hidden-text {
+.letter-hidden-text {
   overflow: hidden;
   display: flex;
 }
@@ -17,7 +17,7 @@
 .letter-words {
   transform: translateY(25px);
 }
-.hidden-text:nth-child(1) {
+.letter-hidden-text:nth-child(1) {
   margin-bottom: 1rem;
 }
 #letter-words-1 {
