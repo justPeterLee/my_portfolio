@@ -22,6 +22,7 @@ export function contactContentContainer() {
 
   const letter = letterContainer(contactContainer);
   inputContainer(letter);
+  button(letter);
   postScript(letter);
   return contactContainer;
 }
@@ -117,7 +118,25 @@ function postScript(parent) {
   hidden(postScriptContainer, postButton, "hidden-ps");
 }
 
-function button(parent) {}
+function button(parent) {
+  const buttonContainer = document.createElement("span");
+  buttonContainer.id = "button-container";
+  // buttonContainer.className = "letter-words";
+  parent.appendChild(buttonContainer);
+
+  const sendButton = document.createElement("button");
+  sendButton.id = "send-button";
+  sendButton.innerHTML = "send";
+  buttonContainer.appendChild(sendButton);
+
+  const addButton = document.createElement("button");
+  addButton.innerHTML = "add note";
+  addButton.id = "add-button";
+  buttonContainer.appendChild(addButton);
+
+  hidden(buttonContainer, sendButton, "contact-button");
+  hidden(buttonContainer, addButton, "contact-button");
+}
 
 function hidden(parent, child, classname) {
   const hiddenInputContainer = document.createElement("span");
