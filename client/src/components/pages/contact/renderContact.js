@@ -22,12 +22,13 @@ export function contactContentContainer() {
 
   const letter = letterContainer(contactContainer);
   inputContainer(letter);
+  postScript(letter);
   return contactContainer;
 }
 
 function letterContainer(parent) {
   const letter =
-    "Greetings Peter,\n I think your website is super duper cool.\n I would love to get in contact with you. Please \nreply to the email at you earliest convince.";
+    "Greetings Peter,\n I think your website is super duper cool. I would love to get\n in contact with you. Please reply to the email at you earliest\n convince.";
 
   let letterArray = letter.split("\n");
 
@@ -62,9 +63,14 @@ function inputContainer(parent) {
   stringContainer.innerHTML = "Yours truly, ";
   hiddenContainer.appendChild(stringContainer);
 
+  const hiddenInputContainer = document.createElement("span");
+  hiddenInputContainer.id = "input-hidden-input";
+  hiddenInputContainer.className = "letter-hidden-text";
+  parent.appendChild(hiddenInputContainer);
+
   const inputContainerSpan = document.createElement("span");
   inputContainerSpan.id = "contact-input-container";
-  hiddenContainer.appendChild(inputContainerSpan);
+  hiddenInputContainer.appendChild(inputContainerSpan);
 
   const inputContainer = document.createElement("input");
   inputContainer.id = "contact-input";
@@ -74,10 +80,52 @@ function inputContainer(parent) {
 
   const lable = document.createElement("label");
   lable.id = "contact-label";
-  // lable.className = "letter-words";
+  lable.className = "letter-words";
   lable.htmlFor = "contact-input";
   lable.innerHTML = "your email";
-  inputContainerSpan.appendChild(lable);
+  // inputContainerSpan.appendChild(lable);
+}
+
+function postScript(parent) {
+  // container
+  const postScriptContainer = document.createElement("span");
+  postScriptContainer.id = "ps-container";
+  parent.appendChild(postScriptContainer);
+
+  // title
+  const postScriptTitle = document.createElement("span");
+  postScriptTitle.id = "ps-title";
+  postScriptContainer.appendChild(postScriptTitle);
+  postScriptTitle.innerHTML = "PS";
+  hidden(postScriptContainer, postScriptTitle, "hidden-ps");
+
+  // input
+  const postScriptInputContainer = document.createElement("span");
+  postScriptInputContainer.id = "ps-input-container";
+  postScriptContainer.appendChild(postScriptInputContainer);
+
+  const postScriptInput = document.createElement("input");
+  postScriptInput.id = "ps-input";
+  postScriptInputContainer.appendChild(postScriptInput);
+  hidden(postScriptContainer, postScriptInputContainer, "hidden-ps");
+
+  // button
+  const postButton = document.createElement("button");
+  postButton.id = "ps-cancel";
+  postScriptContainer.appendChild(postButton);
+  postButton.innerHTML = "cancel";
+  hidden(postScriptContainer, postButton, "hidden-ps");
+}
+
+function button(parent) {}
+
+function hidden(parent, child, classname) {
+  const hiddenInputContainer = document.createElement("span");
+  // hiddenInputContainer.id = id;
+  hiddenInputContainer.className = classname;
+  parent.appendChild(hiddenInputContainer);
+
+  hiddenInputContainer.appendChild(child);
 }
 async function test() {
   const res = await fetch(`/api/v1/contact/send`, {

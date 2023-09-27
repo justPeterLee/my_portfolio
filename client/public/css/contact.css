@@ -12,23 +12,33 @@
 .letter-hidden-text {
   overflow: hidden;
   display: flex;
+  width: 30rem;
+  /* background-color: red; */
 }
 
 .letter-words {
   transform: translateY(25px);
 }
 .letter-hidden-text:nth-child(1) {
-  margin-bottom: 1rem;
-}
-#letter-words-1 {
-  margin-left: 2rem;
+  margin-bottom: 2rem;
 }
 
 #letter-hidden-input {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   display: flex;
   gap: 1rem;
-  /* flex-direction: row; */
+  flex-direction: column;
+}
+
+/* -----------------------------
+input container
+-------------------------------- */
+#contact-input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* gap: 3rem; */
+  position: relative;
 }
 
 #contact-input {
@@ -39,8 +49,26 @@
   border-bottom: solid 1px grey;
 
   /* transition: ; */
+  font-size: 17px;
+  /* width: 15rem; */
 }
 
 #contact-input:focus {
   border-bottom: solid 1px white;
+}
+
+#contact-label {
+  position: absolute;
+  /* font-size: 12px; */
+  /* left: 1px; */
+  color: grey;
+  bottom: 1px;
+}
+
+/* --------------------------------
+post script
+----------------------------------- */
+#ps-container {
+  display: flex;
+  flex-direction: column;
 }
