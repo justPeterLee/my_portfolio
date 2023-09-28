@@ -1,5 +1,5 @@
 import "../../../../public/css/contact.css";
-
+import { showNote, hideNote } from "../../../utils/animation/contactAnimation";
 export function contactContentContainer() {
   const contactContainer = document.createElement("div");
   contactContainer.id = "contact-container";
@@ -91,6 +91,7 @@ function postScript(parent) {
   // container
   const postScriptContainer = document.createElement("span");
   postScriptContainer.id = "ps-container";
+  postScriptContainer.style.display = "none";
   parent.appendChild(postScriptContainer);
 
   // title
@@ -140,9 +141,13 @@ function button(parent) {
   addButton.addEventListener("click", () => {
     if (addButton.dataset.add == 1) {
       // postScript(parent);
+      showNote();
       addButton.dataset.add = 0;
+      addButton.innerHTML = "cancel";
     } else {
+      hideNote();
       addButton.dataset.add = 1;
+      addButton.innerHTML = "add note";
     }
   });
 

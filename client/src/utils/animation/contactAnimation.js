@@ -25,7 +25,19 @@ export function hideContent() {
   });
 }
 
+const noteTL = gsap.timeline();
+
+export function showNote() {
+  noteTL.to("#ps-container", { display: "inline", duration: 0 });
+}
+
+export function hideNote() {
+  noteTL.to("#ps-container", { display: "none", duration: 0 });
+}
+
 export const contactAnimation = {
   showContent,
   hideContent,
+  showNote,
+  hideNote,
 };
