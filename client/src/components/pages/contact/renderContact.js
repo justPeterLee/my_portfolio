@@ -126,13 +126,25 @@ function button(parent) {
 
   const sendButton = document.createElement("button");
   sendButton.id = "send-button";
+  sendButton.className = "letter-words";
   sendButton.innerHTML = "send";
   buttonContainer.appendChild(sendButton);
 
   const addButton = document.createElement("button");
   addButton.innerHTML = "add note";
   addButton.id = "add-button";
+  addButton.className = "letter-words";
+  addButton.dataset.add = 1;
   buttonContainer.appendChild(addButton);
+
+  addButton.addEventListener("click", () => {
+    if (addButton.dataset.add == 1) {
+      // postScript(parent);
+      addButton.dataset.add = 0;
+    } else {
+      addButton.dataset.add = 1;
+    }
+  });
 
   hidden(buttonContainer, sendButton, "contact-button");
   hidden(buttonContainer, addButton, "contact-button");
@@ -141,7 +153,7 @@ function button(parent) {
 function hidden(parent, child, classname) {
   const hiddenInputContainer = document.createElement("span");
   // hiddenInputContainer.id = id;
-  hiddenInputContainer.className = classname;
+  hiddenInputContainer.className = `letter-hidden-text ${classname}`;
   parent.appendChild(hiddenInputContainer);
 
   hiddenInputContainer.appendChild(child);
