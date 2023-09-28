@@ -68,13 +68,30 @@ post script
 #ps-container {
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
+  font-size: 16px;
 }
 
+#ps-input {
+  resize: none;
+  background-color: transparent;
+  outline: none;
+  border: solid 1px grey;
+  border-radius: 3px;
+  color: white;
+  width: 28.5rem;
+  height: 8.5rem;
+  padding: 0.5rem;
+}
+
+#ps-input:focus {
+  border: solid 1px white;
+}
 /* --------------------------------
 buttons
 ----------------------------------- */
 #button-container {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   position: relative;
   width: auto;
 }
@@ -128,8 +145,8 @@ buttons
 #tooltip {
   position: absolute;
   width: 4rem;
-  top: -30px;
-  right: 363px;
+  top: -28px;
+  right: 361px;
 
   font-size: 12px;
   background-color: rgb(10, 10, 10);

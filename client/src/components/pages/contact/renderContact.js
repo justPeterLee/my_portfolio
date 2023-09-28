@@ -104,7 +104,7 @@ function button(parent) {
   buttonContainer.appendChild(sendButton);
 
   sendButton.addEventListener("click", () => {
-    // console.log(postScriptNote);
+    console.log(postScriptNote);
   });
   const addButton = document.createElement("button");
   // addButton.innerHTML = "add note";
@@ -118,11 +118,7 @@ function button(parent) {
   svg.className = "edit";
   addButton.append(svg);
 
-  const hiddenButtonContainer = hidden(
-    buttonContainer,
-    [sendButton, addButton],
-    "contact-hidden-button"
-  );
+  hidden(buttonContainer, [sendButton, addButton], "contact-hidden-button");
 
   const addButtonTip = document.createElement("span");
   addButtonTip.innerHTML = "add note";
@@ -167,7 +163,7 @@ function postScript(parent) {
   const postScriptTitle = document.createElement("span");
   postScriptTitle.id = "ps-title";
   postScriptContainer.appendChild(postScriptTitle);
-  postScriptTitle.innerHTML = "PS";
+  postScriptTitle.innerHTML = "P.S.";
   hidden(postScriptContainer, postScriptTitle, "hidden-ps");
 
   // input
@@ -175,8 +171,9 @@ function postScript(parent) {
   postScriptInputContainer.id = "ps-input-container";
   postScriptContainer.appendChild(postScriptInputContainer);
 
-  const postScriptInput = document.createElement("input");
+  const postScriptInput = document.createElement("textarea");
   postScriptInput.id = "ps-input";
+  postScriptInput.placeholder = "enter note";
   postScriptInputContainer.appendChild(postScriptInput);
   hidden(postScriptContainer, postScriptInputContainer, "hidden-ps");
 

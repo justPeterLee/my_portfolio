@@ -30,7 +30,7 @@ const noteTL = gsap.timeline();
 
 export function showNote() {
   noteTL.to("#ps-container", {
-    display: "inline",
+    display: "flex",
     duration: 0,
   });
 }
