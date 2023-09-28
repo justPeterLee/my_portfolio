@@ -19,9 +19,6 @@
 .letter-words {
   transform: translateY(25px);
 }
-.letter-hidden-text:nth-child(1) {
-  margin-bottom: 2rem;
-}
 
 #letter-hidden-input {
   margin-top: 2rem;

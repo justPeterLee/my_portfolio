@@ -40,6 +40,7 @@ function letterContainer(parent) {
   letterArray.forEach((string, index) => {
     const hiddenContainer = document.createElement("span");
     hiddenContainer.className = "letter-hidden-text";
+    if (index === 0) hiddenContainer.style.marginBottom = "2rem";
     textContainer.appendChild(hiddenContainer);
 
     const stringContainer = document.createElement("span");
