@@ -110,13 +110,6 @@ function postScript(parent) {
   postScriptInput.id = "ps-input";
   postScriptInputContainer.appendChild(postScriptInput);
   hidden(postScriptContainer, postScriptInputContainer, "hidden-ps");
-
-  // button
-  const postButton = document.createElement("button");
-  postButton.id = "ps-cancel";
-  postScriptContainer.appendChild(postButton);
-  postButton.innerHTML = "cancel";
-  hidden(postScriptContainer, postButton, "hidden-ps");
 }
 
 function button(parent) {
