@@ -2,20 +2,21 @@ import { gsap } from "gsap/gsap-core";
 import { Power1 } from "gsap";
 export function showContent() {
   gsap.to(
-    ".letter-words",
+    ".letter-words, .contact-button",
     { y: 0, duration: 0.4, stagger: 0.075, ease: Power1.easeOut }
     // "-=.1"
   );
+  // gsap.to('.contact-button', {y})
 }
 
 export function hideContent() {
   return new Promise((resolve, reject) => {
     gsap.to(
-      ".letter-words",
+      ".letter-words, .contact-button",
       {
-        y: 25,
-        duration: 0.3,
-        stagger: 0.035,
+        y: 32,
+        duration: 0.4,
+        stagger: 0.075,
         onComplete: () => {
           resolve();
         },

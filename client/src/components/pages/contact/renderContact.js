@@ -118,13 +118,27 @@ function button(parent) {
   svg.className = "edit";
   addButton.append(svg);
 
+  const hiddenButtonContainer = hidden(
+    buttonContainer,
+    [sendButton, addButton],
+    "contact-hidden-button"
+  );
+
+  const addButtonTip = document.createElement("span");
+  addButtonTip.innerHTML = "add note";
+  addButtonTip.id = "tooltip";
+  addButton.classname = "container";
+  buttonContainer.appendChild(addButtonTip);
+
   addButton.addEventListener("click", () => {
     if (addButton.dataset.add == 1) {
       // postScript(parent);
+      addButtonTip.innerHTML = "cancel";
       showNote();
       addButton.dataset.add = 0;
       svg.src = cancel;
     } else {
+      addButtonTip.innerHTML = "add note";
       postScriptNote = "";
       document.querySelector("#ps-input").value = postScriptNote;
       hideNote();
@@ -133,7 +147,12 @@ function button(parent) {
     }
   });
 
-  hidden(buttonContainer, [sendButton, addButton], "contact-hidden-button");
+  addButton.addEventListener("mouseover", () => {
+    addButtonTip.style.visibility = "visible";
+  });
+  addButton.addEventListener("mouseout", () => {
+    addButtonTip.style.visibility = "hidden";
+  });
   // hidden(buttonContainer, addButton, "contact-hidden-button");
 }
 
@@ -168,13 +187,14 @@ function postScript(parent) {
 
 function hidden(parent, child, classname) {
   const elementArr = Array.isArray(child) ? child : [child];
+  const hiddenInputContainer = document.createElement("span");
+  hiddenInputContainer.className = `${classname}`;
 
   elementArr.forEach((element) => {
-    const hiddenInputContainer = document.createElement("span");
-    hiddenInputContainer.className = `${classname}`;
     hiddenInputContainer.appendChild(element);
-    parent.appendChild(hiddenInputContainer);
   });
+  parent.appendChild(hiddenInputContainer);
+  return hiddenInputContainer;
 }
 async function test() {
   const res = await fetch(`/api/v1/contact/send`, {

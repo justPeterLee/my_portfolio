@@ -74,12 +74,15 @@ post script
 buttons
 ----------------------------------- */
 #button-container {
-  display: flex;
-  gap: 0.5rem;
   margin-top: 2rem;
+  position: relative;
+  width: auto;
 }
 .contact-hidden-button {
+  display: flex;
+  gap: 0.5rem;
   width: auto;
+  overflow: hidden;
 }
 .contact-button {
   background-color: transparent;
@@ -91,7 +94,7 @@ buttons
   padding-right: 1rem;
   /* width: 5rem; */
   height: 2rem;
-
+  transform: translateY(32px);
   transition: background-color ease 0.2s;
   /* transition: color ease 0.3s; */
 }
@@ -120,4 +123,21 @@ buttons
   align-items: center;
   width: 2rem;
   padding: 0;
+}
+
+#tooltip {
+  position: absolute;
+  width: 4rem;
+  top: -30px;
+  right: 363px;
+
+  font-size: 12px;
+  background-color: rgb(10, 10, 10);
+  border-radius: 5px;
+  height: 1.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
 }
