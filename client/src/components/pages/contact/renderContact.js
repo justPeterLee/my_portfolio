@@ -99,7 +99,7 @@ function button(parent) {
 
   const sendButton = document.createElement("button");
   sendButton.id = "send-button";
-  sendButton.className = "letter-words contact-button";
+  sendButton.className = "contact-button";
   sendButton.innerHTML = "send";
   buttonContainer.appendChild(sendButton);
 
@@ -109,7 +109,7 @@ function button(parent) {
   const addButton = document.createElement("button");
   // addButton.innerHTML = "add note";
   addButton.id = "add-button";
-  addButton.className = "letter-words contact-button";
+  addButton.className = "contact-button";
   addButton.dataset.add = 1;
   buttonContainer.appendChild(addButton);
 
@@ -133,8 +133,8 @@ function button(parent) {
     }
   });
 
-  hidden(buttonContainer, sendButton, "contact-hidden-button");
-  hidden(buttonContainer, addButton, "contact-hidden-button");
+  hidden(buttonContainer, [sendButton, addButton], "contact-hidden-button");
+  // hidden(buttonContainer, addButton, "contact-hidden-button");
 }
 
 function postScript(parent) {
@@ -167,12 +167,14 @@ function postScript(parent) {
 }
 
 function hidden(parent, child, classname) {
-  const hiddenInputContainer = document.createElement("span");
-  // hiddenInputContainer.id = id;
-  hiddenInputContainer.className = `letter-hidden-text ${classname}`;
-  parent.appendChild(hiddenInputContainer);
+  const elementArr = Array.isArray(child) ? child : [child];
 
-  hiddenInputContainer.appendChild(child);
+  elementArr.forEach((element) => {
+    const hiddenInputContainer = document.createElement("span");
+    hiddenInputContainer.className = `${classname}`;
+    hiddenInputContainer.appendChild(element);
+    parent.appendChild(hiddenInputContainer);
+  });
 }
 async function test() {
   const res = await fetch(`/api/v1/contact/send`, {
