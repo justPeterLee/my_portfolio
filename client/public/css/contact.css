@@ -69,3 +69,55 @@ post script
   display: flex;
   flex-direction: column;
 }
+
+/* --------------------------------
+buttons
+----------------------------------- */
+#button-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.contact-hidden-button {
+  width: auto;
+}
+.contact-button {
+  background-color: transparent;
+  border: none;
+  /* border: solid 1px transparent; */
+  border-radius: 5px;
+  color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  /* width: 5rem; */
+  height: 2rem;
+
+  transition: background-color ease 0.2s;
+  /* transition: color ease 0.3s; */
+}
+
+.contact-button:hover {
+  background-color: rgb(255, 255, 255, 0.1);
+  /* border: solid 1px black; */
+  /* color: black; */
+  cursor: pointer;
+}
+
+#send-button {
+  border-radius: 6px;
+  background-color: white;
+  color: black;
+  font-size: 14px;
+}
+#send-button:hover {
+  padding-left: 1.2;
+  padding-right: 1.2;
+}
+
+#add-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  padding: 0;
+}

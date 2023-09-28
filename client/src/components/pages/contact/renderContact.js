@@ -1,6 +1,7 @@
 import "../../../../public/css/contact.css";
 import { showNote, hideNote } from "../../../utils/animation/contactAnimation";
-
+import edit from "../../../../public/edit.svg";
+import cancel from "../../../../public/cancel.svg";
 let postScriptNote = "";
 export function contactContentContainer() {
   const contactContainer = document.createElement("div");
@@ -24,8 +25,8 @@ export function contactContentContainer() {
 
   const letter = letterContainer(contactContainer);
   inputContainer(letter);
-  button(letter);
   postScript(letter);
+  button(letter);
   return contactContainer;
 }
 
@@ -98,37 +99,42 @@ function button(parent) {
 
   const sendButton = document.createElement("button");
   sendButton.id = "send-button";
-  sendButton.className = "letter-words";
+  sendButton.className = "letter-words contact-button";
   sendButton.innerHTML = "send";
   buttonContainer.appendChild(sendButton);
 
   sendButton.addEventListener("click", () => {
-    console.log(postScriptNote);
+    // console.log(postScriptNote);
   });
   const addButton = document.createElement("button");
-  addButton.innerHTML = "add note";
+  // addButton.innerHTML = "add note";
   addButton.id = "add-button";
-  addButton.className = "letter-words";
+  addButton.className = "letter-words contact-button";
   addButton.dataset.add = 1;
   buttonContainer.appendChild(addButton);
+
+  const svg = document.createElement("img");
+  svg.src = edit;
+  svg.className = "edit";
+  addButton.append(svg);
 
   addButton.addEventListener("click", () => {
     if (addButton.dataset.add == 1) {
       // postScript(parent);
       showNote();
       addButton.dataset.add = 0;
-      addButton.innerHTML = "cancel";
+      svg.src = cancel;
     } else {
       postScriptNote = "";
       document.querySelector("#ps-input").value = postScriptNote;
       hideNote();
       addButton.dataset.add = 1;
-      addButton.innerHTML = "add note";
+      svg.src = edit;
     }
   });
 
-  hidden(buttonContainer, sendButton, "contact-button");
-  hidden(buttonContainer, addButton, "contact-button");
+  hidden(buttonContainer, sendButton, "contact-hidden-button");
+  hidden(buttonContainer, addButton, "contact-hidden-button");
 }
 
 function postScript(parent) {
