@@ -28,7 +28,10 @@ export function hideContent() {
 const noteTL = gsap.timeline();
 
 export function showNote() {
-  noteTL.to("#ps-container", { display: "inline", duration: 0 });
+  noteTL.to("#ps-container", {
+    display: "inline",
+    duration: 0,
+  });
 }
 
 export function hideNote() {

@@ -1,5 +1,7 @@
 import "../../../../public/css/contact.css";
 import { showNote, hideNote } from "../../../utils/animation/contactAnimation";
+
+let postScriptNote = "";
 export function contactContentContainer() {
   const contactContainer = document.createElement("div");
   contactContainer.id = "contact-container";
@@ -88,6 +90,47 @@ function inputContainer(parent) {
   // inputContainerSpan.appendChild(lable);
 }
 
+function button(parent) {
+  const buttonContainer = document.createElement("span");
+  buttonContainer.id = "button-container";
+  // buttonContainer.className = "letter-words";
+  parent.appendChild(buttonContainer);
+
+  const sendButton = document.createElement("button");
+  sendButton.id = "send-button";
+  sendButton.className = "letter-words";
+  sendButton.innerHTML = "send";
+  buttonContainer.appendChild(sendButton);
+
+  sendButton.addEventListener("click", () => {
+    console.log(postScriptNote);
+  });
+  const addButton = document.createElement("button");
+  addButton.innerHTML = "add note";
+  addButton.id = "add-button";
+  addButton.className = "letter-words";
+  addButton.dataset.add = 1;
+  buttonContainer.appendChild(addButton);
+
+  addButton.addEventListener("click", () => {
+    if (addButton.dataset.add == 1) {
+      // postScript(parent);
+      showNote();
+      addButton.dataset.add = 0;
+      addButton.innerHTML = "cancel";
+    } else {
+      postScriptNote = "";
+      document.querySelector("#ps-input").value = postScriptNote;
+      hideNote();
+      addButton.dataset.add = 1;
+      addButton.innerHTML = "add note";
+    }
+  });
+
+  hidden(buttonContainer, sendButton, "contact-button");
+  hidden(buttonContainer, addButton, "contact-button");
+}
+
 function postScript(parent) {
   // container
   const postScriptContainer = document.createElement("span");
@@ -111,42 +154,10 @@ function postScript(parent) {
   postScriptInput.id = "ps-input";
   postScriptInputContainer.appendChild(postScriptInput);
   hidden(postScriptContainer, postScriptInputContainer, "hidden-ps");
-}
 
-function button(parent) {
-  const buttonContainer = document.createElement("span");
-  buttonContainer.id = "button-container";
-  // buttonContainer.className = "letter-words";
-  parent.appendChild(buttonContainer);
-
-  const sendButton = document.createElement("button");
-  sendButton.id = "send-button";
-  sendButton.className = "letter-words";
-  sendButton.innerHTML = "send";
-  buttonContainer.appendChild(sendButton);
-
-  const addButton = document.createElement("button");
-  addButton.innerHTML = "add note";
-  addButton.id = "add-button";
-  addButton.className = "letter-words";
-  addButton.dataset.add = 1;
-  buttonContainer.appendChild(addButton);
-
-  addButton.addEventListener("click", () => {
-    if (addButton.dataset.add == 1) {
-      // postScript(parent);
-      showNote();
-      addButton.dataset.add = 0;
-      addButton.innerHTML = "cancel";
-    } else {
-      hideNote();
-      addButton.dataset.add = 1;
-      addButton.innerHTML = "add note";
-    }
+  postScriptInput.addEventListener("change", (e) => {
+    postScriptNote = e.target.value;
   });
-
-  hidden(buttonContainer, sendButton, "contact-button");
-  hidden(buttonContainer, addButton, "contact-button");
 }
 
 function hidden(parent, child, classname) {
