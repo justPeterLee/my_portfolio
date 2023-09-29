@@ -1,5 +1,10 @@
 import "../../../../public/css/contact.css";
-import { showNote, hideNote } from "../../../utils/animation/contactAnimation";
+import {
+  showNote,
+  hideNote,
+  invalidEmailAni,
+  validEmailAni,
+} from "../../../utils/animation/contactAnimation";
 import edit from "../../../../public/edit.svg";
 import cancel from "../../../../public/cancel.svg";
 import check from "../../../../public/check.svg";
@@ -7,6 +12,7 @@ import x from "../../../../public/x.svg";
 
 let postScriptNote = "";
 let email = "";
+let isValidate = null;
 export function contactContentContainer() {
   const contactContainer = document.createElement("div");
   contactContainer.id = "contact-container";
@@ -66,10 +72,17 @@ function inputContainer(parent) {
   inputContainerSpan.id = "contact-input-container";
   hiddenInputContainer.appendChild(inputContainerSpan);
 
-  const validatorState = document.createElement("img");
-  validatorState.id = "email-validate-state";
-  validatorState.src = check;
-  inputContainerSpan.append(validatorState);
+  const invalidEmail = document.createElement("img");
+  invalidEmail.id = "invalid-email";
+  invalidEmail.className = "email-validate-state";
+  invalidEmail.src = x;
+  inputContainerSpan.append(invalidEmail);
+
+  const validEmail = document.createElement("img");
+  validEmail.id = "valid-email";
+  validEmail.className = "email-validate-state";
+  validEmail.src = check;
+  inputContainerSpan.append(validEmail);
 
   const inputContainer = document.createElement("input");
   inputContainer.id = "contact-input";
@@ -82,9 +95,9 @@ function inputContainer(parent) {
 
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (emailPattern.test(email)) {
-      console.log("send from", email);
+      isValidate = validEmailAni(isValidate);
     } else {
-      console.log("invalid email", email);
+      isValidate = invalidEmailAni(isValidate);
     }
   });
 }

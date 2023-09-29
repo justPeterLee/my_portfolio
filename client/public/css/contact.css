@@ -160,8 +160,10 @@ buttons
   visibility: hidden;
 }
 
-#email-validate-state {
+.email-validate-state {
   position: absolute;
   transform: translateY(20px);
-  right: 0;
+  right: -30px;
+  z-index: 100;
+  /* visibility: hidden; */
 }
