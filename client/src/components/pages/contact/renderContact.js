@@ -92,13 +92,7 @@ function inputContainer(parent) {
 
   inputContainer.addEventListener("change", (e) => {
     email = e.target.value;
-
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (emailPattern.test(email)) {
-      isValidate = validEmailAni(isValidate);
-    } else {
-      isValidate = invalidEmailAni(isValidate);
-    }
+    emailValidator();
   });
 }
 
@@ -205,27 +199,32 @@ function hidden(parent, child, classname) {
 
 async function sendEmail() {
   const data = { email, postScriptNote };
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-  if (emailPattern.test(data.email)) {
+  // const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  emailValidator();
+  if (isValidate) {
     console.log("send from", data.email);
+    const res = await fetch(`/api/v1/contact/send`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
   } else {
     console.log("invalid email", data.email);
   }
   console.log(data);
 
-  // const res = await fetch(`/api/v1/contact/send`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     message: "this is the message",
-  //     email: "email@email.com",
-  //   }),
-  // });
-
   // console.log(await res.text());
+}
+
+function emailValidator() {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  if (emailPattern.test(email)) {
+    isValidate = validEmailAni(isValidate);
+  } else {
+    isValidate = invalidEmailAni(isValidate);
+  }
 }
 export const contactRender = {
   contactContentContainer,

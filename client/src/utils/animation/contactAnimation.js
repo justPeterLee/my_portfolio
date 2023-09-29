@@ -41,15 +41,12 @@ export function hideNote() {
 const validateTL = gsap.timeline();
 export function validEmailAni(isValidate) {
   if (isValidate) return true;
-  console.log("valid");
   validateTL.to("#invalid-email", { y: 20, duration: 0.1 });
   validateTL.to("#valid-email", { y: 0, duration: 0.1 });
   return true;
 }
 export function invalidEmailAni(isValidate) {
-  console.log(isValidate);
   if (isValidate === false) return false;
-  console.log("invalid");
   validateTL.to("#valid-email", { y: 20, duration: 0.1 });
   validateTL.to("#invalid-email", { y: 0, duration: 0.1 });
   return false;
