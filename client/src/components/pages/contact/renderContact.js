@@ -2,26 +2,15 @@ import "../../../../public/css/contact.css";
 import { showNote, hideNote } from "../../../utils/animation/contactAnimation";
 import edit from "../../../../public/edit.svg";
 import cancel from "../../../../public/cancel.svg";
+import check from "../../../../public/check.svg";
+import x from "../../../../public/x.svg";
+
 let postScriptNote = "";
+let email = "";
 export function contactContentContainer() {
   const contactContainer = document.createElement("div");
   contactContainer.id = "contact-container";
   contactContainer.className = "container";
-
-  // const text = document.createElement("p");
-  // text.innerHTML = "contact";
-  // contactContainer.appendChild(text);
-
-  // const button = document.createElement("button");
-  // button.innerHTML = "send";
-  // button.id = "send-email";
-  // button.class = "button";
-  // contactContainer.appendChild(button);
-
-  // button.addEventListener("click", () => {
-  //   console.log("clicked");
-  //   test();
-  // });
 
   const letter = letterContainer(contactContainer);
   inputContainer(letter);
@@ -77,18 +66,27 @@ function inputContainer(parent) {
   inputContainerSpan.id = "contact-input-container";
   hiddenInputContainer.appendChild(inputContainerSpan);
 
+  const validatorState = document.createElement("img");
+  validatorState.id = "email-validate-state";
+  validatorState.src = check;
+  inputContainerSpan.append(validatorState);
+
   const inputContainer = document.createElement("input");
   inputContainer.id = "contact-input";
   inputContainer.className = "letter-words";
   inputContainer.placeholder = "your email";
   inputContainerSpan.appendChild(inputContainer);
 
-  const lable = document.createElement("label");
-  lable.id = "contact-label";
-  lable.className = "letter-words";
-  lable.htmlFor = "contact-input";
-  lable.innerHTML = "your email";
-  // inputContainerSpan.appendChild(lable);
+  inputContainer.addEventListener("change", (e) => {
+    email = e.target.value;
+
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (emailPattern.test(email)) {
+      console.log("send from", email);
+    } else {
+      console.log("invalid email", email);
+    }
+  });
 }
 
 function button(parent) {
@@ -103,9 +101,7 @@ function button(parent) {
   sendButton.innerHTML = "send";
   buttonContainer.appendChild(sendButton);
 
-  sendButton.addEventListener("click", () => {
-    console.log(postScriptNote);
-  });
+  sendButton.addEventListener("click", sendEmail);
   const addButton = document.createElement("button");
   // addButton.innerHTML = "add note";
   addButton.id = "add-button";
@@ -193,18 +189,30 @@ function hidden(parent, child, classname) {
   parent.appendChild(hiddenInputContainer);
   return hiddenInputContainer;
 }
-async function test() {
-  const res = await fetch(`/api/v1/contact/send`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      message: "this is the message",
-      email: "email@email.com",
-    }),
-  });
-  console.log(await res.text());
+
+async function sendEmail() {
+  const data = { email, postScriptNote };
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+  if (emailPattern.test(data.email)) {
+    console.log("send from", data.email);
+  } else {
+    console.log("invalid email", data.email);
+  }
+  console.log(data);
+
+  // const res = await fetch(`/api/v1/contact/send`, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     message: "this is the message",
+  //     email: "email@email.com",
+  //   }),
+  // });
+
+  // console.log(await res.text());
 }
 export const contactRender = {
   contactContentContainer,

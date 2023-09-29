@@ -14,9 +14,8 @@ export function hideContent() {
     gsap.to(
       ".letter-words, .contact-button",
       {
-        y: 32,
+        y: 40,
         duration: 0.4,
-        stagger: 0.075,
         onComplete: () => {
           resolve();
         },

@@ -1,6 +1,7 @@
 #contact-container {
   height: 100vh;
   gap: 1rem;
+  position: relative;
 }
 
 #letter-text-container {
@@ -157,4 +158,10 @@ buttons
   justify-content: center;
   align-items: center;
   visibility: hidden;
+}
+
+#email-validate-state {
+  position: absolute;
+  transform: translateY(20px);
+  right: 0;
 }
