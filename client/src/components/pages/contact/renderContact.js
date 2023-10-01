@@ -214,12 +214,12 @@ async function sendEmail() {
       },
       body: JSON.stringify(data),
     });
+
+    console.log(await res.json());
   } else {
     console.log("invalid email", data.email);
   }
   console.log(data);
-
-  // console.log(await res.text());
 }
 
 function emailValidator() {

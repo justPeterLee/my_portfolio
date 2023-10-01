@@ -34,7 +34,9 @@ router.post("/send", (req, res) => {
       });
     }
 
-    send().catch(console.error);
+    send().catch(() => {
+      res.status(500).send(false);
+    });
     res.status(200).send(true);
   } else {
     console.log("invalid");

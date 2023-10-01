@@ -7,8 +7,6 @@ import { projectScroll } from "./scrollClass";
 const body = document.querySelector("body");
 
 export function scrollContainer() {
-  console.log(data);
-
   // -----------------------------------------------
   // outter divs
   // -----------------------------------------------
