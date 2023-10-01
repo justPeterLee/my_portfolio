@@ -12,7 +12,7 @@ export function showContent() {
 export function hideContent() {
   return new Promise((resolve, reject) => {
     gsap.to(
-      ".letter-words, .contact-button",
+      ".letter-words, .contact-button, .email-validate-state",
       {
         y: 40,
         duration: 0.4,

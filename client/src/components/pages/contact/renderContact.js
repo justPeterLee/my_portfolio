@@ -14,6 +14,10 @@ let postScriptNote = "";
 let email = "";
 let isValidate = null;
 export function contactContentContainer() {
+  postScriptNote = "";
+  email = "";
+  isValidate = null;
+
   const contactContainer = document.createElement("div");
   contactContainer.id = "contact-container";
   contactContainer.className = "container";

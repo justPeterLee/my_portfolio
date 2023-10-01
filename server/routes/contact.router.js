@@ -16,27 +16,29 @@ const transporter = nodemailer.createTransport({
 
 router.post("/send", (req, res) => {
   const email = req.body.email;
-  const message = req.body.message;
+  const message = req.body.postScriptNote;
 
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   if (emailPattern.test(email)) {
-    console.log("valid");
+    console.log("sent email");
 
     async function send() {
       const info = await transporter.sendMail({
         from: `${process.env.mailAuth}`, // sender address
         to: `${process.env.mailAuth}, ${email}`, // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
+        subject: "this is the subject", // Subject line
+        text: "this is the title", // plain text body
+        html: `<p>Greetings Peter,</p><p>I think your website is super duper cool. I would love to get in contact with you. Please reply to the email at you earliest convince.</p><p>Yours truly, ${email}</p> ${
+          message.replace(/\s+/g, "") ? `<p>PS</p> <p>${message}</p> ` : ``
+        }`, // html body
       });
     }
 
-    // send().catch(console.error);
-    res.status(200).send("message sent");
+    send().catch(console.error);
+    res.status(200).send(true);
   } else {
     console.log("invalid");
-    res.status(500).send("invalid email");
+    res.status(500).send(false);
   }
   // console.log(req.body);
 });
